@@ -157,8 +157,9 @@ input[type="file"] {
         background: #4E2A58;
     }
 
-    .fieldUpload {
-        display: block;
+    .fieldUpload,.fieldPreview {
+        display: flex;
+        flex-direction: column;
         /* margin-top: 20px; */
     }
 }
