@@ -98,28 +98,30 @@ h1 {
     color: #4E2A58;
     background-color: #e0bfe9;
 }
+
 .fieldUpload {
     display: flex;
     margin-top: 20px;
 }
 
- .fieldPreview {
+.fieldPreview {
     margin-left: 20px;
     /* padding: 10px; */
     display: flex;
 }
 
-.fieldPreview img{
+.fieldPreview img {
     width: 100px;
     margin: 0 10px;
 }
-.fieldPreview span{
+
+.fieldPreview span {
     font-size: 12px;
 }
 
 input[type="file"] {
     display: none;
-    
+
 }
 
 .ButtomUploadFile {
@@ -155,4 +157,8 @@ input[type="file"] {
         background: #4E2A58;
     }
 
+    .fieldUpload {
+        display: block;
+        /* margin-top: 20px; */
+    }
 }

@@ -6,25 +6,22 @@ import moment from "moment";
 import * as constants from "../constants/constants";
 import SendAndAttachment from "../services/SendAttachment";
 import SendCustomFields from "../services/SendCustomFields";
-import getImageArray from "../services/getImageArray";
-import showPreview from "../services/showPreview";
-import getSate from "../services/showPreview";
+// import getImageArray from "../services/getImageArray";
+// import showPreview from "../services/showPreview";
+// import getSate from "../services/showPreview";
 
 export function Form() {
   const [images, setImage] = useState([]);
 
-  // function getSate() {
-  //   console.log()
-  // }
   const showPreview = (event) => {
     console.log("ok");
-    // const imagesPreview =  Array.from(event.target.files);
-    // console.log(imagesPreview[0])
-    // const images = imagesPreview.map((file) => {
-    //   const { name, size } = file;
-    //   return {name, size, URLpreview: URL.createObjectURL(file)};
-    // }
-    // );
+    const imagesPreview = Array.from(event.target.files);
+    console.log(imagesPreview[0]);
+    const images = imagesPreview.map((file) => {
+      const { name, size } = file;
+      return { name, size, URLpreview: URL.createObjectURL(file) };
+    });
+    setImage(images);
   };
 
   const {
@@ -134,16 +131,7 @@ export function Form() {
                   name="filesInOrder"
                   {...register("filesInOrder", {
                     onChange: (e) => {
-                      const imagesPreview = getImageArray(e);
-                      const images = imagesPreview.map((file) => {
-                        const { name, size } = file;
-                        return {
-                          name,
-                          size,
-                          URLpreview: URL.createObjectURL(file),
-                        };
-                      });
-                      setImage(images)
+                      showPreview(e);
                     },
                   })}
                 />

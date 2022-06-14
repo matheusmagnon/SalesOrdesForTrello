@@ -8,11 +8,5 @@ import getImageArray from "./getImageArray";
     const { name, size } = file;
     return {name, size, URLpreview: URL.createObjectURL(file) };
   });
-  state = images
-}
-
-const state = ''
-
-export function getState(){
-    return state
+ return images
 }
