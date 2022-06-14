@@ -9,6 +9,7 @@ import * as constants from "../constants/constants";
 import SendAndAttachment from "../services/SendAttachment";
 import SendCustomFields from "../services/SendCustomFields";
 import getDateNow from "../services/getDateNow";
+import { min } from "moment";
 
 export function Form() {
   const [images, setImage] = useState([]);
@@ -32,7 +33,7 @@ export function Form() {
     urlTrelloPostCard,
   } = constants;
 
-  const validateForm = yup.object().shape({
+  const validateOrder = yup.object().shape({
     nameInOrder: yup
       .string()
       .required("Campo obrigatório")
@@ -42,13 +43,19 @@ export function Form() {
       .string()
       .required("Campo obrigatório")
       .max(52, "A quantidade de caracteres excede o espaço no bolo"),
+    cakePhraseColor: yup.string().required("Campo obrigatório"),
+    cakeColor: yup.string().required("Campo obrigatório"),
+    flavorInOrder: yup.string().required("Campo obrigatório").nullable(),
+    // dateTimeInOrder: yup.string().required("Campo obrigatório").nullable()
+    candleInOrder: yup.string().required("Campo obrigatório").nullable(),
+    formOfPaymentInOrder: yup.string().required("Campo obrigatório").nullable(),
   });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(validateForm) });
+  } = useForm({ resolver: yupResolver(validateOrder) });
 
   const submitOrder = (dataOrder) => {
     console.log(dataOrder.filesInOrder);
@@ -58,8 +65,8 @@ export function Form() {
       desc: `**********RESUMO DO PEDIDO**********
       Frase: ${dataOrder.phraseOnTheCake}
       Desenho: ${dataOrder.drawingOnTheCake}
-      Cor da Frase: ${dataOrder.cakeColor}
-      Cor do bolo: ${dataOrder.colorBaseInOrder}
+      Cor da Frase: ${dataOrder.cakePhraseColor}
+      Cor do bolo: ${dataOrder.cakeColor}
       Observação: ${dataOrder.orderObservation}
       PAGAMENTO: ${dataOrder.formOfPaymentInOrder}`,
       due: `${moment(dataOrder.dateTimeInOrder)}`,
@@ -150,6 +157,20 @@ export function Form() {
             </div>
             <div className="field">
               <label>
+                <strong>Cor da Frase:</strong>
+              </label>
+              <br />
+              <input
+                type="text"
+                name="cakePhraseColor"
+                {...register("cakePhraseColor")}
+                placeholder="Informe a cor da frase"
+                className="inputFieldText"
+              />
+              <p className="errorMessage">{errors.cakePhraseColor?.message}</p>
+            </div>
+            <div className="field">
+              <label>
                 <strong>Se houver desenho descreva abaixo:</strong>
               </label>
               <br />
@@ -222,6 +243,7 @@ export function Form() {
                 placeholder="Cor do seu bolinho"
                 className="inputFieldText "
               />
+              <p className="errorMessage">{errors.cakeColor?.message}</p>
               <br />
             </div>
 
@@ -261,6 +283,7 @@ export function Form() {
               <label>AMOR PERFEITO</label>
               <br />
             </div>
+            <p className="errorMessage">{errors.flavorInOrder?.message}</p>
 
             <div className="fieldDataRetirada">
               <span>
@@ -312,6 +335,7 @@ export function Form() {
               <label>Não</label>
               <br />
             </div>
+            <p className="errorMessage">{errors.candleInOrder?.message}</p>
             <div className="fieldPagamento">
               <label className="pagamento">
                 <strong>Foma de Pagamento:</strong>
@@ -347,6 +371,9 @@ export function Form() {
               />
               <label>TRANSFERÊNCIA BANCÁRIA (BB e CAIXA)</label>
               <br />
+              <p className="errorMessage">
+                {errors.formOfPaymentInOrder?.message}
+              </p>
 
               <input
                 className="botaoSendPost"
