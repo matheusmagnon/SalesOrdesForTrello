@@ -11,6 +11,17 @@ import SendCustomFields from "../services/SendCustomFields";
 // import getSate from "../services/showPreview";
 
 export function Form() {
+
+// const defaultTime = ()=>{
+//   const datetimeLocalInput = document.getElementById('dataTimeLocal');
+//   console.log(datetimeLocalInput)
+// }
+// defaultTime()
+ 
+
+
+
+
   const [images, setImage] = useState([]);
 
   const showPreview = (event) => {
@@ -215,8 +226,11 @@ export function Form() {
               <input
                 type="datetime-local"
                 name="dateTimeInOrder"
-                // value="2022-01-01T17:00"
-                {...register("dateTimeInOrder")}
+                id="dataTimeLocal"              
+                {...register("dateTimeInOrder",{
+                  value: "2019-02-04T12:32:20.51"
+                })
+                }
               />
             </div>
 
