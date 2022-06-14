@@ -228,7 +228,7 @@ export function Form() {
                 name="dateTimeInOrder"
                 id="dataTimeLocal"              
                 {...register("dateTimeInOrder",{
-                  value: "2019-02-04T12:32:20.51"
+                  value: "02-04T12:32:20.51"
                 })
                 }
               />
