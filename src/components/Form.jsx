@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import "../components/Form.css";
 import moment from "moment";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import * as constants from "../constants/constants";
 import SendAndAttachment from "../services/SendAttachment";
 import SendCustomFields from "../services/SendCustomFields";
 import getDateNow from "../services/getDateNow";
 
 export function Form() {
-
   const [images, setImage] = useState([]);
 
   const showPreview = (event) => {
@@ -31,11 +32,23 @@ export function Form() {
     urlTrelloPostCard,
   } = constants;
 
+  const validateForm = yup.object().shape({
+    nameInOrder: yup
+      .string()
+      .required("Campo obrigatório")
+      .min(10, "Por favor, escreva seu nome completo"),
+    celInOrder: yup.string().required("Campo obrigatório"),
+    phraseOnTheCake: yup
+      .string()
+      .required("Campo obrigatório")
+      .max(52, "A quantidade de caracteres excede o espaço no bolo"),
+  });
+
   const {
     register,
     handleSubmit,
-    formState: { erros },
-  } = useForm();
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(validateForm) });
 
   const submitOrder = (dataOrder) => {
     console.log(dataOrder.filesInOrder);
@@ -43,11 +56,11 @@ export function Form() {
     const CardBody = {
       name: `${dataOrder.nameInOrder} - CEL: ${dataOrder.celInOrder} - DATA: ${dueDate}`,
       desc: `**********RESUMO DO PEDIDO**********
-      Frase: Frase padrão para bolos
-      Desenho: Flork com chapéu de aniversário e bolinho na mão
-      Cor da Frase: Preta
+      Frase: ${dataOrder.phraseOnTheCake}
+      Desenho: ${dataOrder.drawingOnTheCake}
+      Cor da Frase: ${dataOrder.cakeColor}
       Cor do bolo: ${dataOrder.colorBaseInOrder}
-      Observação: Granulado colorido
+      Observação: ${dataOrder.orderObservation}
       PAGAMENTO: ${dataOrder.formOfPaymentInOrder}`,
       due: `${moment(dataOrder.dateTimeInOrder)}`,
       idLabels: `624a04802f06001532cefe52`,
@@ -87,8 +100,9 @@ export function Form() {
             encType="multipart/form-data"
           >
             <div className="field">
-              <label>Nome Completo:</label>
-              <br />
+              <label>
+                <strong>Nome Completo:</strong>
+              </label>
               <input
                 type="text"
                 id="POST-name"
@@ -98,11 +112,13 @@ export function Form() {
                 autoFocus
                 className="inputFieldText "
               />
-              <br />
+              <p className="errorMessage">{errors.nameInOrder?.message}</p>
             </div>
 
             <div className="field">
-              <label>Número de celular(WhatsApp):</label>
+              <label>
+                <strong>Número de celular(WhatsApp):</strong>
+              </label>
               <br />
               <input
                 type="tel"
@@ -112,7 +128,39 @@ export function Form() {
                 placeholder="Informe seu WhatsApp"
                 className="inputFieldText"
               />
+              <p className="errorMessage">{errors.celInOrder?.message}</p>
+            </div>
+
+            <div className="field">
+              <label>
+                <strong>
+                  Frase no bolinho (máximo 50 caracteres com desenho):
+                </strong>
+              </label>
               <br />
+              <input
+                type="tel"
+                id="POST-celular"
+                name="phraseOnTheCake"
+                {...register("phraseOnTheCake")}
+                placeholder="Informe a frase que vai no bolinho"
+                className="inputFieldText"
+              />
+              <p className="errorMessage">{errors.phraseOnTheCake?.message}</p>
+            </div>
+            <div className="field">
+              <label>
+                <strong>Se houver desenho descreva abaixo:</strong>
+              </label>
+              <br />
+              <input
+                type="tel"
+                id="POST-celular"
+                name="drawingOnTheCake"
+                {...register("drawingOnTheCake")}
+                placeholder="Desenho em cima do bolinho"
+                className="inputFieldText"
+              />
             </div>
 
             <div className="fieldUpload">
@@ -140,7 +188,7 @@ export function Form() {
                       <div>
                         <span>{images.name}</span>
                       </div>
-                      <img src={images.URLpreview} key={images.size} />
+                      <img src={images.URLpreview} key={images.name} />
                     </div>
                   );
                 })}
@@ -148,13 +196,29 @@ export function Form() {
             </div>
 
             <div className="field">
-              <label>Cor do bolo (base):</label>
+              <label>
+                <strong>Caso haja alguma observação escreva abaixo:</strong>
+              </label>
+              <br />
+              <input
+                type="tel"
+                id="POST-celular"
+                name="orderObservation"
+                {...register("orderObservation")}
+                placeholder="Desenho em cima do bolinho"
+                className="inputFieldText"
+              />
+            </div>
+            <div className="field">
+              <label>
+                <strong>Cor do bolo (base):</strong>
+              </label>
               <br />
               <input
                 type="text"
                 id="POST-corBase"
-                name="colorBaseInOrder"
-                {...register("colorBaseInOrder")}
+                name="cakeColor"
+                {...register("cakeColor")}
                 placeholder="Cor do seu bolinho"
                 className="inputFieldText "
               />
@@ -162,7 +226,10 @@ export function Form() {
             </div>
 
             <div className="fieldSabor">
-              <span> Escolha um Sabor: </span>
+              <span>
+                {" "}
+                <strong>Escolha um Sabor:</strong>{" "}
+              </span>
               <br />
               <input
                 type="radio"
@@ -221,7 +288,7 @@ export function Form() {
 
             <div className="fieldVela">
               <label className="vela">
-                Aceita vela? (custo adicional de 2 reais):
+                <strong>Aceita vela? (custo adicional de 2 reais):</strong>
               </label>
               <br />
 
@@ -246,7 +313,9 @@ export function Form() {
               <br />
             </div>
             <div className="fieldPagamento">
-              <label className="pagamento">Foma de Pagamento:</label>
+              <label className="pagamento">
+                <strong>Foma de Pagamento:</strong>
+              </label>
               <br />
 
               <input
