@@ -6,30 +6,9 @@ import moment from "moment";
 import * as constants from "../constants/constants";
 import SendAndAttachment from "../services/SendAttachment";
 import SendCustomFields from "../services/SendCustomFields";
-// import getImageArray from "../services/getImageArray";
-// import showPreview from "../services/showPreview";
-// import getSate from "../services/showPreview";
+import getDateNow from "../services/getDateNow";
 
 export function Form() {
-
-const defaultTime = ()=>{
-  // var today = new Date()
-  // var DD = String(today.getDate()).padStart(2, '0')
-  // var MM = String(today.getMonth()+1).padStart(2, '0')
-  // var YYYY = today.getFullYear()
-  // var mm = String( today.getMinutes()).padStart(2, '0')
-  // var HH = String(today.getHours()).padStart(2, '0')
-  // today = `${YYYY}-${MM}-${DD}T${HH}:${mm} `
-  // "2022-06-14T12:32"
-  const today = moment().format(moment.DATETIME_LOCAL)
-  console.log(today)
-
-}
-defaultTime()
- 
-
-
-
 
   const [images, setImage] = useState([]);
 
@@ -116,7 +95,6 @@ defaultTime()
                 name="nameInOrder"
                 {...register("nameInOrder")}
                 placeholder="Informe seu nome completo"
-                required
                 autoFocus
                 className="inputFieldText "
               />
@@ -132,7 +110,6 @@ defaultTime()
                 name="celInOrder"
                 {...register("celInOrder")}
                 placeholder="Informe seu WhatsApp"
-                required
                 className="inputFieldText"
               />
               <br />
@@ -179,7 +156,6 @@ defaultTime()
                 name="colorBaseInOrder"
                 {...register("colorBaseInOrder")}
                 placeholder="Cor do seu bolinho"
-                required
                 className="inputFieldText "
               />
               <br />
@@ -235,12 +211,11 @@ defaultTime()
               <input
                 type="datetime-local"
                 name="dateTimeInOrder"
-                id="dataTimeLocal"              
-                {...register("dateTimeInOrder",{
-                  value: moment().format(moment.DATETIME_LOCAL).toString()
+                id="inputDateNow"
+                {...register("dateTimeInOrder", {
+                  value: getDateNow(),
                   // "2022-06-14T12:32"
-                })
-                }
+                })}
               />
             </div>
 
