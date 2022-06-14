@@ -12,11 +12,20 @@ import SendCustomFields from "../services/SendCustomFields";
 
 export function Form() {
 
-// const defaultTime = ()=>{
-//   const datetimeLocalInput = document.getElementById('dataTimeLocal');
-//   console.log(datetimeLocalInput)
-// }
-// defaultTime()
+const defaultTime = ()=>{
+  // var today = new Date()
+  // var DD = String(today.getDate()).padStart(2, '0')
+  // var MM = String(today.getMonth()+1).padStart(2, '0')
+  // var YYYY = today.getFullYear()
+  // var mm = String( today.getMinutes()).padStart(2, '0')
+  // var HH = String(today.getHours()).padStart(2, '0')
+  // today = `${YYYY}-${MM}-${DD}T${HH}:${mm} `
+  // "2022-06-14T12:32"
+  const today = moment().format(moment.DATETIME_LOCAL)
+  console.log(today)
+
+}
+defaultTime()
  
 
 
@@ -228,7 +237,8 @@ export function Form() {
                 name="dateTimeInOrder"
                 id="dataTimeLocal"              
                 {...register("dateTimeInOrder",{
-                  value: "02-04T12:32:20.51"
+                  value: moment().format(moment.DATETIME_LOCAL).toString()
+                  // "2022-06-14T12:32"
                 })
                 }
               />
