@@ -9,7 +9,9 @@ import * as constants from "../constants/constants";
 import SendAndAttachment from "../services/SendAttachment";
 import SendCustomFields from "../services/SendCustomFields";
 import getDateNow from "../services/getDateNow";
-import { min } from "moment";
+import makeAPICallPost from "../services/makeAPICallPost";
+import SendAttachment from "../services/SendAttachment";
+import BodyCard from "../services/createBody";
 
 export function Form() {
   const [images, setImage] = useState([]);
@@ -46,7 +48,6 @@ export function Form() {
     cakePhraseColor: yup.string().required("Campo obrigatório"),
     cakeColor: yup.string().required("Campo obrigatório"),
     flavorInOrder: yup.string().required("Campo obrigatório").nullable(),
-    // dateTimeInOrder: yup.string().required("Campo obrigatório").nullable()
     candleInOrder: yup.string().required("Campo obrigatório").nullable(),
     formOfPaymentInOrder: yup.string().required("Campo obrigatório").nullable(),
   });
@@ -58,41 +59,15 @@ export function Form() {
   } = useForm({ resolver: yupResolver(validateOrder) });
 
   const submitOrder = (dataOrder) => {
-    console.log(dataOrder.filesInOrder);
-    const dueDate = moment(dataOrder.dateTimeInOrder).format("DD/MM HH:mm");
-    const CardBody = {
-      name: `${dataOrder.nameInOrder} - CEL: ${dataOrder.celInOrder} - DATA: ${dueDate}`,
-      desc: `**********RESUMO DO PEDIDO**********
-      Frase: ${dataOrder.phraseOnTheCake}
-      Desenho: ${dataOrder.drawingOnTheCake}
-      Cor da Frase: ${dataOrder.cakePhraseColor}
-      Cor do bolo: ${dataOrder.cakeColor}
-      Observação: ${dataOrder.orderObservation}
-      PAGAMENTO: ${dataOrder.formOfPaymentInOrder}`,
-      due: `${moment(dataOrder.dateTimeInOrder)}`,
-      idLabels: `624a04802f06001532cefe52`,
-    };
-
-    fetch(urlTrelloPostCard, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(CardBody),
-    })
-      .then((response) => {
-        console.log(`Response: ${response.status} ${response.statusText}`);
-        return response.json();
-      })
-
-      .then((jsonBody) => {
-        const idCard = jsonBody.id;
-        const body = jsonBody;
-
-        SendCustomFields(dataOrder, idCard);
-        SendAndAttachment(dataOrder.filesInOrder, idCard);
-      })
-      .catch((err) => console.error(err));
+    async function CreateCard() {
+     const response =  makeAPICallPost(urlTrelloPostCard, BodyCard(dataOrder))
+      const responseJson = await  response
+      const idCard = responseJson.id
+      SendAttachment(dataOrder.filesInOrder, idCard)
+      SendCustomFields(dataOrder, idCard)
+      
+    }
+    CreateCard();
   };
 
   return (

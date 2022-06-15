@@ -26,6 +26,7 @@ export default function SendCustomFields(dataOrder, idCard) {
         if (idCustomFields[id] == "62845d1714150e5f18da882e") {
           dataCustom.value.text = dataOrder.formOfPaymentInOrder;
         }
+
       };
 
       const sendData = () => {
