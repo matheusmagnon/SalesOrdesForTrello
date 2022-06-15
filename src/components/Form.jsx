@@ -9,7 +9,7 @@ import * as constants from "../constants/constants";
 import SendAndAttachment from "../services/SendAttachment";
 import SendCustomFields from "../services/SendCustomFields";
 import getDateNow from "../services/getDateNow";
-import { min } from "moment";
+import * as OrderSchema from "../services/validateOrder";
 
 export function Form() {
   const [images, setImage] = useState([]);
@@ -59,7 +59,11 @@ export function Form() {
 
   const submitOrder = (dataOrder) => {
     console.log(dataOrder.filesInOrder);
+
     const dueDate = moment(dataOrder.dateTimeInOrder).format("DD/MM HH:mm");
+
+    // const createCard = () => {};
+
     const CardBody = {
       name: `${dataOrder.nameInOrder} - CEL: ${dataOrder.celInOrder} - DATA: ${dueDate}`,
       desc: `**********RESUMO DO PEDIDO**********
@@ -73,26 +77,22 @@ export function Form() {
       idLabels: `624a04802f06001532cefe52`,
     };
 
-    fetch(urlTrelloPostCard, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(CardBody),
-    })
-      .then((response) => {
-        console.log(`Response: ${response.status} ${response.statusText}`);
-        return response.json();
+    async function CreateCard() {
+     const  response = await  fetch(urlTrelloPostCard, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(CardBody),
       })
-
-      .then((jsonBody) => {
-        const idCard = jsonBody.id;
-        const body = jsonBody;
-
-        SendCustomFields(dataOrder, idCard);
-        SendAndAttachment(dataOrder.filesInOrder, idCard);
-      })
-      .catch((err) => console.error(err));
+        console.log(`Response: ${response.status} ${response.statusText}`)
+        const responseJson = await response.json()
+        const idCard = responseJson.id
+          SendCustomFields(dataOrder, idCard);
+          SendAndAttachment(dataOrder.filesInOrder, idCard);
+  
+    }
+    CreateCard()
   };
 
   return (

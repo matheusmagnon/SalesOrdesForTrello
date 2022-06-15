@@ -15,7 +15,7 @@ export default function SendCustomFields(dataOrder, idCard) {
           dataCustom.value.text = dataOrder.celInOrder;
         }
         if (idCustomFields[id] == "6266f4bca4f27866da085132") {
-          dataCustom.value.text = dataOrder.colorBaseInOrder;
+          dataCustom.value.text = dataOrder.cakeColor;
         }
         if (idCustomFields[id] == "6266f5496a22807bb41e25f3") {
           dataCustom.value.text = dataOrder.candleInOrder;
@@ -26,6 +26,7 @@ export default function SendCustomFields(dataOrder, idCard) {
         if (idCustomFields[id] == "62845d1714150e5f18da882e") {
           dataCustom.value.text = dataOrder.formOfPaymentInOrder;
         }
+
       };
 
       const sendData = () => {
