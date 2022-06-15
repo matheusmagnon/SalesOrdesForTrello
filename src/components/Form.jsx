@@ -146,7 +146,7 @@ export function Form() {
               </label>
               <br />
               <input
-                type="tel"
+                type="text"
                 id="POST-celular"
                 name="phraseOnTheCake"
                 {...register("phraseOnTheCake")}
@@ -175,7 +175,7 @@ export function Form() {
               </label>
               <br />
               <input
-                type="tel"
+                type="text"
                 id="POST-celular"
                 name="drawingOnTheCake"
                 {...register("drawingOnTheCake")}
@@ -222,7 +222,7 @@ export function Form() {
               </label>
               <br />
               <input
-                type="tel"
+                type="text"
                 id="POST-celular"
                 name="orderObservation"
                 {...register("orderObservation")}
