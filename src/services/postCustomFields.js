@@ -33,7 +33,8 @@ export default function postCustomFields(dataOrder, idCard) {
   
       // console.log(response)
     });
-  } catch (error) {
+  } 
+  catch (error) {
     console.log(error)
   }
 }

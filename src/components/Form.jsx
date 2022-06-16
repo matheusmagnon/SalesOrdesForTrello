@@ -11,6 +11,7 @@ import makeAPICall from "../services/makeAPICall";
 import SendAttachment from "../services/SendAttachment";
 import BodyCard from "../services/createBody";
 import pedidoEnviado from "../pages/pedidoEnviado";
+import getId from "../services/getId";
 
 export function Form() {
   const [images, setImage] = useState([]);
@@ -58,8 +59,8 @@ export function Form() {
         urlTrelloPostCard,
         BodyCard(dataOrder)
       );
-      const responseJson = await response.json();
-      const idCard = responseJson.id;
+      
+      const idCard = await getId(response)
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
       console.log("Card Criado");
