@@ -1,20 +1,24 @@
 // import * as dotenv from 'dotenv/config';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "../components/Form.css";
-import moment from "moment";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as yup from "yup";
 import * as constants from "../constants/constants";
-import SendAndAttachment from "../services/SendAttachment";
-import SendCustomFields from "../services/SendCustomFields";
+import postCustomFields from "../services/postCustomFields";
 import getDateNow from "../services/getDateNow";
-import makeAPICallPost from "../services/makeAPICallPost";
+import makeAPICall from "../services/makeAPICall";
 import SendAttachment from "../services/SendAttachment";
 import BodyCard from "../services/createBody";
+import pedidoEnviado from "../pages/pedidoEnviado";
 
 export function Form() {
   const [images, setImage] = useState([]);
+  const [orderStatus, setOrderStatus] = useState(false);
+
+  useEffect(() => {
+    // document.title = "P"
+  }, [orderStatus]);
 
   const showPreview = (event) => {
     console.log("ok");
@@ -33,39 +37,33 @@ export function Form() {
     apikeyTrello,
     tokenTrello,
     urlTrelloPostCard,
+    validationScheme,
   } = constants;
 
-  const validateOrder = yup.object().shape({
-    nameInOrder: yup
-      .string()
-      .required("Campo obrigatório")
-      .min(10, "Por favor, escreva seu nome completo"),
-    celInOrder: yup.string().required("Campo obrigatório"),
-    phraseOnTheCake: yup
-      .string()
-      .required("Campo obrigatório")
-      .max(52, "A quantidade de caracteres excede o espaço no bolo"),
-    cakePhraseColor: yup.string().required("Campo obrigatório"),
-    cakeColor: yup.string().required("Campo obrigatório"),
-    flavorInOrder: yup.string().required("Campo obrigatório").nullable(),
-    candleInOrder: yup.string().required("Campo obrigatório").nullable(),
-    formOfPaymentInOrder: yup.string().required("Campo obrigatório").nullable(),
-  });
+  // const validateOrder = yup.object().shape(
+  // validationScheme
+  // );
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(validateOrder) });
+  } = useForm({
+    // resolver: yupResolver(validateOrder)
+  });
 
   const submitOrder = (dataOrder) => {
     async function CreateCard() {
-     const response =  makeAPICallPost(urlTrelloPostCard, BodyCard(dataOrder))
-      const responseJson = await  response
-      const idCard = responseJson.id
-      SendAttachment(dataOrder.filesInOrder, idCard)
-      SendCustomFields(dataOrder, idCard)
-      
+      const response = await makeAPICall(
+        urlTrelloPostCard,
+        BodyCard(dataOrder)
+      );
+      const responseJson = await response.json();
+      const idCard = responseJson.id;
+      SendAttachment(dataOrder.filesInOrder, idCard);
+      postCustomFields(dataOrder, idCard);
+      console.log("Card Criado");
+      setOrderStatus(true)
     }
     CreateCard();
   };
@@ -76,6 +74,7 @@ export function Form() {
         <h1>
           Pedido de BENTÔ CAKE <br /> (bolinho de 350g)
         </h1>
+        {/* <MessageBeforeCreateCard/> */}
         <div className="formBody">
           <form
             onSubmit={handleSubmit(submitOrder)}
