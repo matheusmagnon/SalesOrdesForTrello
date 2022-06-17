@@ -11,6 +11,7 @@ import BodyCard from "../services/createBody";
 import getId from "../services/getId";
 import PedidoEnviado from "./PedidoEnviado";
 import renderComponent from "./renderComponent";
+import menuBento from "../_assets/images/menuBento.jpg"
 
 function Form() {
   const [images, setImage] = useState([]);
@@ -60,7 +61,12 @@ function Form() {
     renderComponent(isShown);
   }
   return (
+    
     <div className="formBody">
+      <div className="menuBento">
+        <img src={menuBento} alt="Cardápio - Bentô Cake">
+        </img>
+      </div>
       <form onSubmit={handleSubmit(submitOrder)} encType="multipart/form-data">
         <div className="field">
           <label>
