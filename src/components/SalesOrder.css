@@ -14,7 +14,7 @@ main {
     justify-content: center;
     padding: 10px;
     background-image: url(../_assets/images/Pattern.jpg);
-    background-size: cover;
+    background-size:70%;
     font-family: Nephilm;
     font-size: 1.6em;
     box-sizing: border-box;
@@ -138,6 +138,10 @@ input[type="file"] {
     color: red;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 0.8em;
+}
+
+.PedidoEnviado{
+    margin-top: 20px;
 }
 
 @media only screen and (max-width:700px) {

@@ -1,10 +1,9 @@
 
 
-function pedidoEnviado() {
+function PedidoEnviado() {
   return (
-    <div>
+    <div className="PedidoEnviado">
       <p>
-        {" "}
         Sua solicitação foi registrada com sucesso! Se puder, sinalize o envio
         do formulário no nosso Whatsapp. Esperamos que breve você encontre seu
         bentô lindo e personalizado.
@@ -12,4 +11,4 @@ function pedidoEnviado() {
     </div>
   );
 }
-export default pedidoEnviado;
+export default PedidoEnviado;

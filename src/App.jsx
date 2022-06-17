@@ -1,9 +1,9 @@
-import { Form } from "./components/Form"
+import { SalesOrder } from "./components/SalesOrder"
 
 function App() {
   return (
     <div>
-      <Form />
+      <SalesOrder />
     </div>
   );
 }
