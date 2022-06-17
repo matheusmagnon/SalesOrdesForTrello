@@ -1,9 +1,10 @@
-import { Form } from "./components/Form"
+import { SalesOrder } from "./components/SalesOrder"
+import { useNavigate, Router } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <Form />
+      <SalesOrder />
     </div>
   );
 }

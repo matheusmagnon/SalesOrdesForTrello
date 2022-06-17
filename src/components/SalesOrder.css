@@ -12,21 +12,25 @@ main {
     display: flex;
     box-sizing: border-box;
     justify-content: center;
-    padding: 10px;
+    padding: 20px;
     background-image: url(../_assets/images/Pattern.jpg);
-    background-size: cover;
+    background-size:50%;
     font-family: Nephilm;
     font-size: 1.6em;
     box-sizing: border-box;
-    letter-spacing: .1rem
+    letter-spacing: .1rem;
+    height: 105vmax;
+    scroll-behavior: smooth;
 }
 
-.container {
+.containerForm {
     border-radius: 45px;
     box-shadow: 0 0 10px rgb(0, 0, 0), 0 0 1px rgb(7, 2, 10) inset;
     padding: 20px 40px;
     width: 750px;
     background-color: #fff;
+    height: fit-content;
+
 }
 
 .formBody form {
@@ -79,21 +83,24 @@ h1 {
     margin: 5px;
 }
 
-.botaoSendPost {
+.botaoSendPost,.ButtonNovoPedido {
     background-color: #4E2A58;
     color: #D9D9D9;
     border: none;
     border-radius: 10px;
     height: 45px;
-    margin-top: 10px;
+    margin-top: 15px;
     font-weight: 1000;
 }
 
 .botaoSendPost {
     width: 140px;
 }
+.ButtonNovoPedido{
+    width: 160px;
+}
 
-.botaoSendPost:hover,
+.botaoSendPost:hover,.ButtonNovoPedido:hover,
 .file:hover {
     color: #4E2A58;
     background-color: #e0bfe9;
@@ -138,6 +145,10 @@ input[type="file"] {
     color: red;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 0.8em;
+}
+
+.PedidoEnviado{
+    margin: 20px 0 50px;
 }
 
 @media only screen and (max-width:700px) {
