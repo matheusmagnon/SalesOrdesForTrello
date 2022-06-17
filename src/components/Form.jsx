@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import getDateNow from "../services/getDateNow";
 import makeAPICall from "../services/makeAPICall";
 import * as constants from "../constants/constants";
@@ -8,20 +10,14 @@ import postCustomFields from "../services/postCustomFields";
 import BodyCard from "../services/createBody";
 import getId from "../services/getId";
 import PedidoEnviado from "./PedidoEnviado";
-import renderComponent from "../services/renderComponent";
-// import renderComponent from "../services/renderComponent";
+import renderComponent from "./renderComponent";
 
 function Form() {
   const [images, setImage] = useState([]);
   const [isShown, setIsShown] = useState(false);
-
   const {
-    IdBoard,
-    IdListPedAberto,
-    apikeyTrello,
-    tokenTrello,
     urlTrelloPostCard,
-    validationScheme,
+    validationScheme
   } = constants;
 
   const showPreview = (event) => {
@@ -34,13 +30,14 @@ function Form() {
     });
     setImage(images);
   };
+
+  const validateOrder = yup.object().shape(validationScheme);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    // resolver: yupResolver(validateOrder)
-  });
+  } = useForm({ resolver: yupResolver(validateOrder) });
 
   const submitOrder = (dataOrder) => {
     async function CreateCard() {
@@ -55,14 +52,13 @@ function Form() {
     CreateCard();
     setIsShown(true);
   };
-//   renderComponent(isShown);
 
-    if (isShown == true) {
-      return  <PedidoEnviado />
-     } else {
-      console.log("Card não criado")
-     }
-
+  if (isShown == true) {
+    return <PedidoEnviado />;
+  }
+  {
+    renderComponent(isShown);
+  }
   return (
     <div className="formBody">
       <form onSubmit={handleSubmit(submitOrder)} encType="multipart/form-data">
@@ -332,12 +328,11 @@ function Form() {
           <label>TRANSFERÊNCIA BANCÁRIA (BB e CAIXA)</label>
           <br />
           <p className="errorMessage">{errors.formOfPaymentInOrder?.message}</p>
-
           <input
-            className="botaoSendPost"
-            type="submit"
-            value="Enviar Pedido"
-          />
+                className="botaoSendPost"
+                type="submit"
+                value="Enviar Pedido"
+              />
         </div>
       </form>
     </div>
