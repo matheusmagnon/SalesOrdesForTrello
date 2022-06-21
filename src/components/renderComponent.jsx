@@ -10,8 +10,7 @@ export default function renderComponent(props) {
   else {
     return <Form/>
   }
-  // if (props == false){
-  //   return <Form />
-  // }
+
+  return props
 
 }

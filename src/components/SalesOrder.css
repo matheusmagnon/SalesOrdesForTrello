@@ -1,59 +1,109 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
+/* Configuração padrão */
 @font-face {
     font-family: Nephilm;
     src: url("../_assets/font/Nephilm.otf") format("opentype");
 }
 
-main {
-    display: flex;
-    box-sizing: border-box;
-    justify-content: center;
-    padding: 20px;
-    background-image: url(../_assets/images/Pattern.jpg);
-    background-size:50%;
-    font-family: Nephilm;
-    font-size: 1.6em;
-    box-sizing: border-box;
-    letter-spacing: .1rem;
-    height: 175vmax;
-    scroll-behavior: smooth;
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    /* height: 100%; */
+    /* background-image: url(../_assets/images/Pattern.jpg); */
 }
 
-.containerForm {
+root {
+    font-size: 62.5%;
+}
+
+/* html {
+    
+} */
+
+body {
+    font-family: Nephilm;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    box-sizing: border-box;
+
+}
+
+/* 
+main {
+    
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 2rem 0rem;
+    background-image: url(../_assets/images/Pattern.jpg);
+    background-size: 80%;
+    letter-spacing: 0.1rem;
+    height: 100%;
+} */
+
+/* Container do Form */
+/* .containerForm {
+    display: flex;
+    flex-direction: column;
     border-radius: 45px;
     box-shadow: 0 0 10px rgb(0, 0, 0), 0 0 1px rgb(7, 2, 10) inset;
-    padding: 20px 40px;
-    width: 750px;
+    padding: 5rem 5rem 3rem;
+    width: 100%;
+    max-width: 1050px;
     background-color: #fff;
     height: fit-content;
+    justify-content: center;
+    align-self: center;
+} */
 
+/* Corpo do Form */
+
+.formBody {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .formBody form {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    width: 100%;
+    justify-content: center;
+    align-self: center;
 }
 
+/* img cardápio */
+
+.menuBento img {
+    display: flex;
+    width: 100%;
+    /* height: 100%; */
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+}
+
+/* Fonta do Titulo */
+
 h1 {
-    font-size: 2.5rem;
+    font-size: 4.2rem;
+    line-height: 4.5rem;
     color: #4E2A58;
     text-align: center;
 }
 
+/* Campos */
 .field,
 .fieldSabor,
 .fieldDataRetirada,
 .fieldDataRetirada div,
 .fieldPagamento,
 .fieldVela {
-    margin-top: 30px;
+    margin-top: 3%;
     /* align-self: center; */
 }
+
 
 
 .inputFieldText {
@@ -63,15 +113,16 @@ h1 {
     border: 0;
     outline: 0;
     background-color: rgb(228, 225, 230);
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+
 }
 
 .fieldDataRetirada input {
     color: white;
-    font-size: 30px;
-    padding: 5px;
-    width: 400px;
-    height: 50px;
+    font-size: 1.6rem;
+    padding: 1%;
+    width: 30%;
+    height: 4rem;
     border: #4E2A58;
     border-radius: 10px;
     background: #4E2A58;
@@ -83,55 +134,41 @@ h1 {
     margin: 5px;
 }
 
-.botaoSendPost,.ButtonNovoPedido {
+/* Botoes */
+
+.botaoSendOrder,
+.ButtonNewOrder {
     background-color: #4E2A58;
     color: #D9D9D9;
     border: none;
     border-radius: 10px;
-    height: 45px;
-    margin-top: 15px;
-    font-weight: 1000;
+    height: 3.8rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1.8rem;
 }
 
-.botaoSendPost {
-    width: 140px;
-}
-.ButtonNovoPedido{
-    width: 160px;
+.botaoSendOrder {
+    width: 17rem;
 }
 
-.botaoSendPost:hover,.ButtonNovoPedido:hover,
-.file:hover {
+.ButtonNewOrder {
+    width: 30%;
+}
+
+.botaoSendOrder:hover,
+.ButtonNovoPedido:hover,
+.file:hover,
+.ButtomUploadFile:hover,
+.fieldDataRetirada input:hover {
     color: #4E2A58;
     background-color: #e0bfe9;
 }
 
+/* Campos relacionados ao upload das imagens */
 .fieldUpload {
     display: flex;
     margin-top: 20px;
-}
-
-.fieldPreview {
-    margin-left: 20px;
-    /* padding: 10px; */
-    display: flex;
-}
-
-.fieldPreview img {
-    width: 100px;
-    margin: 0 10px;
-}
-
-.fieldPreview span {
-    font-size: 12px;
-}
-
-input[type="file"] {
-    display: none;
-}
-.menuBento img{
-    width: 100%;
-    height: 1200px;
 }
 
 .ButtomUploadFile {
@@ -144,42 +181,235 @@ input[type="file"] {
     border-radius: 10px;
     cursor: pointer;
 }
-.errorMessage{
-    color: red;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 0.8em;
+
+
+.fieldPreview {
+    margin-left: 20px;
+    /* padding: 10px; */
+    display: flex;
 }
 
-.PedidoEnviado{
+.fieldPreview img {
+    width: 60%;
+    margin: 0 20px;
+}
+
+.fieldPreview span {
+    font-size: 1.5rem;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+
+
+/* Mensage de validação do form */
+.errorMessage {
+    color: red;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.6rem;
+}
+
+/* Tela de form enviado */
+.PedidoEnviado {
     margin: 20px 0 50px;
 }
 
-@media only screen and (max-width:700px) {
-    main {
-        font-size: 1.0em;
-    }
+@media (max-width:1310px) {
 
     h1 {
-        font-size: 1.8rem;
-        color: #4E2A58;
-        text-align: center;
-    }
-
-    .inputFieldText {
-        width: 100%;
+        font-size: 3.8rem;
     }
 
     .fieldDataRetirada input {
-        color: white;
-        width: 250px;
-        font-size: 20px;
-        background: #4E2A58;
+        width: 35%;
+        height: 3rem;
     }
 
-    .fieldUpload,.fieldPreview {
-        display: flex;
+    .fieldUpload {
         flex-direction: column;
-        /* margin-top: 20px; */
+    }
+
+    .fieldPreview {
+        margin-top: 2%;
+    }
+
+    .ButtomUploadFile {
+        width: 50%;
+    }
+
+}
+
+@media (max-width:1140px) {
+
+    .fieldDataRetirada input {
+        width: 38%;
+        height: 3rem;
+    }
+
+    .botaoSendOrder {
+        font-size: 1.6rem;
+    }
+    .ButtonNewOrder {
+        width: 35%;
+    }
+}
+
+
+@media (max-width:1050px) {
+    .fieldDataRetirada input {
+        width: 48%;
+        height: 3rem;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+    .ButtonNewOrder {
+        width: 45%;
+    }
+}
+
+@media (max-width:930px) {
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .botaoSendOrder {
+        width: 12rem;
+        font-size: 1.4rem;
+    }
+
+    .fieldDataRetirada input {
+        width: 42%;
+        height: 3rem;
     }
     
+}
+
+@media (max-width:820px) {
+    body {
+        font-size: 1.2rem;
+    }
+
+    .fieldDataRetirada input {
+        width: 60%;
+    }
+
+    .formBody {
+        padding-top: 1rem;
+    }
+    h1{
+        height: 5rem;
+        line-height: 3rem;
+    }
+}
+
+@media (max-width: 720px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .botaoSendOrder {
+        font-size: 1rem;
+    }
+
+    .menuBento img {
+        padding: 0;
+    }
+    .ButtonNewOrder {
+        width: 60%;
+        height: 3rem;
+    }
+}
+
+@media (max-width: 640px) {
+    body{
+        line-height: 1.6rem;
+    }
+    .fieldDataRetirada input {
+        width: 70%;
+    }
+
+    .ButtomUploadFile {
+        width: 70%;
+    }
+    .ButtonNewOrder{
+        width: 40%;
+        font-size: 1.2rem;
+    }
+
+
+    .fieldPreview span {
+        font-size: 1rem;
+    }
+
+    .inputFieldText {
+        font-size: 1rem;
+    }
+
+    .errorMessage {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 580px) {
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .fieldPreview span {
+        font-size: 0.8rem;
+    }
+
+    .fieldDataRetirada input {
+        width: 80%;
+    }
+    .botaoSendOrder{
+        width: 50%;
+        height: 2.8rem;
+    }
+}
+
+@media (max-width:510px) {
+
+    body {
+        font-size: 1rem;
+    }
+
+    .fieldDataRetirada input {
+        width: 80%;
+        font-size: 1.2rem;
+    }
+
+    .inputFieldText {
+        font-size: 1rem;
+    }
+
+    .errorMessage {
+        font-size: 1rem;
+    }
+    .botaoSendOrder{
+        /* padding: 0px;  */
+        width: 40%;
+        margin: 10px;
+    }
+}
+@media (max-width:380px) {
+    .fieldDataRetirada input {
+        width: 90%;
+        /* font-size: 0.5rem; */
+    }
+    .botaoSendOrder{
+        /* padding: 0px;  */
+        width: 50%;
+        margin: 10px;
+    }
+} .ButtonNewOrder{
+    width: 70%;
+    font-size: 1rem;
 }
