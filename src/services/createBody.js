@@ -13,7 +13,7 @@ Observação: ${dataOrder.orderObservation}
 Pagamento: ${dataOrder.formOfPaymentInOrder}
 Data e Horário de retirada: ${dueDate}`,
         due: `${moment(dataOrder.dateTimeInOrder)}`,
-        // label[]id: `624a04802f06001532cefe52`,
+        idLabels: `624a04802f06001532cefe52`,
       };
       return CardBody
     }
