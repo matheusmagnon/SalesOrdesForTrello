@@ -8,7 +8,6 @@ function PedidoEnviado() {
   const [isShown, setIsShown] = useState([false]);
     window.scrollTo(0, 0);
   if (isShown === false) {
-    // setIsShown(true)
     return <Form />;
   } else {
     

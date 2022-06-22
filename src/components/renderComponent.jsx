@@ -4,7 +4,7 @@ import PedidoEnviado from "./PedidoEnviado";
 export default function renderComponent(props) {
   console.log(`Chegou: ${props}`)
   
-  if (props == true) {
+  if (props === true) {
     return  <PedidoEnviado />
   } 
   else {

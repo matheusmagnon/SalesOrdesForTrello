@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import background from "../_assets/images/Pattern.jpg";
 
-
-var teste
+var teste;
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
@@ -11,13 +10,11 @@ export const Main = styled.div`
   background-image: url(${background});
   background-size: 80%;
   letter-spacing: 0.1rem;
-  height: ${props=>{
-    teste = props.state
-    if(teste == true){
-        return `${200}vh`
+  height: ${(props) => {
+    if (props.state == true) {
+      return `${200}vh`;
     }
-} 
-};
+  }};
 
   @media (max-width: 820px) {
     padding: 1rem 1rem;
@@ -36,7 +33,6 @@ export const ContainerForm = styled.div`
   max-width: 1050px;
   background-color: #fff;
   height: fit-content;
-  /* justify-content: center; */
   align-self: center;
 
   @media (max-width: 1310px) {
