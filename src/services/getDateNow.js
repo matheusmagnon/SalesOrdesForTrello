@@ -4,7 +4,7 @@ export default function getDateNow() {
     .toString()
     .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 
-  let time = '00';
+  let time = '00:00';
   // `
   //   ${today.getHours().toString().padStart(2, '0')}:${today
   //   .getMinutes()
