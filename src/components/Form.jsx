@@ -1,34 +1,39 @@
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import getDateNow from "../services/getDateNow";
-import makeAPICall from "../services/makeAPICall";
-import * as constants from "../constants/constants";
-import SendAttachment from "../services/SendAttachment";
-import postCustomFields from "../services/postCustomFields";
-import BodyCard from "../services/createBody";
-import getId from "../services/getId";
-import PedidoEnviado from "./PedidoEnviado";
-import renderComponent from "./renderComponent";
-import menuBento from "../_assets/images/menuBento.jpg";
-import { ContainerForm } from "./styles";
-import { Main } from "./styles";
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import getDateNow from '../services/getDateNow';
+import makeAPICall from '../services/makeAPICall';
+import * as constants from '../constants/constants';
+import SendAttachment from '../services/SendAttachment';
+import postCustomFields from '../services/postCustomFields';
+import BodyCard from '../services/createBody';
+import getId from '../services/getId';
+import PedidoEnviado from './PedidoEnviado';
+import renderComponent from './renderComponent';
+// import showPreview from "../services/showPreview";
+import menuBento from '../_assets/images/menuBento.jpg';
+import { ContainerForm } from './styles';
+import { Main } from './styles';
 
 function Form() {
   const [images, setImage] = useState([]);
   const [isShown, setIsShown] = useState(false);
   const { urlTrelloPostCard, validationScheme } = constants;
 
-  const showPreview = (event) => {
-    console.log("ok");
+  const handleImages = images => {
+    setImage(images);
+  };
+
+  const showPreview = event => {
+    console.log('ok');
     const imagesPreview = Array.from(event.target.files);
     console.log(imagesPreview[0]);
-    const images = imagesPreview.map((file) => {
+    const images = imagesPreview.map(file => {
       const { name, size } = file;
       return { name, size, URLpreview: URL.createObjectURL(file) };
     });
-    setImage(images);
+    handleImages(images);
   };
 
   const validateOrder = yup.object().shape(validationScheme);
@@ -37,15 +42,15 @@ function Form() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ 
-    resolver: yupResolver(validateOrder) 
+  } = useForm({
+    resolver: yupResolver(validateOrder),
   });
 
-  const submitOrder = (dataOrder) => {
+  const submitOrder = dataOrder => {
     async function CreateCard() {
       const response = await makeAPICall(
         urlTrelloPostCard,
-        BodyCard(dataOrder)
+        BodyCard(dataOrder),
       );
       const idCard = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
@@ -74,20 +79,22 @@ function Form() {
           <form
             onSubmit={handleSubmit(submitOrder)}
             encType="multipart/form-data"
+            netlify
+            name="PedidosBento"
           >
             <div className="field">
               <label>
                 <strong>Nome Completo:</strong>
+                <input
+                  type="text"
+                  id="POST-name"
+                  name="nameInOrder"
+                  {...register('nameInOrder')}
+                  placeholder="Informe seu nome completo"
+                  autoFocus
+                  className="inputFieldText "
+                />
               </label>
-              <input
-                type="text"
-                id="POST-name"
-                name="nameInOrder"
-                {...register("nameInOrder")}
-                placeholder="Informe seu nome completo"
-                autoFocus
-                className="inputFieldText "
-              />
               <p className="errorMessage">{errors.nameInOrder?.message}</p>
             </div>
 
@@ -100,7 +107,7 @@ function Form() {
                 type="tel"
                 id="POST-celular"
                 name="celInOrder"
-                {...register("celInOrder")}
+                {...register('celInOrder')}
                 placeholder="Informe seu WhatsApp"
                 className="inputFieldText"
               />
@@ -112,67 +119,66 @@ function Form() {
                 <strong>
                   Frase no bolinho (máximo 50 caracteres com desenho):
                 </strong>
+                <input
+                  type="text"
+                  id="POST-celular"
+                  name="phraseOnTheCake"
+                  {...register('phraseOnTheCake')}
+                  placeholder="Informe a frase que vai no bolinho"
+                  className="inputFieldText"
+                />
               </label>
-              <br />
-              <input
-                type="text"
-                id="POST-celular"
-                name="phraseOnTheCake"
-                {...register("phraseOnTheCake")}
-                placeholder="Informe a frase que vai no bolinho"
-                className="inputFieldText"
-              />
               <p className="errorMessage">{errors.phraseOnTheCake?.message}</p>
             </div>
             <div className="field">
               <label>
                 <strong>Cor da Frase:</strong>
+                <input
+                  type="text"
+                  name="cakePhraseColor"
+                  {...register('cakePhraseColor')}
+                  placeholder="Informe a cor da frase"
+                  className="inputFieldText"
+                />
               </label>
-              <br />
-              <input
-                type="text"
-                name="cakePhraseColor"
-                {...register("cakePhraseColor")}
-                placeholder="Informe a cor da frase"
-                className="inputFieldText"
-              />
               <p className="errorMessage">{errors.cakePhraseColor?.message}</p>
             </div>
             <div className="field">
               <label>
                 <strong>Se houver desenho descreva abaixo:</strong>
+
+                <br />
+                <input
+                  type="text"
+                  id="POST-celular"
+                  name="drawingOnTheCake"
+                  {...register('drawingOnTheCake')}
+                  placeholder="Desenho em cima do bolinho"
+                  className="inputFieldText"
+                />
               </label>
-              <br />
-              <input
-                type="text"
-                id="POST-celular"
-                name="drawingOnTheCake"
-                {...register("drawingOnTheCake")}
-                placeholder="Desenho em cima do bolinho"
-                className="inputFieldText"
-              />
             </div>
 
             <div className="fieldUpload">
               <div>
                 <label htmlFor="POST-file" className="ButtomUploadFile">
                   Caso haja alguma imagem de inspiração anexe aqui:
+                  <input
+                    type="file"
+                    id="POST-file"
+                    multiple
+                    accept="image/*"
+                    name="filesInOrder"
+                    {...register('filesInOrder', {
+                      onChange: e => {
+                        showPreview(e);
+                      },
+                    })}
+                  />
                 </label>
-                <input
-                  type="file"
-                  id="POST-file"
-                  multiple
-                  accept="image/*"
-                  name="filesInOrder"
-                  {...register("filesInOrder", {
-                    onChange: (e) => {
-                      showPreview(e);
-                    },
-                  })}
-                />
               </div>
               <div className="fieldPreview">
-                {images.map((images) => {
+                {images.map(images => {
                   return (
                     <div>
                       <div>
@@ -188,38 +194,38 @@ function Form() {
             <div className="field">
               <label>
                 <strong>Caso haja alguma observação escreva abaixo:</strong>
+                <br />
+                <input
+                  type="text"
+                  id="POST-celular"
+                  name="orderObservation"
+                  {...register('orderObservation')}
+                  placeholder="Desenho em cima do bolinho"
+                  className="inputFieldText"
+                />
               </label>
-              <br />
-              <input
-                type="text"
-                id="POST-celular"
-                name="orderObservation"
-                {...register("orderObservation")}
-                placeholder="Desenho em cima do bolinho"
-                className="inputFieldText"
-              />
             </div>
             <div className="field">
               <label>
                 <strong>Cor do bolo (base):</strong>
+                <br />
+                <input
+                  type="text"
+                  id="POST-corBase"
+                  name="cakeColor"
+                  {...register('cakeColor')}
+                  placeholder="Cor do seu bolinho"
+                  className="inputFieldText "
+                />
               </label>
-              <br />
-              <input
-                type="text"
-                id="POST-corBase"
-                name="cakeColor"
-                {...register("cakeColor")}
-                placeholder="Cor do seu bolinho"
-                className="inputFieldText "
-              />
               <p className="errorMessage">{errors.cakeColor?.message}</p>
               <br />
             </div>
 
             <div className="fieldSabor">
               <span>
-                {" "}
-                <strong>Escolha um Sabor:</strong>{" "}
+                {' '}
+                <strong>Escolha um Sabor:</strong>{' '}
               </span>
               <br />
               <input
@@ -227,7 +233,7 @@ function Form() {
                 id="POST-saborChoc"
                 name="flavorInOrder"
                 value="CHOCOLATUDO"
-                {...register("flavorInOrder")}
+                {...register('flavorInOrder')}
               />
               <label>CHOCOLATUDO</label>
               <br />
@@ -237,7 +243,7 @@ function Form() {
                 id="POST-saborRed"
                 name="flavorInOrder"
                 value="RED VELVET"
-                {...register("flavorInOrder")}
+                {...register('flavorInOrder')}
               />
               <label>RED VELVET</label>
               <br />
@@ -247,7 +253,7 @@ function Form() {
                 id="POST-saborRedAmor"
                 name="flavorInOrder"
                 value="AMOR PERFEITO"
-                {...register("flavorInOrder")}
+                {...register('flavorInOrder')}
               />
               <label>AMOR PERFEITO</label>
               <br />
@@ -258,12 +264,12 @@ function Form() {
               <span>
                 Data e horário da retirada: <br />
                 <strong>TERÇA à SÁBADO das 12:00 às 18:30</strong> <br />
-                <strong>SÁBADO 12:00 às 16:00</strong>{" "}
+                <strong>SÁBADO 12:00 às 16:00</strong>{' '}
               </span>
               <br />
               <div>
                 <label>
-                  {" "}
+                  {' '}
                   <strong> Data e Horário: </strong>
                 </label>
               </div>
@@ -271,7 +277,7 @@ function Form() {
                 type="datetime-local"
                 name="dateTimeInOrder"
                 id="inputDateNow"
-                {...register("dateTimeInOrder", {
+                {...register('dateTimeInOrder', {
                   value: getDateNow(),
                   // "2022-06-14T12:32"
                 })}
@@ -289,7 +295,7 @@ function Form() {
                 id="POST-velaSim"
                 name="candleInOrder"
                 value="Sim"
-                {...register("candleInOrder")}
+                {...register('candleInOrder')}
               />
               <label>Sim</label>
               <br />
@@ -299,7 +305,7 @@ function Form() {
                 id="POST-velaNao"
                 name="candleInOrder"
                 value="Não"
-                {...register("candleInOrder")}
+                {...register('candleInOrder')}
               />
               <label>Não</label>
               <br />
@@ -316,7 +322,7 @@ function Form() {
                 id="PIX"
                 name="formOfPaymentInOrder"
                 value="PIX"
-                {...register("formOfPaymentInOrder")}
+                {...register('formOfPaymentInOrder')}
               />
               <label>PIX</label>
               <br />
@@ -326,7 +332,7 @@ function Form() {
                 id="CardCredit"
                 name="formOfPaymentInOrder"
                 value="Cartão de Crédito"
-                {...register("formOfPaymentInOrder")}
+                {...register('formOfPaymentInOrder')}
               />
               <label>Cartão de Crédito (+ taxa de 5%)</label>
               <br />
@@ -336,7 +342,7 @@ function Form() {
                 id="TransfBancaria"
                 name="formOfPaymentInOrder"
                 value="TRANSFERÊNCIA"
-                {...register("formOfPaymentInOrder")}
+                {...register('formOfPaymentInOrder')}
               />
               <label>TRANSFERÊNCIA BANCÁRIA (BB e CAIXA)</label>
               <br />
