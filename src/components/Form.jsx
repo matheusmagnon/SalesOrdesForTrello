@@ -79,7 +79,6 @@ function Form() {
           <form
             onSubmit={handleSubmit(submitOrder)}
             encType="multipart/form-data"
-            netlify
             name="PedidosBento"
           >
             <div className="field">
@@ -97,7 +96,6 @@ function Form() {
               </label>
               <p className="errorMessage">{errors.nameInOrder?.message}</p>
             </div>
-
             <div className="field">
               <label>
                 <strong>Número de celular(WhatsApp):</strong>
@@ -113,7 +111,6 @@ function Form() {
               />
               <p className="errorMessage">{errors.celInOrder?.message}</p>
             </div>
-
             <div className="field">
               <label>
                 <strong>
@@ -158,7 +155,6 @@ function Form() {
                 />
               </label>
             </div>
-
             <div className="fieldUpload">
               <div>
                 <label htmlFor="POST-file" className="ButtomUploadFile">
@@ -190,7 +186,6 @@ function Form() {
                 })}
               </div>
             </div>
-
             <div className="field">
               <label>
                 <strong>Caso haja alguma observação escreva abaixo:</strong>
@@ -221,7 +216,6 @@ function Form() {
               <p className="errorMessage">{errors.cakeColor?.message}</p>
               <br />
             </div>
-
             <div className="fieldSabor">
               <span>
                 {' '}
@@ -259,7 +253,6 @@ function Form() {
               <br />
             </div>
             <p className="errorMessage">{errors.flavorInOrder?.message}</p>
-
             <div className="fieldDataRetirada">
               <span>
                 Data e horário da retirada: <br />
@@ -270,7 +263,7 @@ function Form() {
               <div>
                 <label>
                   {' '}
-                  <strong> Data e Horário: </strong>
+                  <strong> Data e Horário de retirada: </strong>
                 </label>
               </div>
               <input
@@ -283,7 +276,6 @@ function Form() {
                 })}
               />
             </div>
-
             <div className="fieldVela">
               <label className="vela">
                 <strong>Aceita vela? (custo adicional de 2 reais):</strong>
