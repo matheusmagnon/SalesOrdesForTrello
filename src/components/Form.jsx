@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import getDateNow from '../services/getDateNow';
-import { getDataNowMoreTenMinutes } from '../services/getDateNow';
 import makeAPICall from '../services/makeAPICall';
 import * as constants from '../constants/constants';
 import SendAttachment from '../services/SendAttachment';
@@ -272,11 +271,6 @@ function Form() {
                 id="dateTimeInOrder"
                 name="dateTimeInOrder"
                 {...register('dateTimeInOrder', {
-                  onChange: e => {
-                    // setDateNow(getDateNow);
-                    console.log(getDateNow());
-                    console.log(getDataNowMoreTenMinutes());
-                  },
                   value: getDateNow(),
                 })}
               />
