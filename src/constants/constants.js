@@ -6,6 +6,7 @@ const urlTrelloGetCustomField = `https://api.trello.com/1/boards/${IdBoard}/cust
 const urlTrelloPostCard = `https://api.trello.com/1/cards?idList=${IdListPedAberto}&key=${apikeyTrello}&token=${tokenTrello}`;
 // const urlTrelloSendAttachments = `https://api.trello.com/1/cards/${idCard}/attachments/?key=${apikeyTrello}&token=${tokenTrello}`;
 import * as yup from 'yup';
+import getDataNowMoreTenMinutes from '../services/getDateNow';
 
 const idCustomFields = {
   idCustomNome: '6266f3cf7a05075d51e5d87a',
@@ -31,7 +32,10 @@ const validationScheme = {
   flavorInOrder: yup.string().required('Campo obrigatório').nullable(),
   candleInOrder: yup.string().required('Campo obrigatório').nullable(),
   formOfPaymentInOrder: yup.string().required('Campo obrigatório').nullable(),
-  dateTimeInOrder: yup.date().required('TESES'),
+  dateTimeInOrder: yup
+    .date()
+    .min(new Date(), 'Selecione uma data válida')
+    .required(),
 };
 
 export {
