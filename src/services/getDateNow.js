@@ -1,15 +1,15 @@
 export default function getDateNow() {
   var today = new Date();
-  let date = `${today.getFullYear()}-${(today.getMonth() + 1)
-    .toString()
-    .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+  let date = '222-01-01';
+  // `${today.getFullYear()}-${(today.getMonth() + 1)
+  //   .toString()
+  //   .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 
   let time = '00:00';
-  // `
-  //   ${today.getHours().toString().padStart(2, '0')}:${today
+  // `${today.getHours().toString().padStart(2, '0')}:${today
   //   .getMinutes()
   //   .toString()
   //   .padStart(2, '0')}`;
-
-  return console.log(`${date}T${time}`);
+  console.log(date);
+  return `${date}T${time}`;
 }

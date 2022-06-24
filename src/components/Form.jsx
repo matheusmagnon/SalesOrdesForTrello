@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import getDateNow from '../services/getDateNow';
+// import getDateNow from '../services/getDateNow';
 import makeAPICall from '../services/makeAPICall';
 import * as constants from '../constants/constants';
 import SendAttachment from '../services/SendAttachment';
@@ -19,6 +19,7 @@ import { Main } from './styles';
 function Form() {
   const [images, setImage] = useState([]);
   const [isShown, setIsShown] = useState(false);
+  const [date, setDate] = useState([false]);
   const { urlTrelloPostCard, validationScheme } = constants;
 
   const handleImages = images => {
@@ -262,20 +263,29 @@ function Form() {
               <br />
               <div>
                 <label>
-                  {' '}
                   <strong> Data e Horário de retirada: </strong>
                 </label>
               </div>
               <input
                 type="datetime-local"
                 name="dateTimeInOrder"
-                id="inputDateNow"
                 {...register('dateTimeInOrder', {
-                  value: getDateNow(),
-                  // "2022-06-14T12:32"
+                  required: 'Campo obrigatório',
+                  onChange: e => {
+                    setDate(true);
+                    console.log(`Data: ${date}`);
+                  },
                 })}
+
+                // value: getDateNow(),
+
+                // "2022-06-14T12:32"
               />
+              <p className="errorMessage">
+                {errors.dateTimeInOrder && <span>Campo obrigatório</span>}
+              </p>
             </div>
+
             <div className="fieldVela">
               <label className="vela">
                 <strong>Aceita vela? (custo adicional de 2 reais):</strong>
