@@ -232,8 +232,9 @@ function Form() {
               />
               <label>CHOCOLATUDO</label>
               <br />
+
               <input
-                type="radio "
+                type="radio"
                 id="POST-saborRed"
                 name="flavorInOrder"
                 value="RED VELVET"
@@ -241,6 +242,7 @@ function Form() {
               />
               <label>RED VELVET</label>
               <br />
+
               <input
                 type="radio"
                 id="POST-saborRedAmor"
