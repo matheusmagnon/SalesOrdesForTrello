@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import background from "../_assets/images/Pattern.jpg";
+import styled from 'styled-components';
+import background from '../_assets/images/Pattern.jpg';
 
 var teste;
 export const Main = styled.div`
@@ -10,7 +10,7 @@ export const Main = styled.div`
   background-image: url(${background});
   background-size: 80%;
   letter-spacing: 0.1rem;
-  height: ${(props) => {
+  height: ${props => {
     if (props.state == true) {
       return `${200}vh`;
     }
@@ -27,7 +27,7 @@ export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 45px;
-  box-shadow: 0 0 10px rgb(0, 0, 0), 0 0 1px rgb(7, 2, 10) inset;
+  box-shadow: inset 0 0 1em black, 0 0 1em black;
   padding: 5rem 5rem 3rem;
   width: 100%;
   max-width: 1050px;
