@@ -1,0 +1,441 @@
+.formBody {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formBody form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-self: center;
+}
+
+h1 {
+    font-size: 4rem;
+    line-height: 4.5rem;
+    color: var(--purple-500);
+    text-align: center;
+}
+
+.menuBento img {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+}
+
+.inputFieldText {
+    width: 100%;
+    height: 3rem;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    background-color: var(--gray-300);
+    font-size: 1.6rem;
+}
+
+.fieldDateWithdrawal span {
+    font-size: 1.2rem;
+}
+
+.fieldDateWithdrawal input {
+    color: var(--white);
+    font-size: 1.6rem;
+    padding: 2%;
+    width: 40%;
+    border: none;
+    border-radius: 10px;
+    background: var(--purple-500);
+}
+
+.fieldFullName,
+.fieldPhrase,
+.fieldColorPhrase,
+.fieldCel,
+.fieldDrawingDescription,
+.fieldUpload,
+.fieldObservation,
+.fieldCakeColor,
+.fieldFlavor,
+.isWithdrawal,
+.fieldDateWithdrawal,
+.fieldCandle,
+.fieldPayment {
+    margin-top: 1.5rem;
+}
+
+.fieldFlavor,
+.fieldIsWithdrawal,
+.fieldDateWithdrawal,
+.fieldCandle,
+.fieldPayment {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttomSendOrder {
+    background-color: var(--purple-500);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    height: 3.8rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    width: 30%;
+    transition: 0.2s;
+}
+
+.ButtomUploadFile {
+    padding: 0.5rem;
+    width: 15rem;
+    background-color: var(--purple-500);
+    color: var(--white);
+    text-align: center;
+    display: block;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.buttomSendOrder:hover,
+.ButtomUploadFile:hover,
+.fieldDateWithdrawal input:hover {
+    color: var(--purple-500);
+    background-color: var(--purple-200);
+}
+
+.fieldUpload {
+    display: flex;
+}
+
+.ButtomUploadFile {
+    padding: 10px;
+    width: 250px;
+    background-color: #4E2A58;
+    color: #FFF;
+    text-align: center;
+    display: block;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.fieldPreview {
+    margin-left: 20px;
+    display: flex;
+}
+
+.fieldPreview img {
+    width: 100px;
+    height: 100px;
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fieldPreview span {
+    font-size: 1.2rem;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.errorMessage {
+    color: red;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.6rem;
+}
+
+/*Media Queries*/
+
+@media (max-width:1310px) {
+
+    h1 {
+        font-size: 3.8rem;
+    }
+
+    .fieldDateWithdrawal input {
+        width: 45%;
+        height: 3rem;
+    }
+
+    .fieldUpload {
+        flex-direction: column;
+    }
+
+    .fieldPreview {
+        margin-top: 2%;
+    }
+
+    .ButtomUploadFile {
+        width: 50%;
+    }
+
+}
+
+@media (max-width:1140px) {
+
+    .fieldDateWithdrawal input {
+        width: 50%;
+        height: 3rem;
+    }
+
+    .botaoSendOrder {
+        font-size: 1.6rem;
+    }
+
+}
+
+
+@media (max-width:1050px) {
+    .formBody {
+        padding-top: 0;
+    }
+
+    .fieldDateWithdrawal input {
+        width: 60%;
+        height: 3rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    @media (max-width:930px) {
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        .botaoSendOrder {
+            width: 12rem;
+            font-size: 1.4rem;
+        }
+
+        .fieldDateWithdrawal input {
+            width: 60%;
+            height: 3rem;
+        }
+
+    }
+
+    @media (max-width:820px) {
+
+
+        .fieldDateWithdrawal input {
+            width: 60%;
+        }
+
+        .formBody {
+            padding-top: 1rem;
+        }
+
+        h1 {
+            height: 5rem;
+            line-height: 3rem;
+        }
+    }
+
+    @media (max-width: 720px) {
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .botaoSendOrder {
+            font-size: 1rem;
+        }
+
+        .menuBento img {
+            padding: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        body {
+            line-height: 1.6rem;
+        }
+
+        .fieldDateWithdrawal input {
+            width: 70%;
+        }
+
+        .ButtomUploadFile {
+            width: 70%;
+        }
+
+
+        .fieldPreview span {
+            font-size: 1rem;
+        }
+
+        .inputFieldText {
+            font-size: 1rem;
+        }
+
+        .errorMessage {
+            font-size: 1rem;
+        }
+
+        .buttomSendOrder {
+            width: 35%;
+        }
+    }
+
+    @media (max-width: 580px) {
+
+        .formBody {
+            padding-top: 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+            line-height: 2.2rem;
+        }
+
+        .fieldPreview span {
+            font-size: 0.8rem;
+        }
+
+        .fieldDateWithdrawal input {
+            width: 80%;
+        }
+
+        .buttomSendOrder {
+            width: 50%;
+            height: 2.8rem;
+        }
+    }
+
+    @media (max-width:510px) {
+
+        body {
+            font-size: 1rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        .fieldFullName,
+        .fieldPhrase,
+        .fieldColorPhrase,
+        .fieldCel,
+        .fieldDrawingDescription,
+        .fieldUpload,
+        .fieldObservation,
+        .fieldCakeColor,
+        .fieldFlavor,
+        .isWithdrawal,
+        .fieldDateWithdrawal,
+        .fieldCandle,
+        .fieldPayment {
+            margin-top: 1rem;
+        }
+
+        .fieldDateWithdrawal input {
+            width: 80%;
+            font-size: 1.2rem;
+        }
+
+        .fieldDateWithdrawal span {
+            font-size: 1rem;
+        }
+
+        .inputFieldText {
+            font-size: 1rem;
+        }
+
+        .errorMessage {
+            font-size: 1rem;
+        }
+
+        .buttomSendOrder {
+            width: 60%;
+            margin: 10px;
+        }
+    }
+
+    @media (max-width:399px) {
+
+        .fieldFullName,
+        .fieldPhrase,
+        .fieldColorPhrase,
+        .fieldCel,
+        .fieldDrawingDescription,
+        .fieldUpload,
+        .fieldObservation,
+        .fieldCakeColor,
+        .fieldFlavor,
+        .isWithdrawal,
+        .fieldDateWithdrawal,
+        .fieldCandle,
+        .fieldPayment {
+            margin-top: 1rem;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+        }
+
+        .inputFieldText {
+            height: 2rem;
+        }
+
+        .fieldDateWithdrawal input {
+            width: 90%;
+            font-size: 1rem;
+        }
+
+        .fieldDateWithdrawal span {
+            font-size: 0.8rem;
+        }
+
+        .buttomSendOrder {
+            font-size: 1rem;
+        }
+
+
+    }
+
+    @media (max-width:331px) {
+
+        .fieldFullName,
+        .fieldPhrase,
+        .fieldColorPhrase,
+        .fieldCel,
+        .fieldDrawingDescription,
+        .fieldUpload,
+        .fieldObservation,
+        .fieldCakeColor,
+        .fieldFlavor,
+        .isWithdrawal,
+        .fieldDateWithdrawal,
+        .fieldCandle,
+        .fieldPayment {
+            margin-top: 0.7rem;
+        }
+
+        h1 {
+            font-size: 1rem;
+            line-height: 1.2rem;
+            height: 3rem;
+        }
+
+        .fieldDateWithdrawal input {
+            width: 100%;
+
+        }
+    }
+
+    @media (max-width:265px) {
+        h1 {
+            font-size: 0.8rem;
+        }
+    }
+}

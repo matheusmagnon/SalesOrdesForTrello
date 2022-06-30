@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
 import getDateNow from '../services/getDateNow';
 import makeAPICall from '../services/makeAPICall';
 import * as constants from '../constants/constants';
@@ -9,27 +10,30 @@ import SendAttachment from '../services/SendAttachment';
 import postCustomFields from '../services/postCustomFields';
 import BodyCard from '../services/createBody';
 import getId from '../services/getId';
-import PedidoEnviado from './PedidoEnviado';
+import OrderSen from './OrderSent';
 import renderComponent from './renderComponent';
-// import showPreview from "../services/showPreview";
 import menuBento from '../_assets/images/menuBento.jpg';
-import { ContainerForm } from './styles';
-import { Main } from './styles';
+import styles from './Form.module.css';
+
+import { ContainerForm } from './styled';
+import { Main } from './styled';
 
 function Form() {
   const [images, setImage] = useState([]);
   const [isShown, setIsShown] = useState(false);
-  const [dateNow, setDateNow] = useState([false]);
+  const [isWithdrawal, setIsWithdrawal] = useState('Retirada');
   const { urlTrelloPostCard, validationScheme } = constants;
 
   const handleImages = images => {
     setImage(images);
   };
 
+  const handleChange = event => {
+    setIsWithdrawal(event.target.value);
+  };
+
   const showPreview = event => {
-    console.log('ok');
     const imagesPreview = Array.from(event.target.files);
-    console.log(imagesPreview[0]);
     const images = imagesPreview.map(file => {
       const { name, size } = file;
       return { name, size, URLpreview: URL.createObjectURL(file) };
@@ -62,7 +66,7 @@ function Form() {
   };
 
   if (isShown == true) {
-    return <PedidoEnviado />;
+    return <OrderSen />;
   }
   {
     renderComponent(isShown);
@@ -73,8 +77,8 @@ function Form() {
         <h1>
           Pedido de BENTÔ CAKE <br /> (bolinho de 350g)
         </h1>
-        <div className="formBody">
-          <div className="menuBento">
+        <div className={styles.formBody}>
+          <div className={styles.menuBento}>
             <img src={menuBento} alt="Cardápio - Bentô Cake"></img>
           </div>
           <form
@@ -82,7 +86,7 @@ function Form() {
             encType="multipart/form-data"
             name="PedidosBento"
           >
-            <div className="field">
+            <div className={styles.fieldFullName}>
               <label>
                 <strong>Nome Completo:</strong>
                 <input
@@ -92,27 +96,30 @@ function Form() {
                   {...register('nameInOrder')}
                   placeholder="Informe seu nome completo"
                   autoFocus
-                  className="inputFieldText "
+                  className={styles.inputFieldText}
                 />
               </label>
-              <p className="errorMessage">{errors.nameInOrder?.message}</p>
+              <p className={styles.errorMessage}>
+                {errors.nameInOrder?.message}
+              </p>
             </div>
-            <div className="field">
+            <div className={styles.fieldCel}>
               <label>
                 <strong>Número de celular(WhatsApp):</strong>
               </label>
-              <br />
               <input
                 type="tel"
                 id="POST-celular"
                 name="celInOrder"
                 {...register('celInOrder')}
                 placeholder="Informe seu WhatsApp"
-                className="inputFieldText"
+                className={styles.inputFieldText}
               />
-              <p className="errorMessage">{errors.celInOrder?.message}</p>
+              <p className={styles.errorMessage}>
+                {errors.celInOrder?.message}
+              </p>
             </div>
-            <div className="field">
+            <div className={styles.fieldPhrase}>
               <label>
                 <strong>
                   Frase no bolinho (máximo 50 caracteres com desenho):
@@ -123,12 +130,14 @@ function Form() {
                   name="phraseOnTheCake"
                   {...register('phraseOnTheCake')}
                   placeholder="Informe a frase que vai no bolinho"
-                  className="inputFieldText"
+                  className={styles.inputFieldText}
                 />
               </label>
-              <p className="errorMessage">{errors.phraseOnTheCake?.message}</p>
+              <p className={styles.errorMessage}>
+                {errors.phraseOnTheCake?.message}
+              </p>
             </div>
-            <div className="field">
+            <div className={styles.fieldColorPhrase}>
               <label>
                 <strong>Cor da Frase:</strong>
                 <input
@@ -136,33 +145,32 @@ function Form() {
                   name="cakePhraseColor"
                   {...register('cakePhraseColor')}
                   placeholder="Informe a cor da frase"
-                  className="inputFieldText"
+                  className={styles.inputFieldText}
                 />
               </label>
-              <p className="errorMessage">{errors.cakePhraseColor?.message}</p>
+              <p className={styles.errorMessage}>
+                {errors.cakePhraseColor?.message}
+              </p>
             </div>
-            <div className="field">
+            <div className={styles.fieldDrawingDescription}>
               <label>
                 <strong>Se houver desenho descreva abaixo:</strong>
-
-                <br />
                 <input
                   type="text"
                   id="POST-celular"
                   name="drawingOnTheCake"
                   {...register('drawingOnTheCake')}
                   placeholder="Desenho em cima do bolinho"
-                  className="inputFieldText"
+                  className={styles.inputFieldText}
                 />
               </label>
             </div>
-            <div className="fieldUpload">
+            <div className={styles.fieldUpload}>
               <div>
-                <label htmlFor="POST-file" className="ButtomUploadFile">
+                <label className={styles.ButtomUploadFile}>
                   Caso haja alguma imagem de inspiração anexe aqui:
                   <input
                     type="file"
-                    id="POST-file"
                     multiple
                     accept="image/*"
                     name="filesInOrder"
@@ -174,7 +182,7 @@ function Form() {
                   />
                 </label>
               </div>
-              <div className="fieldPreview">
+              <div className={styles.fieldPreview}>
                 {images.map(images => {
                   return (
                     <div>
@@ -187,167 +195,193 @@ function Form() {
                 })}
               </div>
             </div>
-            <div className="field">
+            <div className={styles.fieldObservation}>
               <label>
                 <strong>Caso haja alguma observação escreva abaixo:</strong>
-                <br />
                 <input
                   type="text"
                   id="POST-celular"
                   name="orderObservation"
                   {...register('orderObservation')}
                   placeholder="Desenho em cima do bolinho"
-                  className="inputFieldText"
+                  className={styles.inputFieldText}
                 />
               </label>
             </div>
-            <div className="field">
+            <div className={styles.fieldCakeColor}>
               <label>
                 <strong>Cor do bolo (base):</strong>
-                <br />
                 <input
                   type="text"
                   id="POST-corBase"
                   name="cakeColor"
                   {...register('cakeColor')}
                   placeholder="Cor do seu bolinho"
-                  className="inputFieldText "
+                  className={styles.inputFieldText}
                 />
+                <p className={styles.errorMessage}>
+                  {errors.cakeColor?.message}
+                </p>
               </label>
-              <p className="errorMessage">{errors.cakeColor?.message}</p>
-              <br />
             </div>
-            <div className="fieldSabor">
-              <span>
-                {' '}
-                <strong>Escolha um Sabor:</strong>{' '}
-              </span>
-              <br />
-              <input
-                type="radio"
-                id="POST-saborChoc"
-                name="flavorInOrder"
-                value="CHOCOLATUDO"
-                {...register('flavorInOrder')}
-              />
-              <label>CHOCOLATUDO</label>
-              <br />
-
-              <input
-                type="radio"
-                id="POST-saborRed"
-                name="flavorInOrder"
-                value="RED VELVET"
-                {...register('flavorInOrder')}
-              />
-              <label>RED VELVET</label>
-              <br />
-
-              <input
-                type="radio"
-                id="POST-saborRedAmor"
-                name="flavorInOrder"
-                value="AMOR PERFEITO"
-                {...register('flavorInOrder')}
-              />
-              <label>AMOR PERFEITO</label>
-              <br />
+            <div className={styles.fieldFlavor}>
+              <strong>Escolha um Sabor:</strong>{' '}
+              <label>
+                <input
+                  type="radio"
+                  id="POST-saborChoc"
+                  name="flavorInOrder"
+                  value="CHOCOLATUDO"
+                  {...register('flavorInOrder')}
+                />{' '}
+                CHOCOLATUDO
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  id="POST-saborRed"
+                  name="flavorInOrder"
+                  value="RED VELVET"
+                  {...register('flavorInOrder')}
+                />{' '}
+                RED VELVET
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  id="POST-saborRedAmor"
+                  name="flavorInOrder"
+                  value="AMOR PERFEITO"
+                  {...register('flavorInOrder')}
+                />{' '}
+                AMOR PERFEITO
+              </label>
+              <p className={styles.errorMessage}>
+                {errors.flavorInOrder?.message}
+              </p>
             </div>
-            <p className="errorMessage">{errors.flavorInOrder?.message}</p>
-            <div className="fieldDataRetirada">
-              <span>
-                Data e horário da retirada: <br />
-                <strong>TERÇA à SÁBADO das 12:00 às 18:30</strong> <br />
-                <strong>SÁBADO 12:00 às 16:00</strong>{' '}
-              </span>
-              <br />
-              <div>
-                <label>
-                  <strong> Data e Horário de retirada: </strong>
-                </label>
-              </div>
+            <div className={styles.fieldIsWithdrawal}>
+              <label className={styles.isWithdrawal}>
+                <strong>Retirada ou Entrega:</strong>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="isWithdrawal"
+                  value="Retirada"
+                  // checked={isWithdrawal == 'Retirada'}
+                  {...register('isWithdrawal', {
+                    onChange: e => {
+                      handleChange(e);
+                    },
+                  })}
+                />{' '}
+                Retirada
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="isWithdrawal"
+                  value="Entrega"
+                  // checked={isWithdrawal == 'Entrega'}
+                  {...register('isWithdrawal', {
+                    onChange: e => {
+                      handleChange(e);
+                    },
+                  })}
+                />{' '}
+                Entrega
+              </label>
+              <p className={styles.errorMessage}>
+                {errors.candleInOrder?.message}
+              </p>
+            </div>
+            <div className={styles.fieldDateWithdrawal}>
+              <strong>Data e horário da {isWithdrawal}:</strong>
+              <span>Segunda à Sexta das 12:00 às 18:30</span>
+              <span>SÁBADO 12:00 às 16:00</span>
               <input
                 type="datetime-local"
-                id="dateTimeInOrder"
                 name="dateTimeInOrder"
                 {...register('dateTimeInOrder', {
                   value: getDateNow(),
                 })}
               />
-              <p className="errorMessage">{errors.dateTimeInOrder?.message}</p>
+              <p className={styles.errorMessage}>
+                {errors.dateTimeInOrder?.message}
+              </p>
             </div>
-
-            <div className="fieldVela">
+            <div className={styles.fieldCandle}>
               <label className="vela">
                 <strong>Aceita vela? (custo adicional de 2 reais):</strong>
               </label>
-              <br />
-
-              <input
-                type="radio"
-                id="POST-velaSim"
-                name="candleInOrder"
-                value="Sim"
-                {...register('candleInOrder')}
-              />
-              <label>Sim</label>
-              <br />
-
-              <input
-                type="radio"
-                id="POST-velaNao"
-                name="candleInOrder"
-                value="Não"
-                {...register('candleInOrder')}
-              />
-              <label>Não</label>
-              <br />
+              <label>
+                <input
+                  type="radio"
+                  id="POST-velaSim"
+                  name="candleInOrder"
+                  value="Sim"
+                  {...register('candleInOrder')}
+                />{' '}
+                Sim
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  id="POST-velaNao"
+                  name="candleInOrder"
+                  value="Não"
+                  {...register('candleInOrder')}
+                />{' '}
+                Não
+              </label>
+              <p className={styles.errorMessage}>
+                {errors.candleInOrder?.message}
+              </p>
             </div>
-            <p className="errorMessage">{errors.candleInOrder?.message}</p>
-            <div className="fieldPagamento">
+            <div className={styles.fieldPayment}>
               <label className="pagamento">
                 <strong>Foma de Pagamento:</strong>
               </label>
-              <br />
-
-              <input
-                type="radio"
-                id="PIX"
-                name="formOfPaymentInOrder"
-                value="PIX"
-                {...register('formOfPaymentInOrder')}
-              />
-              <label>PIX</label>
-              <br />
-
-              <input
-                type="radio"
-                id="CardCredit"
-                name="formOfPaymentInOrder"
-                value="Cartão de Crédito"
-                {...register('formOfPaymentInOrder')}
-              />
-              <label>Cartão de Crédito (+ taxa de 5%)</label>
-              <br />
-
-              <input
-                type="radio"
-                id="TransfBancaria"
-                name="formOfPaymentInOrder"
-                value="TRANSFERÊNCIA"
-                {...register('formOfPaymentInOrder')}
-              />
-              <label>TRANSFERÊNCIA BANCÁRIA (BB e CAIXA)</label>
-              <br />
-              <p className="errorMessage">
+              <label>
+                <input
+                  type="radio"
+                  id="PIX"
+                  name="formOfPaymentInOrder"
+                  value="PIX"
+                  {...register('formOfPaymentInOrder')}
+                />{' '}
+                PIX
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  id="CardCredit"
+                  name="formOfPaymentInOrder"
+                  value="Cartão de Crédito"
+                  {...register('formOfPaymentInOrder')}
+                />{' '}
+                Cartão de Crédito (+ taxa de 5%)
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  id="TransfBancaria"
+                  name="formOfPaymentInOrder"
+                  value="TRANSFERÊNCIA"
+                  {...register('formOfPaymentInOrder')}
+                />{' '}
+                TRANSFERÊNCIA BANCÁRIA (BB e CAIXA)
+              </label>
+              <p className={styles.errorMessage}>
                 {errors.formOfPaymentInOrder?.message}
               </p>
-              <input
-                className="botaoSendOrder"
-                type="submit"
-                value="Enviar Pedido"
-              />
             </div>
+            <input
+              className={styles.buttomSendOrder}
+              type="submit"
+              value="Enviar Pedido"
+            />
           </form>
         </div>
       </ContainerForm>

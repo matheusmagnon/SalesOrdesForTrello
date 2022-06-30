@@ -1,0 +1,69 @@
+.OrderSent {
+    margin: 20px 0 50px;
+}
+
+.ButtonNewOrder {
+    background: var(--purple-500);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    height: 3.8rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1.6rem;
+    width: 30%;
+}
+
+.ButtonNewOrder:hover {
+    background: var(--purple-200);
+    color: var(--purple-500);
+}
+
+@media (max-width:1310px) {
+    .ButtonNewOrder {
+        width: 35%;
+    }
+}
+
+@media (max-width:1120px) {
+    .ButtonNewOrder {
+        width: 45%;
+    }
+}
+
+@media (max-width:930px) {
+    .ButtonNewOrder {
+        width: 55%;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width:510px) {
+    .ButtonNewOrder {
+        height: 2.8rem;
+        margin-top: 1rem;
+        font-weight: 600;
+        font-size: 1.4rem;
+        width: 80%;
+    }
+
+    .OrderSent {
+        padding-left: 1.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .ButtonNewOrder {
+        width: 75%;
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    .OrderSent {
+        padding: 0.2rem;
+    }
+
+    .OrderSent p {
+        font-size: 1.2rem;
+    }
+}

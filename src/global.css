@@ -1,0 +1,54 @@
+/* Configuração padrão */
+@font-face {
+    font-family: Nephilm;
+    src: url("./_assets/font/Nephilm.otf") format("opentype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+root {
+    font-size: 62.5%;
+}
+
+:root {
+    --white: rgb(244, 244, 244);
+
+    --gray-300: rgb(232, 231, 231);
+
+    --purple-200: #e0bfe9;
+    --purple-500: #4E2A58;
+
+}
+
+body {
+    font-family: Nephilm;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    box-sizing: border-box;
+}
+
+@media (max-width:510px) {
+    body {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width:410px) {
+    body {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+}
+
+@media (max-width:365px) {
+
+    body {
+        font-size: 0.8rem;
+        line-height: 1rem;
+    }
+}

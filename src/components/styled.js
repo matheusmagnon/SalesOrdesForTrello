@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import background from '../_assets/images/Pattern.jpg';
 
-var teste;
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,7 +26,7 @@ export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 45px;
-  box-shadow: inset 0 0 1em black, 0 0 1em black;
+  box-shadow: inset 0 0 1rem black, 0 0 1rem black;
   padding: 5rem 5rem 3rem;
   width: 100%;
   max-width: 1050px;
@@ -49,10 +48,10 @@ export const ContainerForm = styled.div`
 
   @media (max-width: 930px) {
     max-width: 650px;
+    padding: 1rem 2rem;
   }
   @media (max-width: 820px) {
     max-width: 650px;
-    padding: 1rem 2rem;
   }
 
   @media (max-width: 720px) {
@@ -65,6 +64,6 @@ export const ContainerForm = styled.div`
   @media (max-width: 510px) {
     width: 100%;
     max-width: 430px;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
   }
 `;
