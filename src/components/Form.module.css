@@ -347,6 +347,13 @@ input[type="file"] {
             font-size: 1rem;
         }
 
+        .fieldPreview {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
         .inputFieldText {
             font-size: 1rem;
         }
