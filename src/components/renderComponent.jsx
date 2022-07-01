@@ -1,12 +1,10 @@
 import Form from './Form';
-import PedidoEnviado from './PedidoEnviado';
+import OrderSen from './OrderSent';
 
 export default function renderComponent(props) {
   if (props === true) {
-    return <PedidoEnviado />;
+    return <OrderSen />;
   } else {
     return <Form />;
   }
-
-  return props;
 }

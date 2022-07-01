@@ -1,5 +1,5 @@
-import { SalesOrder } from "./components/SalesOrder"
-import { useNavigate, Router } from "react-router-dom";
+import { SalesOrder } from './components/SalesOrder';
+import './global.css';
 
 function App() {
   return (
@@ -9,4 +9,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
