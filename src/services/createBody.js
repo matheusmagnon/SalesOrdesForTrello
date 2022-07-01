@@ -1,27 +1,48 @@
 import moment from 'moment';
 
-export default function Body(dataOrder) {
-  const dueDate = moment(dataOrder.dateTimeInOrder).format('DD/MM HH:mm');
+export default function Body({
+  nameInOrder,
+  celInOrder,
+  phraseOnTheCake,
+  drawingOnTheCake,
+  cakePhraseColor,
+  cakeColor,
+  isWithdrawal,
+  orderObservation,
+  formOfPaymentInOrder,
+  dateTimeInOrder,
+}) {
+  const dueDate = moment(dateTimeInOrder).format('DD/MM HH:mm');
+  const Labels = [`624a04802f06001532cefe52`];
+  const Entrega = `624a04802f06001532cefe43`;
+  const Retirada = `62a0c9dd4bed6367d6a3e17e`;
+  if (isWithdrawal == 'Retirada') {
+    Labels.push(Retirada);
+  }
+  if (isWithdrawal == 'Entrega') {
+    Labels.push(Entrega);
+  }
+
   const CardBody = {
-    name: `${dataOrder.nameInOrder} - CEL: ${dataOrder.celInOrder}`,
+    name: `${nameInOrder} - CEL: ${celInOrder}`,
     desc: `**RESUMO DO PEDIDO**
 -----------------------------------
-*Frase:* ${dataOrder.phraseOnTheCake}
+*Frase:* ${phraseOnTheCake}
 -----------------------------------
-*Desenho:* ${dataOrder.drawingOnTheCake}
+*Desenho:* ${drawingOnTheCake}
 -----------------------------------
-*Cor da Frase:* ${dataOrder.cakePhraseColor}
+*Cor da Frase:* ${cakePhraseColor}
 -----------------------------------
-*Cor do bolo:* ${dataOrder.cakeColor}
+*Cor do bolo:* ${cakeColor}
 -----------------------------------
-*Observação:* ${dataOrder.orderObservation}
+*Observação:* ${orderObservation}
 -----------------------------------
-*Pagamento:* ${dataOrder.formOfPaymentInOrder}
+*Pagamento:* ${formOfPaymentInOrder}
 -----------------------------------
-*Data e Horário de retirada: ${dueDate}*
+*Data e Horário de ${isWithdrawal}: ${dueDate}*
 -----------------------------------`,
-    due: `${moment(dataOrder.dateTimeInOrder)}`,
-    idLabels: `624a04802f06001532cefe52`,
+    due: `${moment(dateTimeInOrder)}`,
+    idLabels: Labels,
   };
   return CardBody;
 }

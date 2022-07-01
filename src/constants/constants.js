@@ -31,6 +31,7 @@ const validationScheme = {
   cakePhraseColor: yup.string().required('Campo obrigatório'),
   cakeColor: yup.string().required('Campo obrigatório'),
   flavorInOrder: yup.string().required('Campo obrigatório').nullable(),
+  isWithdrawal: yup.string().required('Campo obrigatório').nullable(),
   candleInOrder: yup.string().required('Campo obrigatório').nullable(),
   formOfPaymentInOrder: yup.string().required('Campo obrigatório').nullable(),
   dateTimeInOrder: yup
