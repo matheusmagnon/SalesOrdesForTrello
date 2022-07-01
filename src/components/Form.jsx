@@ -28,7 +28,7 @@ function Form() {
     setImage(images);
   };
 
-  const handleChange = event => {
+  const handleisWithdrawalChange = event => {
     setIsWithdrawal(event.target.value);
   };
 
@@ -52,6 +52,7 @@ function Form() {
   });
 
   const submitOrder = dataOrder => {
+    console.log(dataOrder);
     async function CreateCard() {
       const response = await makeAPICall(
         urlTrelloPostCard,
@@ -272,7 +273,7 @@ function Form() {
                   // checked={isWithdrawal == 'Retirada'}
                   {...register('isWithdrawal', {
                     onChange: e => {
-                      handleChange(e);
+                      handleisWithdrawalChange(e);
                     },
                   })}
                 />{' '}
@@ -286,14 +287,14 @@ function Form() {
                   // checked={isWithdrawal == 'Entrega'}
                   {...register('isWithdrawal', {
                     onChange: e => {
-                      handleChange(e);
+                      handleisWithdrawalChange(e);
                     },
                   })}
                 />{' '}
                 Entrega
               </label>
               <p className={styles.errorMessage}>
-                {errors.candleInOrder?.message}
+                {errors.isWithdrawal?.message}
               </p>
             </div>
             <div className={styles.fieldDateWithdrawal}>
