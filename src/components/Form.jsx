@@ -5,14 +5,19 @@ import * as yup from 'yup';
 
 import getDateNow from '../services/getDateNow';
 import makeAPICall from '../services/makeAPICall';
-import * as constants from '../constants/constants';
 import SendAttachment from '../services/SendAttachment';
 import postCustomFields from '../services/postCustomFields';
 import BodyCard from '../services/createBody';
 import getId from '../services/getId';
+
+import menuBento from '../_assets/images/menuBento.jpg';
+
+import * as constants from '../constants/constants';
+
 import OrderSen from './OrderSent';
 import renderComponent from './renderComponent';
-import menuBento from '../_assets/images/menuBento.jpg';
+import PreviewImageUpload from './PreviewImageUpload';
+
 import styles from './Form.module.css';
 
 import { ContainerForm } from './styled';
@@ -24,21 +29,17 @@ function Form() {
   const [isWithdrawal, setIsWithdrawal] = useState('Retirada');
   const { urlTrelloPostCard, validationScheme } = constants;
 
-  const handleImages = images => {
-    setImage(images);
-  };
-
   const handleisWithdrawalChange = event => {
     setIsWithdrawal(event.target.value);
   };
 
-  const showPreview = event => {
+  const getImagesToUpload = event => {
     const imagesPreview = Array.from(event.target.files);
     const images = imagesPreview.map(file => {
       const { name, size } = file;
       return { name, size, URLpreview: URL.createObjectURL(file) };
     });
-    handleImages(images);
+    setImage(images);
   };
 
   const validateOrder = yup.object().shape(validationScheme);
@@ -177,21 +178,19 @@ function Form() {
                     name="filesInOrder"
                     {...register('filesInOrder', {
                       onChange: e => {
-                        showPreview(e);
+                        getImagesToUpload(e);
                       },
                     })}
                   />
                 </label>
               </div>
-              <div className={styles.fieldPreview}>
-                {images.map(images => {
+              <div className={styles.previewImages}>
+                {images.map(image => {
                   return (
-                    <div>
-                      <div>
-                        <span>{images.name}</span>
-                      </div>
-                      <img src={images.URLpreview} key={images.name} />
-                    </div>
+                    <PreviewImageUpload
+                      name={image.name}
+                      URLpreview={image.URLpreview}
+                    />
                   );
                 })}
               </div>
@@ -309,7 +308,7 @@ function Form() {
                 })}
               />
               <p className={styles.errorMessage}>
-                {errors.dateTimeInOrder?.message}
+                {errors.dateTimeInOrder?.message + `${isWithdrawal}`}
               </p>
             </div>
             <div className={styles.fieldCandle}>

@@ -100,6 +100,11 @@ h1 {
     border-radius: 10px;
     cursor: pointer;
     transition: 0.2s;
+    margin-right: 5rem;
+}
+
+.ButtomUploadFile input[type="file"] {
+    display: none;
 }
 
 .buttomSendOrder:hover,
@@ -111,27 +116,22 @@ h1 {
 
 .fieldUpload {
     display: flex;
+    flex-direction: row;
 }
 
-.ButtomUploadFile {
-    padding: 10px;
-    width: 250px;
-    background-color: #4E2A58;
-    color: #FFF;
-    text-align: center;
-    display: block;
-    border-radius: 10px;
-    cursor: pointer;
+.previewImages {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
 }
 
 .fieldPreview {
-    margin-left: 20px;
     display: flex;
 }
 
 .fieldPreview img {
-    width: 100px;
-    height: 100px;
+    width: 8rem;
+    /* height: 30rem; */
     margin: 0 20px;
     display: flex;
     align-items: center;
@@ -139,12 +139,11 @@ h1 {
 }
 
 .fieldPreview span {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    line-height: 0px;
 }
 
-input[type="file"] {
-    display: none;
-}
+
 
 .errorMessage {
     color: red;
@@ -165,16 +164,12 @@ input[type="file"] {
         height: 3rem;
     }
 
-    .fieldUpload {
-        flex-direction: column;
-    }
-
     .fieldPreview {
         margin-top: 2%;
     }
 
     .ButtomUploadFile {
-        width: 50%;
+        margin-right: 1rem;
     }
 
 }
@@ -227,7 +222,6 @@ input[type="file"] {
 
     @media (max-width:820px) {
 
-
         .fieldDateWithdrawal input {
             width: 60%;
         }
@@ -263,6 +257,10 @@ input[type="file"] {
 
         .fieldDateWithdrawal input {
             width: 70%;
+        }
+
+        .fieldUpload {
+            flex-direction: column;
         }
 
         .ButtomUploadFile {

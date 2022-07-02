@@ -1,13 +1,18 @@
-const IdBoard = import.meta.env.VITE_ID_BOARD;
-const IdListPedAberto = `624a047f2f06001532cef5e5`;
-const apikeyTrello = import.meta.env.VITE_API_KEY;
-const tokenTrello = import.meta.env.VITE_TOKEN;
-const urlTrelloGetCustomField = `https://api.trello.com/1/boards/${IdBoard}/customFields?key=${apikeyTrello}&token=${tokenTrello}`;
-const urlTrelloPostCard = `https://api.trello.com/1/cards?idList=${IdListPedAberto}&key=${apikeyTrello}&token=${tokenTrello}`;
-// const urlTrelloSendAttachments = `https://api.trello.com/1/cards/${idCard}/attachments/?key=${apikeyTrello}&token=${tokenTrello}`;
 import * as yup from 'yup';
 import moment from 'moment';
-import getDataNowMoreTenMinutes from '../services/getDateNow';
+
+const IdBoard = import.meta.env.VITE_ID_BOARD;
+const IdListPedAberto = `624a047f2f06001532cef5e5`;
+
+const apikeyTrello = import.meta.env.VITE_API_KEY;
+const tokenTrello = import.meta.env.VITE_TOKEN;
+
+const urlTrelloGetCustomField = `https://api.trello.com/1/boards/${IdBoard}/customFields?key=${apikeyTrello}&token=${tokenTrello}`;
+const urlTrelloPostCard = `https://api.trello.com/1/cards?idList=${IdListPedAberto}&key=${apikeyTrello}&token=${tokenTrello}`;
+
+const Labels = [`624a04802f06001532cefe52`];
+const Entrega = `624a04802f06001532cefe43`;
+const Retirada = `62a0c9dd4bed6367d6a3e17e`;
 
 const idCustomFields = {
   idCustomNome: '6266f3cf7a05075d51e5d87a',
@@ -36,7 +41,7 @@ const validationScheme = {
   formOfPaymentInOrder: yup.string().required('Campo obrigatório').nullable(),
   dateTimeInOrder: yup
     .date()
-    .min(moment().add(10, 'm').toDate(), 'Selecione uma data válida')
+    .min(moment().add(10, 'm').toDate(), 'Selecione um horário válido de ')
     .required('Campo obrigatório'),
 };
 
@@ -49,4 +54,7 @@ export {
   urlTrelloPostCard,
   idCustomFields,
   validationScheme,
+  Labels,
+  Entrega,
+  Retirada,
 };
