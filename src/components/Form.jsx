@@ -42,6 +42,11 @@ function Form() {
     setImage(images);
   };
 
+  function erroIsWithdrawalOrDelivery() {
+    if (errors.dateTimeInOrder?.message) {
+      return errors.dateTimeInOrder?.message + `${isWithdrawal}`;
+    }
+  }
   const validateOrder = yup.object().shape(validationScheme);
 
   const {
@@ -87,6 +92,7 @@ function Form() {
             onSubmit={handleSubmit(submitOrder)}
             encType="multipart/form-data"
             name="PedidosBento"
+            data-netlify="true"
           >
             <div className={styles.fieldFullName}>
               <label>
@@ -283,7 +289,6 @@ function Form() {
                   type="radio"
                   name="isWithdrawal"
                   value="Entrega"
-                  // checked={isWithdrawal == 'Entrega'}
                   {...register('isWithdrawal', {
                     onChange: e => {
                       handleisWithdrawalChange(e);
@@ -308,7 +313,7 @@ function Form() {
                 })}
               />
               <p className={styles.errorMessage}>
-                {errors.dateTimeInOrder?.message + `${isWithdrawal}`}
+                {erroIsWithdrawalOrDelivery()}
               </p>
             </div>
             <div className={styles.fieldCandle}>
