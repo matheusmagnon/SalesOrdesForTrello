@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 import styles from './OrderSent.module.css';
 
-import Form from './Form';
 import { ContainerForm } from './styled';
 import { Main } from './styled';
+
+import Form from './Form';
 
 function PedidoEnviado() {
   const [isShown, setIsShown] = useState([false]);
