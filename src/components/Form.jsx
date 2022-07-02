@@ -87,7 +87,7 @@ function Form() {
             onSubmit={handleSubmit(submitOrder)}
             encType="multipart/form-data"
             name="PedidosBento"
-            netlify
+            data-netlify="true"
           >
             <div className={styles.fieldFullName}>
               <label>
