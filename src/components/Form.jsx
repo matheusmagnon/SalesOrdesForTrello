@@ -23,10 +23,11 @@ import styles from './Form.module.css';
 import { ContainerForm } from './styled';
 import { Main } from './styled';
 
-function Form() {
+const Form = () => {
   const [images, setImage] = useState([]);
   const [isShown, setIsShown] = useState(false);
   const [isWithdrawal, setIsWithdrawal] = useState('Retirada');
+
   const { urlTrelloPostCard, validationScheme } = constants;
 
   const handleisWithdrawalChange = event => {
@@ -42,11 +43,11 @@ function Form() {
     setImage(images);
   };
 
-  function erroIsWithdrawalOrDelivery() {
+  const validationHandlingForTheTimeField = () => {
     if (errors.dateTimeInOrder?.message) {
       return errors.dateTimeInOrder?.message + `${isWithdrawal}`;
     }
-  }
+  };
   const validateOrder = yup.object().shape(validationScheme);
 
   const {
@@ -58,8 +59,7 @@ function Form() {
   });
 
   const submitOrder = dataOrder => {
-    console.log(dataOrder);
-    async function CreateCard() {
+    const CreateCard = async () => {
       const response = await makeAPICall(
         urlTrelloPostCard,
         BodyCard(dataOrder),
@@ -67,7 +67,7 @@ function Form() {
       const idCard = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
-    }
+    };
     CreateCard();
     setIsShown(true);
   };
@@ -313,7 +313,7 @@ function Form() {
                 })}
               />
               <p className={styles.errorMessage}>
-                {erroIsWithdrawalOrDelivery()}
+                {validationHandlingForTheTimeField()}
               </p>
             </div>
             <div className={styles.fieldCandle}>
@@ -392,5 +392,5 @@ function Form() {
       </ContainerForm>
     </Main>
   );
-}
+};
 export default Form;
