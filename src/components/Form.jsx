@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import validationScheme from '../services/validationScheme';
 import getDateNow from '../services/getDateNow';
 import makeAPICall from '../services/makeAPICall';
 import SendAttachment from '../services/SendAttachment';
-import postCustomFields from '../services/postCustomFields';
+import SendCustomFields from '../services/SendCustomFields';
 import BodyCard from '../services/createBody';
 import getId from '../services/getId';
 
@@ -28,7 +29,7 @@ const Form = () => {
   const [isShown, setIsShown] = useState(false);
   const [isWithdrawal, setIsWithdrawal] = useState('Retirada');
 
-  const { urlTrelloPostCard, validationScheme } = constants;
+  const { urlTrelloPostCard } = constants;
 
   const handleisWithdrawalChange = event => {
     setIsWithdrawal(event.target.value);
@@ -48,6 +49,7 @@ const Form = () => {
       return errors.dateTimeInOrder?.message + `${isWithdrawal}`;
     }
   };
+
   const validateOrder = yup.object().shape(validationScheme);
 
   const {
@@ -63,12 +65,13 @@ const Form = () => {
       const response = await makeAPICall(
         urlTrelloPostCard,
         BodyCard(dataOrder),
+        "POST"
       );
       const idCard = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
-      postCustomFields(dataOrder, idCard);
-    };
-    CreateCard();
+      SendCustomFields(dataOrder, idCard);
+    }
+    // CreateCard();
     setIsShown(true);
   };
 
@@ -91,7 +94,7 @@ const Form = () => {
           <form
             onSubmit={handleSubmit(submitOrder)}
             encType="multipart/form-data"
-            name="PedidosBento"
+            name="Pedido Bentô Cake"
             data-netlify="true"
           >
             <div className={styles.fieldFullName}>
