@@ -5,6 +5,7 @@ import { setDataOrderInCustomField } from "./setDataOrderInCustomField";
 const { idCustomFields, apikeyTrello, tokenTrello } = constants;
 
 export default function SendCustomFields(dataOrder, idCard) {
+  console.log('custom')
   
   try {
     Object.keys(idCustomFields).forEach((id) => {
@@ -14,7 +15,18 @@ export default function SendCustomFields(dataOrder, idCard) {
       
       const dataCustom = setDataOrderInCustomField(idCustomFields[id], dataOrder)
      
-      makeAPICall(urlTrelloPUTCustomField,dataCustom, "PUT" )
+      const sendData = () => {
+        fetch(urlTrelloPUTCustomField, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataCustom),
+        });
+      };
+      
+      sendData();
+      // makeAPICall(urlTrelloPUTCustomField,dataCustom, "PUT" )
   
     });
   } 
