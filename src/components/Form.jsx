@@ -64,14 +64,13 @@ const Form = () => {
     const CreateCard = async () => {
       const response = await makeAPICall(
         urlTrelloPostCard,
-        BodyCard(dataOrder),
-        "POST"
+        BodyCard(dataOrder)
       );
       const idCard = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
       SendCustomFields(dataOrder, idCard);
     }
-    // CreateCard();
+    CreateCard();
     setIsShown(true);
   };
 

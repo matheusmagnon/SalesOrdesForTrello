@@ -1,6 +1,7 @@
-export default async function makeAPICall(url, body, method) {
+export default async function makeAPICall(url, body) {
+  console.log('ok')
   const response = await fetch(url, {
-    method: method,
+    method: 'POST',
     headers: {
       "Content-Type": "application/json",
     },
