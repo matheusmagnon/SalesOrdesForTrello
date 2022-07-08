@@ -277,7 +277,6 @@ const Form = () => {
                   type="radio"
                   name="isWithdrawal"
                   value="Retirada"
-                  // checked={isWithdrawal == 'Retirada'}
                   {...register('isWithdrawal', {
                     onChange: e => {
                       handleisWithdrawalChange(e);
@@ -297,7 +296,7 @@ const Form = () => {
                     },
                   })}
                 />{' '}
-                Entrega
+                Entrega (Consulte a taxa de entrega)
               </label>
               <p className={styles.errorMessage}>
                 {errors.isWithdrawal?.message}
