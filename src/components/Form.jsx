@@ -367,7 +367,7 @@ const Form = () => {
                   value="Cartão de Crédito"
                   {...register('formOfPaymentInOrder')}
                 />{' '}
-                Cartão de Crédito (+ taxa de 5%)
+                Cartão de Crédito (+ taxa  de 5%)
               </label>
               <label>
                 <input
