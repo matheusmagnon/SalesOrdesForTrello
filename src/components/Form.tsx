@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
 
-import validationScheme from '../services/validationScheme';
 import getDateNow from '../services/getDateNow';
 import makeAPICall from '../services/makeAPICall';
 import SendAttachment from '../services/SendAttachment';
-import SendCustomFields from '../services/SendCustomFields';
+import postCustomFields from '../services/postCustomFields';
+import { DataOrder } from '../types';
 import BodyCard from '../services/createBody';
 import getId from '../services/getId';
 
@@ -15,8 +16,8 @@ import menuBento from '../_assets/images/menuBento.jpg';
 
 import * as constants from '../constants/constants';
 
-import OrderSen from './OrderSent';
-import renderComponent from './renderComponent';
+import OrderSent from './OrderSent';
+// import Render
 import PreviewImageUpload from './PreviewImageUpload';
 
 import styles from './Form.module.css';
@@ -24,61 +25,77 @@ import styles from './Form.module.css';
 import { ContainerForm } from './styled';
 import { Main } from './styled';
 
-const Form = () => {
-  const [images, setImage] = useState([]);
-  const [isShown, setIsShown] = useState(false);
+type Images = {
+  name: string;
+  size: number;
+  URLpreview: string;
+}
+
+type IsSalesOrderCompleted = boolean;
+
+function Form() {
+  const [images, setImage] = useState<Images[]>([]);
+  const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState<IsSalesOrderCompleted>();
   const [isWithdrawal, setIsWithdrawal] = useState('Retirada');
+  const { urlTrelloPostCard, validationScheme } = constants;
 
-  const { urlTrelloPostCard } = constants;
-
-  const handleisWithdrawalChange = event => {
+  const handleisWithdrawalChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsWithdrawal(event.target.value);
   };
 
-  const getImagesToUpload = event => {
-    const imagesPreview = Array.from(event.target.files);
+  const getImagesToUpload = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLInputElement
+
+    const imagesPreview = Array.from(target.files as FileList)
+
+    interface File {
+      name: string;
+      size: number;
+    }
+
     const images = imagesPreview.map(file => {
-      const { name, size } = file;
+      const { name, size }: File = file;
       return { name, size, URLpreview: URL.createObjectURL(file) };
     });
     setImage(images);
   };
 
-  const validationHandlingForTheTimeField = () => {
+  function erroIsWithdrawalOrDelivery() {
     if (errors.dateTimeInOrder?.message) {
       return errors.dateTimeInOrder?.message + `${isWithdrawal}`;
     }
-  };
-
+  }
   const validateOrder = yup.object().shape(validationScheme);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<DataOrder>({
     resolver: yupResolver(validateOrder),
   });
 
-  const submitOrder = dataOrder => {
-    const CreateCard = async () => {
+  const submitOrder = (dataOrder: DataOrder) => {
+    async function CreateCard() {
       const response = await makeAPICall(
         urlTrelloPostCard,
-        BodyCard(dataOrder)
+        BodyCard(dataOrder),
       );
-      const idCard = await getId(response);
+      const idCard: number = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
-      SendCustomFields(dataOrder, idCard);
+      postCustomFields(dataOrder, idCard);
     }
     CreateCard();
-    setIsShown(true);
+    setIsSalesOrderIsCompleted(true);
+    console.log(isSalesOrderIsCompleted);
+
   };
 
-  if (isShown == true) {
-    return <OrderSen />;
-  }
-  {
-    renderComponent(isShown);
+  // { isSalesOrderIsCompleted ? <OrderSent /> : <Form /> }
+  if (isSalesOrderIsCompleted == true) {
+    return <OrderSent />;
+  } else {
+    // renderComponent(isSalesOrderIsCompleted)
   }
   return (
     <Main>
@@ -93,7 +110,7 @@ const Form = () => {
           <form
             onSubmit={handleSubmit(submitOrder)}
             encType="multipart/form-data"
-            name="Pedido Bentô Cake"
+            name="PedidosBento"
             data-netlify="true"
           >
             <div className={styles.fieldFullName}>
@@ -102,7 +119,7 @@ const Form = () => {
                 <input
                   type="text"
                   id="POST-name"
-                  name="nameInOrder"
+                  // name="nameInOrder"
                   {...register('nameInOrder')}
                   placeholder="Informe seu nome completo"
                   autoFocus
@@ -120,7 +137,7 @@ const Form = () => {
               <input
                 type="tel"
                 id="POST-celular"
-                name="celInOrder"
+                // name="celInOrder"
                 {...register('celInOrder')}
                 placeholder="Informe seu WhatsApp"
                 className={styles.inputFieldText}
@@ -137,7 +154,7 @@ const Form = () => {
                 <input
                   type="text"
                   id="POST-celular"
-                  name="phraseOnTheCake"
+                  // name="phraseOnTheCake"
                   {...register('phraseOnTheCake')}
                   placeholder="Informe a frase que vai no bolinho"
                   className={styles.inputFieldText}
@@ -152,7 +169,7 @@ const Form = () => {
                 <strong>Cor da Frase:</strong>
                 <input
                   type="text"
-                  name="cakePhraseColor"
+                  // name="cakePhraseColor"
                   {...register('cakePhraseColor')}
                   placeholder="Informe a cor da frase"
                   className={styles.inputFieldText}
@@ -168,7 +185,7 @@ const Form = () => {
                 <input
                   type="text"
                   id="POST-celular"
-                  name="drawingOnTheCake"
+                  // name="drawingOnTheCake"
                   {...register('drawingOnTheCake')}
                   placeholder="Desenho em cima do bolinho"
                   className={styles.inputFieldText}
@@ -183,7 +200,7 @@ const Form = () => {
                     type="file"
                     multiple
                     accept="image/*"
-                    name="filesInOrder"
+                    // name="filesInOrder"
                     {...register('filesInOrder', {
                       onChange: e => {
                         getImagesToUpload(e);
@@ -196,6 +213,7 @@ const Form = () => {
                 {images.map(image => {
                   return (
                     <PreviewImageUpload
+                      key={uuidv4()}
                       name={image.name}
                       URLpreview={image.URLpreview}
                     />
@@ -209,7 +227,7 @@ const Form = () => {
                 <input
                   type="text"
                   id="POST-celular"
-                  name="orderObservation"
+                  // name="orderObservation"
                   {...register('orderObservation')}
                   placeholder="Desenho em cima do bolinho"
                   className={styles.inputFieldText}
@@ -222,7 +240,7 @@ const Form = () => {
                 <input
                   type="text"
                   id="POST-corBase"
-                  name="cakeColor"
+                  // name="cakeColor"
                   {...register('cakeColor')}
                   placeholder="Cor do seu bolinho"
                   className={styles.inputFieldText}
@@ -238,7 +256,7 @@ const Form = () => {
                 <input
                   type="radio"
                   id="POST-saborChoc"
-                  name="flavorInOrder"
+                  // name="flavorInOrder"
                   value="CHOCOLATUDO"
                   {...register('flavorInOrder')}
                 />{' '}
@@ -248,7 +266,7 @@ const Form = () => {
                 <input
                   type="radio"
                   id="POST-saborRed"
-                  name="flavorInOrder"
+                  // name="flavorInOrder"
                   value="RED VELVET"
                   {...register('flavorInOrder')}
                 />{' '}
@@ -258,7 +276,7 @@ const Form = () => {
                 <input
                   type="radio"
                   id="POST-saborRedAmor"
-                  name="flavorInOrder"
+                  // name="flavorInOrder"
                   value="AMOR PERFEITO"
                   {...register('flavorInOrder')}
                 />{' '}
@@ -275,8 +293,9 @@ const Form = () => {
               <label>
                 <input
                   type="radio"
-                  name="isWithdrawal"
+                  // name="isWithdrawal"
                   value="Retirada"
+                  // checked={isWithdrawal == 'Retirada'}
                   {...register('isWithdrawal', {
                     onChange: e => {
                       handleisWithdrawalChange(e);
@@ -288,7 +307,7 @@ const Form = () => {
               <label>
                 <input
                   type="radio"
-                  name="isWithdrawal"
+                  // name="isWithdrawal"
                   value="Entrega"
                   {...register('isWithdrawal', {
                     onChange: e => {
@@ -296,7 +315,7 @@ const Form = () => {
                     },
                   })}
                 />{' '}
-                Entrega (Consulte a taxa de entrega)
+                Entrega
               </label>
               <p className={styles.errorMessage}>
                 {errors.isWithdrawal?.message}
@@ -308,13 +327,13 @@ const Form = () => {
               <span>SÁBADO 12:00 às 16:00</span>
               <input
                 type="datetime-local"
-                name="dateTimeInOrder"
+                // name="dateTimeInOrder"
                 {...register('dateTimeInOrder', {
                   value: getDateNow(),
                 })}
               />
               <p className={styles.errorMessage}>
-                {validationHandlingForTheTimeField()}
+                {erroIsWithdrawalOrDelivery()}
               </p>
             </div>
             <div className={styles.fieldCandle}>
@@ -325,7 +344,7 @@ const Form = () => {
                 <input
                   type="radio"
                   id="POST-velaSim"
-                  name="candleInOrder"
+                  // name="candleInOrder"
                   value="Sim"
                   {...register('candleInOrder')}
                 />{' '}
@@ -335,7 +354,7 @@ const Form = () => {
                 <input
                   type="radio"
                   id="POST-velaNao"
-                  name="candleInOrder"
+                  // name="candleInOrder"
                   value="Não"
                   {...register('candleInOrder')}
                 />{' '}
@@ -353,7 +372,7 @@ const Form = () => {
                 <input
                   type="radio"
                   id="PIX"
-                  name="formOfPaymentInOrder"
+                  // name="formOfPaymentInOrder"
                   value="PIX"
                   {...register('formOfPaymentInOrder')}
                 />{' '}
@@ -363,7 +382,7 @@ const Form = () => {
                 <input
                   type="radio"
                   id="CardCredit"
-                  name="formOfPaymentInOrder"
+                  // name="formOfPaymentInOrder"
                   value="Cartão de Crédito"
                   {...register('formOfPaymentInOrder')}
                 />{' '}
@@ -373,7 +392,7 @@ const Form = () => {
                 <input
                   type="radio"
                   id="TransfBancaria"
-                  name="formOfPaymentInOrder"
+                  // name="formOfPaymentInOrder"
                   value="TRANSFERÊNCIA"
                   {...register('formOfPaymentInOrder')}
                 />{' '}
@@ -393,5 +412,5 @@ const Form = () => {
       </ContainerForm>
     </Main>
   );
-};
+}
 export default Form;
