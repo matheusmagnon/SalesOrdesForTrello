@@ -8,7 +8,7 @@ import { Main } from './styled';
 import Form from './Form';
 
 function PedidoEnviado() {
-  const [isShown, setIsShown] = useState([false]);
+  const [isShown, setIsShown] = useState(false);
   window.scrollTo(0, 0);
   if (isShown === false) {
     return <Form />;

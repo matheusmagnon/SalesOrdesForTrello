@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import { boolean } from 'yup';
 import background from '../_assets/images/Pattern.jpg';
-
+type PropsState = {
+  state: boolean
+}
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
@@ -9,7 +12,7 @@ export const Main = styled.div`
   background-image: url(${background});
   background-size: 80%;
   letter-spacing: 0.1rem;
-  height: ${props => {
+  height: ${(props: PropsState) => {
     if (props.state == true) {
       return `${200}vh`;
     }
