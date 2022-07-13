@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { boolean } from 'yup';
 import background from '../_assets/images/Pattern.jpg';
 type PropsState = {
-  state: boolean
+  state?: boolean
 }
 export const Main = styled.div`
   display: flex;
