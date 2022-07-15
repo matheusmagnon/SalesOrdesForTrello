@@ -13,3 +13,7 @@ export type DataOrder = {
     filesInOrder: [];
     dateTimeInOrder: string;
 }
+
+export type PropsState = {
+    state?: boolean
+}

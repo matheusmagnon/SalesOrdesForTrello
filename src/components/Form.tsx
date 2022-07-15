@@ -17,7 +17,7 @@ import menuBento from '../_assets/images/menuBento.jpg';
 import * as constants from '../constants/constants';
 
 import OrderSent from './OrderSent';
-// import Render
+
 import PreviewImageUpload from './PreviewImageUpload';
 
 import styles from './Form.module.css';
@@ -31,11 +31,14 @@ type Images = {
   URLpreview: string;
 }
 
-type IsSalesOrderCompleted = boolean;
+// type IsSalesOrderCompleted = boolean;
+
+import { PropsState } from '../types'
+import renderComponent from './renderComponent';
 
 function Form() {
   const [images, setImage] = useState<Images[]>([]);
-  const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState<IsSalesOrderCompleted>();
+  const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
   const [isWithdrawal, setIsWithdrawal] = useState('Retirada');
   const { urlTrelloPostCard, validationScheme } = constants;
 
@@ -87,16 +90,17 @@ function Form() {
     }
     CreateCard();
     setIsSalesOrderIsCompleted(true);
-    console.log(isSalesOrderIsCompleted);
 
-  };
-
-  // { isSalesOrderIsCompleted ? <OrderSent /> : <Form /> }
-  if (isSalesOrderIsCompleted == true) {
-    return <OrderSent />;
-  } else {
-    // renderComponent(isSalesOrderIsCompleted)
   }
+  if (isSalesOrderIsCompleted == false) {
+    return <OrderSent />
+  }
+  {
+    renderComponent(isSalesOrderIsCompleted)
+  }
+
+  // console.log(isSalesOrderIsCompleted)
+  // }
   return (
     <Main>
       <ContainerForm>

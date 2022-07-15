@@ -1,6 +1,9 @@
 import styles from './Form.module.css';
-
-export default function PreviewImageUpload({ name, URLpreview }) {
+type PropPreview = {
+  name: string;
+  URLpreview: string
+}
+export default function PreviewImageUpload({ name, URLpreview }: PropPreview) {
   return (
     <div className={styles.fieldPreview}>
       <div>

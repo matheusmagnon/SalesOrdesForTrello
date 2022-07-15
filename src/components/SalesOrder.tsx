@@ -2,17 +2,11 @@
 import { useState } from 'react';
 import '../components/SalesOrder.css';
 
-import OrderSent from './OrderSent'
-import Form from './Form';
-
-type IsSalesOrderCompleted = boolean;
+import renderComponent from './renderComponent';
 
 export function SalesOrder() {
-  const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState<IsSalesOrderCompleted>(false);
 
-  if (isSalesOrderIsCompleted === true) {
-    return <OrderSent />;
-  } else {
-    return <Form />;
-  }
+  const [isShown, setIsShown] = useState(false);
+
+  return renderComponent(isShown);
 }

@@ -2,6 +2,7 @@ import { string } from "yup";
 import * as constants from "../constants/constants";
 const { apikeyTrello, tokenTrello } = constants;
 
+type File = string | Blob
 export default function SendAttachment(files: [], idCard: number) {
   try {
     const getFile = (files: []) => {
@@ -10,11 +11,10 @@ export default function SendAttachment(files: [], idCard: number) {
       });
     };
 
-    const CreateAndSendForm = (file: FileList) => {
+    const CreateAndSendForm = (file: File) => {
       var formData = new FormData();
       formData.append("key", apikeyTrello);
       formData.append("token", tokenTrello);
-      console.log(file)
       formData.append("file", file);
       var request = createRequest(idCard);
       request.send(formData);
