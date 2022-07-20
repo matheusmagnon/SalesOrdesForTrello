@@ -6,7 +6,6 @@ import { ContainerForm } from './styled';
 import { Main } from './styled';
 
 import Form from './Form';
-import renderComponent from './renderComponent';
 
 function OrderSent() {
   const [orderIsCompleted, setOrderIsCompleted] = useState<boolean>(false);
@@ -22,7 +21,7 @@ function OrderSent() {
       <ContainerForm>
         <div className={styles.OrderSent}>
           <p>Sua solicitação foi registrada com sucesso!</p>
-          <p>Vamos concluir seu atendimento pelo WhatsApp ❤</p>
+          <p>Iremos enviar os dados para pagamento através do WhatsApp ❤</p>
           <input
             type="submit"
             className={styles.ButtonNewOrder}
