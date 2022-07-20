@@ -31,11 +31,6 @@ type Images = {
   URLpreview: string;
 };
 
-// type IsSalesOrderCompleted = boolean;
-
-import { PropsState } from '../types';
-import renderComponent from './renderComponent';
-
 function Form() {
   const [images, setImage] = useState<Images[]>([]);
   const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
@@ -91,8 +86,6 @@ function Form() {
     CreateCard();
     setIsSalesOrderIsCompleted(true);
   };
-
-  // isSalesOrderIsCompleted == true ? <OrderSent /> : <Form />;
 
   if (isSalesOrderIsCompleted == true) {
     return <OrderSent />;
@@ -316,7 +309,7 @@ function Form() {
                     },
                   })}
                 />{' '}
-                Entrega
+                Entrega (Consulte a taxa)
               </label>
               <p className={styles.errorMessage}>
                 {errors.isWithdrawal?.message}
@@ -367,7 +360,7 @@ function Form() {
             </div>
             <div className={styles.fieldPayment}>
               <label className="pagamento">
-                <strong>Foma de Pagamento:</strong>
+                <strong>Forma de Pagamento:</strong>
               </label>
               <label>
                 <input
