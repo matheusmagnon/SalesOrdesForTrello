@@ -1,6 +1,7 @@
 import moment from 'moment';
 
 import * as constants from '../constants/constants';
+import { DataOrder } from '../types';
 
 const { Labels, Entrega, Retirada } = constants;
 
@@ -15,11 +16,8 @@ export default function Body({
   orderObservation,
   formOfPaymentInOrder,
   dateTimeInOrder,
-}) {
+}: DataOrder) {
   const dueDate = moment(dateTimeInOrder).format('DD/MM HH:mm');
-  // const Labels = [`624a04802f06001532cefe52`];
-  // const Entrega = `624a04802f06001532cefe43`;
-  // const Retirada = `62a0c9dd4bed6367d6a3e17e`;
 
   if (isWithdrawal == 'Retirada') {
     Labels.push(Retirada);
