@@ -29,11 +29,11 @@ type Images = {
   name: string;
   size: number;
   URLpreview: string;
-}
+};
 
 // type IsSalesOrderCompleted = boolean;
 
-import { PropsState } from '../types'
+import { PropsState } from '../types';
 import renderComponent from './renderComponent';
 
 function Form() {
@@ -47,9 +47,9 @@ function Form() {
   };
 
   const getImagesToUpload = (event: React.ChangeEvent) => {
-    const target = event.target as HTMLInputElement
+    const target = event.target as HTMLInputElement;
 
-    const imagesPreview = Array.from(target.files as FileList)
+    const imagesPreview = Array.from(target.files as FileList);
 
     interface File {
       name: string;
@@ -90,14 +90,16 @@ function Form() {
     }
     CreateCard();
     setIsSalesOrderIsCompleted(true);
+  };
 
+  // isSalesOrderIsCompleted == true ? <OrderSent /> : <Form />;
+
+  if (isSalesOrderIsCompleted == true) {
+    return <OrderSent />;
   }
-  if (isSalesOrderIsCompleted == false) {
-    return <OrderSent />
-  }
-  {
-    renderComponent(isSalesOrderIsCompleted)
-  }
+  // {
+  //   renderComponent(isSalesOrderIsCompleted);
+  // }
 
   // console.log(isSalesOrderIsCompleted)
   // }
@@ -115,7 +117,6 @@ function Form() {
             onSubmit={handleSubmit(submitOrder)}
             encType="multipart/form-data"
             name="PedidosBento"
-            data-netlify="true"
           >
             <div className={styles.fieldFullName}>
               <label>

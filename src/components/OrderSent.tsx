@@ -6,28 +6,18 @@ import { ContainerForm } from './styled';
 import { Main } from './styled';
 
 import Form from './Form';
+import renderComponent from './renderComponent';
 
 function OrderSent() {
-  const [orderIsCompleted, setOrderIsCompleted] = useState(false);
+  const [orderIsCompleted, setOrderIsCompleted] = useState<boolean>(false);
+
   window.scrollTo(0, 0);
-  // if (orderIsCompleted == true) {
-  //   console.log(orderIsCompleted)
-  //   return <Form />
-  // }
-  const newOrder = (state: boolean) => {
 
-    if (state === true) {
-      console.log(state)
-      return (
-        <Form />
-      )
-    } else {
-
-    }
+  if (orderIsCompleted == true) {
+    return <Form />;
   }
 
   return (
-
     <Main state={true}>
       <ContainerForm>
         <div className={styles.OrderSent}>
@@ -37,7 +27,9 @@ function OrderSent() {
             type="submit"
             className={styles.ButtonNewOrder}
             value="Enviar Novo Pedido"
-            onClick={() => newOrder(true)}
+            onClick={() => {
+              setOrderIsCompleted(true);
+            }}
           />
         </div>
       </ContainerForm>
