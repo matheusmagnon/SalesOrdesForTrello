@@ -97,12 +97,7 @@ function Form() {
   if (isSalesOrderIsCompleted == true) {
     return <OrderSent />;
   }
-  // {
-  //   renderComponent(isSalesOrderIsCompleted);
-  // }
 
-  // console.log(isSalesOrderIsCompleted)
-  // }
   return (
     <Main>
       <ContainerForm>
@@ -180,6 +175,7 @@ function Form() {
                   className={styles.inputFieldText}
                 />
               </label>
+
               <p className={styles.errorMessage}>
                 {errors.cakePhraseColor?.message}
               </p>

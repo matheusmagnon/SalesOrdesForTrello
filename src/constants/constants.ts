@@ -32,7 +32,8 @@ const validationScheme = {
   phraseOnTheCake: yup
     .string()
     .required('Campo obrigatório')
-    .max(52, 'A quantidade de caracteres excede o espaço no bolo'),
+    .max(52, 'A quantidade de caracteres excede o espaço no bolo')
+    .min(8, 'Digite a frase que vai no Bolinho'),
   cakePhraseColor: yup.string().required('Campo obrigatório'),
   cakeColor: yup.string().required('Campo obrigatório'),
   flavorInOrder: yup.string().required('Campo obrigatório').nullable(),
