@@ -33,12 +33,13 @@
     margin-top: 1rem;
     font-weight: 600;
     font-size: 1.6rem;
-    width: 55%;
+    width: 50%;
     text-decoration: none;
     font-family: Arial;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 }
 
 .WhatsappLogo {
@@ -118,7 +119,8 @@
     }
 
     .ButtonChatWhatsApp {
-        width: 90%
+        width: 90%;
+        gap: 0.5rem;
     }
 
     .OrderSent {
@@ -156,6 +158,10 @@
 }
 
 @media (max-width: 290px) {
+    .ButtonChatWhatsApp {
+        gap: 0;
+    }
+
     .WhatsappLogo {
         width: 100%;
     }
