@@ -20,9 +20,11 @@ root {
 
     --gray-300: rgb(232, 231, 231);
 
-    --purple-200: #e0bfe9;
+    --purple-200: #d58ce9;
     --purple-500: #4E2A58;
 
+    --green-200: rgb(0, 177, 59);
+    --green-500: rgb(35, 255, 108);
 }
 
 body {

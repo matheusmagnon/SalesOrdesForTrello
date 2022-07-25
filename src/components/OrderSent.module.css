@@ -1,5 +1,13 @@
 .OrderSent {
     margin: 20px 0 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.GroupBottons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .ButtonNewOrder {
@@ -7,11 +15,38 @@
     color: var(--white);
     border: none;
     border-radius: 10px;
-    height: 3.8rem;
     margin-top: 1rem;
     font-weight: 600;
     font-size: 1.6rem;
     width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ButtonChatWhatsApp {
+    background: var(--green-200);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    height: 3.8rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1.6rem;
+    width: 55%;
+    text-decoration: none;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.WhatsappLogo {
+    color: var(--white);
+}
+
+.ButtonChatWhatsApp:hover {
+    background: var(--green-500);
 }
 
 .ButtonNewOrder:hover {
@@ -23,11 +58,31 @@
     .ButtonNewOrder {
         width: 35%;
     }
+
+    .ButtonChatWhatsApp {
+        width: 60%;
+    }
+}
+
+@media (max-width: 1140px) {
+    .ButtonNewOrder {
+        font-size: 1.4rem;
+    }
+
+    .ButtonChatWhatsApp {
+        font-size: 1.4rem;
+    }
 }
 
 @media (max-width:1120px) {
     .ButtonNewOrder {
-        width: 45%;
+        width: 35%;
+        font-size: 1.2rem;
+    }
+
+    .ButtonChatWhatsApp {
+        width: 58%;
+        font-size: 1.2rem;
     }
 }
 
@@ -35,16 +90,35 @@
     .ButtonNewOrder {
         width: 55%;
         font-size: 1.4rem;
+        padding: 1rem 1rem;
     }
 }
 
-@media (max-width:510px) {
+@media (max-width:674px) {
+    .ButtonChatWhatsApp {
+        width: 70%;
+    }
+}
+
+@media (max-width:574px) {
+    .ButtonChatWhatsApp {
+        width: 80%;
+    }
+}
+
+
+@media (max-width:513px) {
     .ButtonNewOrder {
         height: 2.8rem;
-        margin-top: 1rem;
+        padding-top: 0.5rem;
+        /* margin-top: 1rem; */
         font-weight: 600;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         width: 80%;
+    }
+
+    .ButtonChatWhatsApp {
+        width: 90%
     }
 
     .OrderSent {
@@ -52,18 +126,37 @@
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width:425px) {
+    .ButtonChatWhatsApp .WhatsappLogo {
+        width: 20%;
+    }
+}
+
+@media (max-width: 330px) {
     .ButtonNewOrder {
-        width: 75%;
-        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    .ButtonChatWhatsApp {
         width: 100%;
     }
 
     .OrderSent {
-        padding: 0.2rem;
+        padding: 0.9rem;
+    }
+}
+
+@media (max-width:315px) {
+
+    .ButtonNewOrder,
+    .ButtonChatWhatsApp {
+        font-size: 1rem;
     }
 
-    .OrderSent p {
-        font-size: 1.2rem;
+}
+
+@media (max-width: 290px) {
+    .WhatsappLogo {
+        width: 100%;
     }
 }
