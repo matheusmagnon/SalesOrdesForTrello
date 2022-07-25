@@ -2,7 +2,6 @@ import * as constants from '../constants/constants';
 import { setDataOrderInCustomField } from './setDataOrderInCustomField';
 
 import { DataOrder } from '../types';
-// import makeAPICallPost from "./makeAPICall";
 const { cardFields, apikeyTrello, tokenTrello } = constants;
 
 export default function postCustomFields(dataOrder: DataOrder, idCard: number) {
