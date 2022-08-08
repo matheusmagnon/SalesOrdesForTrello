@@ -16,6 +16,8 @@ export default function Body({
   orderObservation,
   formOfPaymentInOrder,
   dateTimeInOrder,
+  candleInOrder,
+  flavorInOrder,
 }: DataOrder) {
   const dueDate = moment(dateTimeInOrder).format('DD/MM HH:mm');
 
@@ -37,12 +39,17 @@ export default function Body({
 -----------------------------------
 *Cor do bolo:* ${cakeColor}
 -----------------------------------
+*Sabor do bolo:* ${flavorInOrder}
+-----------------------------------
 *Observação:* ${orderObservation}
 -----------------------------------
 *Pagamento:* ${formOfPaymentInOrder}
 -----------------------------------
 *Data e Horário de ${isWithdrawal}: ${dueDate}*
------------------------------------`,
+-----------------------------------
+*Aceita vela:* ${candleInOrder}
+-----------------------------------
+`,
     due: `${moment(dateTimeInOrder)}`,
     idLabels: Labels,
   };
