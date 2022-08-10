@@ -151,6 +151,10 @@ h1 {
     font-size: 1.6rem;
 }
 
+.fieldPayment span {
+    font-size: 1.2rem;
+}
+
 /*Media Queries*/
 
 @media (max-width:1310px) {
@@ -341,7 +345,8 @@ h1 {
             font-size: 1.2rem;
         }
 
-        .fieldDateWithdrawal span {
+        .fieldDateWithdrawal span,
+        .fieldPayment span {
             font-size: 1rem;
         }
 
@@ -397,7 +402,8 @@ h1 {
             font-size: 1rem;
         }
 
-        .fieldDateWithdrawal span {
+        .fieldDateWithdrawal span,
+        .fieldPayment span {
             font-size: 0.8rem;
         }
 
@@ -435,6 +441,11 @@ h1 {
         .fieldDateWithdrawal input {
             width: 100%;
 
+        }
+
+        .fieldDateWithdrawal span,
+        .fieldPayment span {
+            font-size: 0.7rem;
         }
     }
 
