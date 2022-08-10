@@ -359,9 +359,9 @@ function Form() {
               </p>
             </div>
             <div className={styles.fieldPayment}>
-              <label className="pagamento">
-                <strong>Forma de Pagamento:</strong>
-              </label>
+              <strong>Forma de Pagamento:</strong>
+              <span>Confirmamos seu pedido mediante pagamento antecipado </span>
+
               <label>
                 <input
                   type="radio"
