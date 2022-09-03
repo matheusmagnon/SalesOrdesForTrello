@@ -215,7 +215,7 @@ function Form() {
                 })}
               </div>
             </div>
-            <div className={styles.fieldObservation}>
+            {/* <div className={styles.fieldObservation}>
               <label>
                 <strong>Caso haja alguma observação escreva abaixo:</strong>
                 <input
@@ -227,7 +227,7 @@ function Form() {
                   className={styles.inputFieldText}
                 />
               </label>
-            </div>
+            </div> */}
             <div className={styles.fieldCakeColor}>
               <label>
                 <strong>Cor do bolo (base):</strong>
