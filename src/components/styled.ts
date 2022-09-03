@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { boolean } from 'yup';
 import background from '../_assets/images/Pattern.jpg';
 type PropsState = {
-  state?: boolean
-}
+  state?: boolean;
+};
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,6 +25,7 @@ export const Main = styled.div`
     background-size: 100%;
   }
 `;
+
 export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
