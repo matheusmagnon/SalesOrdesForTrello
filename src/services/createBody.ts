@@ -35,13 +35,13 @@ export default function Body({
 -----------------------------------
 *Desenho:* ${drawingOnTheCake}
 -----------------------------------
+*Observação:* ${orderObservation}
+-----------------------------------
 *Cor da Frase:* ${cakePhraseColor}
 -----------------------------------
 *Cor do bolo:* ${cakeColor}
 -----------------------------------
 *Sabor do bolo:* ${flavorInOrder}
------------------------------------
-*Observação:* ${orderObservation}
 -----------------------------------
 *Pagamento:* ${formOfPaymentInOrder}
 -----------------------------------
