@@ -83,8 +83,9 @@ function Form() {
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
     }
-    CreateCard();
-    setIsSalesOrderIsCompleted(true);
+    CreateCard().then(() => {
+      setIsSalesOrderIsCompleted(true);
+    });
   };
 
   if (isSalesOrderIsCompleted == true) {
