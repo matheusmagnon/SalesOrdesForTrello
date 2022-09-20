@@ -224,7 +224,7 @@ function Form() {
                   id="POST-celular"
                   // name="orderObservation"
                   {...register('orderObservation')}
-                  placeholder="Desenho em cima do bolinho"
+                  placeholder="Informação adicional"
                   className={styles.inputFieldText}
                 />
               </label>
