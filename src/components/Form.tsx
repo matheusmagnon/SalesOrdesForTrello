@@ -12,7 +12,7 @@ import { DataOrder } from '../types';
 import BodyCard from '../services/createBody';
 import getId from '../services/getId';
 
-import menuBento from '../_assets/images/menuBento.jpg';
+import menuBento from '../_assets/images/menuBento.svg';
 
 import * as constants from '../constants/constants';
 
@@ -272,10 +272,10 @@ function Form() {
                   type="radio"
                   id="POST-saborRedAmor"
                   // name="flavorInOrder"
-                  value="AMOR PERFEITO"
+                  value="LEITE NINHO"
                   {...register('flavorInOrder')}
                 />{' '}
-                AMOR PERFEITO
+                LEITE NINHO
               </label>
               <p className={styles.errorMessage}>
                 {errors.flavorInOrder?.message}
