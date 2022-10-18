@@ -12,7 +12,7 @@ import { DataOrder } from '../types';
 import BodyCard from '../services/createBody';
 import getId from '../services/getId';
 
-import menuBento from '../_assets/images/menuBento.svg';
+import menuBento from '../_assets/images/menuBento.jpeg';
 
 import * as constants from '../constants/constants';
 
