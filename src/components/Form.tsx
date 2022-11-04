@@ -391,7 +391,7 @@ function Form() {
                   value="TRANSFERÊNCIA"
                   {...register('formOfPaymentInOrder')}
                 />{' '}
-                TRANSFERÊNCIA BANCÁRIA (BB e CAIXA)
+                TRANSFERÊNCIA BANCÁRIA (BB e CAIXA )
               </label>
               <p className={styles.errorMessage}>
                 {errors.formOfPaymentInOrder?.message}
