@@ -5,7 +5,7 @@
 
 ## Design da aplicação
 - Clique [aqui](https://yannagoisconfeitaria.netlify.app/) para acessar a aplicação em produção ;)
-- 
+
 - Clique [aqui](https://www.figma.com/file/CNZBZZ2sJhnC1vlCuyGkg8/Pedido-Bent%C3%B4-Cake?node-id=2%3A2) para acessar o layout no Figma(foi alterado durante o projeto)
 
 ## Funcionalidades da aplicação
