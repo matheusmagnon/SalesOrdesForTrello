@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { boolean } from 'yup';
-import background from '../_assets/images/Pattern.jpg';
+import styled from "styled-components";
+import { boolean } from "yup";
+import background from "../_assets/images/Pattern.png";
 type PropsState = {
   state?: boolean;
 };
