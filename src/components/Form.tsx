@@ -12,7 +12,8 @@ import { DataOrder } from "../types";
 import BodyCard from "../services/createBody";
 import getId from "../services/getId";
 
-import menuBento from "../_assets/images/menuBento.jpeg";
+
+import menuBento from "../_assets/images/menuBento.png";
 
 import * as constants from "../constants/constants";
 
