@@ -12,6 +12,7 @@ import { DataOrder } from "../types";
 import BodyCard from "../services/createBody";
 import getId from "../services/getId";
 
+
 import menuBento from "../_assets/images/menuBento.png";
 
 import * as constants from "../constants/constants";
@@ -143,7 +144,7 @@ function Form() {
             <div className={styles.fieldPhrase}>
               <label>
                 <strong>
-                  Frase no bolinho (máximo 50 caracteres com desenho):
+                  Frase no bolinho (máximo 35 caracteres com desenho):
                 </strong>
                 <input
                   type="text"
@@ -318,8 +319,8 @@ function Form() {
             </div>
             <div className={styles.fieldDateWithdrawal}>
               <strong>Data e horário da {isWithdrawal}:</strong>
-              <span>Segunda à Sexta das 12:00 às 18:30</span>
-              <span>SÁBADO 12:00 às 16:00</span>
+              <span>Segunda à Sexta das 12:00 às 18:15</span>
+              <span>SÁBADO 10:00 às 12:00</span>
               <input
                 type="datetime-local"
                 // name="dateTimeInOrder"
