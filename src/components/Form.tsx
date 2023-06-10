@@ -316,8 +316,22 @@ function Form() {
                 {errors.isWithdrawal?.message}
               </p>
             </div>
+            {isWithdrawal == 'Entrega' && (
+              <div className={styles.fieldColorPhrase}>
+                <label>
+                  <strong>Endereço de Entrega:</strong>
+                  <input
+                    type="text"
+                    // name="cakePhraseColor"
+                    {...register('deliveryAdress')}
+                    placeholder="Digite o endereço de entrega do Bentô Cake"
+                    className={styles.inputFieldText}
+                  />
+                </label>
+              </div>
+            )}
             <div className={styles.fieldDateWithdrawal}>
-              <strong>Data e horário da {isWithdrawal}:</strong>
+              <strong>Selecione a data e horário da {isWithdrawal}:</strong>
               <span>Segunda à Sexta das 12:00 às 18:30</span>
               <span>SÁBADO 12:00 às 16:00</span>
               <input
