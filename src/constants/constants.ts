@@ -37,10 +37,10 @@ const validationScheme = {
     .max(52, 'A quantidade de caracteres excede o espaço no bolo')
     .min(8, 'Digite a frase que vai no Bolinho'),
   cakePhraseColor: yup.string(),
-  cakeColor: yup.string().required('Todo bolo tem cor 🤪'),
+  cakeColor: yup.string().required('Todo bolo tem cor 🤪 escreva a cor do seu'),
   flavorInOrder: yup
     .string()
-    .required('Selecione o sabor do bolinho 🤤')
+    .required('Clique em um sabor para seu bolinho 🤤')
     .nullable(),
   isWithdrawal: yup
     .string()
