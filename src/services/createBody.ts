@@ -18,6 +18,7 @@ export default function Body({
   dateTimeInOrder,
   candleInOrder,
   flavorInOrder,
+  deliveryAdress,
 }: DataOrder) {
   const dueDate = moment(dateTimeInOrder).format('DD/MM HH:mm');
 
@@ -36,6 +37,8 @@ export default function Body({
 *Desenho:* ${drawingOnTheCake}
 -----------------------------------
 *Observação:* ${orderObservation}
+-----------------------------------
+*Endereço para entrega:* ${deliveryAdress}
 -----------------------------------
 *Cor da Frase:* ${cakePhraseColor}
 -----------------------------------

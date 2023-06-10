@@ -1,30 +1,29 @@
-import { useForm } from "react-hook-form";
-import { ChangeEvent, useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { v4 as uuidv4 } from "uuid";
+import { useForm } from 'react-hook-form';
+import { ChangeEvent, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
 
-import getDateNow from "../services/getDateNow";
-import makeAPICall from "../services/makeAPICall";
-import SendAttachment from "../services/SendAttachment";
-import postCustomFields from "../services/postCustomFields";
-import { DataOrder } from "../types";
-import BodyCard from "../services/createBody";
-import getId from "../services/getId";
+import getDateNow from '../services/getDateNow';
+import makeAPICall from '../services/makeAPICall';
+import SendAttachment from '../services/SendAttachment';
+import postCustomFields from '../services/postCustomFields';
+import { DataOrder } from '../types';
+import BodyCard from '../services/createBody';
+import getId from '../services/getId';
 
+import menuBento from '../_assets/images/menuBento.png';
 
-import menuBento from "../_assets/images/menuBento.png";
+import * as constants from '../constants/constants';
 
-import * as constants from "../constants/constants";
+import OrderSent from './OrderSent';
 
-import OrderSent from "./OrderSent";
+import PreviewImageUpload from './PreviewImageUpload';
 
-import PreviewImageUpload from "./PreviewImageUpload";
+import styles from './Form.module.css';
 
-import styles from "./Form.module.css";
-
-import { ContainerForm } from "./styled";
-import { Main } from "./styled";
+import { ContainerForm } from './styled';
+import { Main } from './styled';
 
 type Images = {
   name: string;
@@ -35,7 +34,7 @@ type Images = {
 function Form() {
   const [images, setImage] = useState<Images[]>([]);
   const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
-  const [isWithdrawal, setIsWithdrawal] = useState("Retirada");
+  const [isWithdrawal, setIsWithdrawal] = useState('Retirada');
   const { urlTrelloPostCard, validationScheme } = constants;
 
   const handleisWithdrawalChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +51,7 @@ function Form() {
       size: number;
     }
 
-    const images = imagesPreview.map((file) => {
+    const images = imagesPreview.map(file => {
       const { name, size }: File = file;
       return { name, size, URLpreview: URL.createObjectURL(file) };
     });
@@ -78,7 +77,7 @@ function Form() {
     async function CreateCard() {
       const response = await makeAPICall(
         urlTrelloPostCard,
-        BodyCard(dataOrder)
+        BodyCard(dataOrder),
       );
       const idCard: number = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
@@ -115,7 +114,7 @@ function Form() {
                   type="text"
                   id="POST-name"
                   // name="nameInOrder"
-                  {...register("nameInOrder")}
+                  {...register('nameInOrder')}
                   placeholder="Informe seu nome completo"
                   autoFocus
                   className={styles.inputFieldText}
@@ -133,7 +132,7 @@ function Form() {
                 type="tel"
                 id="POST-celular"
                 // name="celInOrder"
-                {...register("celInOrder")}
+                {...register('celInOrder')}
                 placeholder="Informe seu WhatsApp"
                 className={styles.inputFieldText}
               />
@@ -150,7 +149,7 @@ function Form() {
                   type="text"
                   id="POST-celular"
                   // name="phraseOnTheCake"
-                  {...register("phraseOnTheCake")}
+                  {...register('phraseOnTheCake')}
                   placeholder="Informe a frase que vai no bolinho"
                   className={styles.inputFieldText}
                 />
@@ -165,7 +164,7 @@ function Form() {
                 <input
                   type="text"
                   // name="cakePhraseColor"
-                  {...register("cakePhraseColor")}
+                  {...register('cakePhraseColor')}
                   placeholder="Informe a cor da frase"
                   className={styles.inputFieldText}
                 />
@@ -182,7 +181,7 @@ function Form() {
                   type="text"
                   id="POST-celular"
                   // name="drawingOnTheCake"
-                  {...register("drawingOnTheCake")}
+                  {...register('drawingOnTheCake')}
                   placeholder="Desenho em cima do bolinho"
                   className={styles.inputFieldText}
                 />
@@ -197,8 +196,8 @@ function Form() {
                     multiple
                     accept="image/*"
                     // name="filesInOrder"
-                    {...register("filesInOrder", {
-                      onChange: (e) => {
+                    {...register('filesInOrder', {
+                      onChange: e => {
                         getImagesToUpload(e);
                       },
                     })}
@@ -206,7 +205,7 @@ function Form() {
                 </label>
               </div>
               <div className={styles.previewImages}>
-                {images.map((image) => {
+                {images.map(image => {
                   return (
                     <PreviewImageUpload
                       key={uuidv4()}
@@ -224,7 +223,7 @@ function Form() {
                   type="text"
                   id="POST-celular"
                   // name="orderObservation"
-                  {...register("orderObservation")}
+                  {...register('orderObservation')}
                   placeholder="Informação adicional"
                   className={styles.inputFieldText}
                 />
@@ -237,7 +236,7 @@ function Form() {
                   type="text"
                   id="POST-corBase"
                   // name="cakeColor"
-                  {...register("cakeColor")}
+                  {...register('cakeColor')}
                   placeholder="Cor do seu bolinho"
                   className={styles.inputFieldText}
                 />
@@ -247,15 +246,15 @@ function Form() {
               </label>
             </div>
             <div className={styles.fieldFlavor}>
-              <strong>Escolha um Sabor:</strong>{" "}
+              <strong>Escolha um Sabor:</strong>{' '}
               <label>
                 <input
                   type="radio"
                   id="POST-saborChoc"
                   // name="flavorInOrder"
                   value="CHOCOLATUDO"
-                  {...register("flavorInOrder")}
-                />{" "}
+                  {...register('flavorInOrder')}
+                />{' '}
                 CHOCOLATUDO
               </label>
               <label>
@@ -264,8 +263,8 @@ function Form() {
                   id="POST-saborRed"
                   // name="flavorInOrder"
                   value="RED VELVET"
-                  {...register("flavorInOrder")}
-                />{" "}
+                  {...register('flavorInOrder')}
+                />{' '}
                 RED VELVET
               </label>
               <label>
@@ -274,8 +273,8 @@ function Form() {
                   id="POST-saborRedAmor"
                   // name="flavorInOrder"
                   value="LEITE NINHO"
-                  {...register("flavorInOrder")}
-                />{" "}
+                  {...register('flavorInOrder')}
+                />{' '}
                 LEITE NINHO
               </label>
               <p className={styles.errorMessage}>
@@ -292,12 +291,12 @@ function Form() {
                   // name="isWithdrawal"
                   value="Retirada"
                   // checked={isWithdrawal == 'Retirada'}
-                  {...register("isWithdrawal", {
-                    onChange: (e) => {
+                  {...register('isWithdrawal', {
+                    onChange: e => {
                       handleisWithdrawalChange(e);
                     },
                   })}
-                />{" "}
+                />{' '}
                 Retirada
               </label>
               <label>
@@ -305,26 +304,40 @@ function Form() {
                   type="radio"
                   // name="isWithdrawal"
                   value="Entrega"
-                  {...register("isWithdrawal", {
-                    onChange: (e) => {
+                  {...register('isWithdrawal', {
+                    onChange: e => {
                       handleisWithdrawalChange(e);
                     },
                   })}
-                />{" "}
+                />{' '}
                 Entrega (Consulte a taxa)
               </label>
               <p className={styles.errorMessage}>
                 {errors.isWithdrawal?.message}
               </p>
             </div>
+            {isWithdrawal == 'Entrega' && (
+              <div className={styles.fieldColorPhrase}>
+                <label>
+                  <strong>Endereço de Entrega:</strong>
+                  <input
+                    type="text"
+                    // name="cakePhraseColor"
+                    {...register('deliveryAdress')}
+                    placeholder="Digite o endereço de entrega do Bentô Cake"
+                    className={styles.inputFieldText}
+                  />
+                </label>
+              </div>
+            )}
             <div className={styles.fieldDateWithdrawal}>
-              <strong>Data e horário da {isWithdrawal}:</strong>
-              <span>Segunda à Sexta das 12:00 às 18:15</span>
-              <span>SÁBADO 10:00 às 12:00</span>
+              <strong>Selecione a data e horário da {isWithdrawal}:</strong>
+              <span>Segunda à Sexta das 12:00 às 18:30</span>
+              <span>SÁBADO 12:00 às 16:00</span>
               <input
                 type="datetime-local"
                 // name="dateTimeInOrder"
-                {...register("dateTimeInOrder", {
+                {...register('dateTimeInOrder', {
                   value: getDateNow(),
                 })}
               />
@@ -342,8 +355,8 @@ function Form() {
                   id="POST-velaSim"
                   // name="candleInOrder"
                   value="Sim"
-                  {...register("candleInOrder")}
-                />{" "}
+                  {...register('candleInOrder')}
+                />{' '}
                 Sim
               </label>
               <label>
@@ -352,8 +365,8 @@ function Form() {
                   id="POST-velaNao"
                   // name="candleInOrder"
                   value="Não"
-                  {...register("candleInOrder")}
-                />{" "}
+                  {...register('candleInOrder')}
+                />{' '}
                 Não
               </label>
               <p className={styles.errorMessage}>
@@ -370,8 +383,8 @@ function Form() {
                   id="PIX"
                   // name="formOfPaymentInOrder"
                   value="PIX"
-                  {...register("formOfPaymentInOrder")}
-                />{" "}
+                  {...register('formOfPaymentInOrder')}
+                />{' '}
                 PIX
               </label>
               <label>
@@ -380,8 +393,8 @@ function Form() {
                   id="CardCredit"
                   // name="formOfPaymentInOrder"
                   value="Cartão de Crédito"
-                  {...register("formOfPaymentInOrder")}
-                />{" "}
+                  {...register('formOfPaymentInOrder')}
+                />{' '}
                 Cartão de Crédito (+ taxa de 5%)
               </label>
               <label>
@@ -390,8 +403,8 @@ function Form() {
                   id="TransfBancaria"
                   // name="formOfPaymentInOrder"
                   value="TRANSFERÊNCIA"
-                  {...register("formOfPaymentInOrder")}
-                />{" "}
+                  {...register('formOfPaymentInOrder')}
+                />{' '}
                 TRANSFERÊNCIA BANCÁRIA (BB e CAIXA )
               </label>
               <p className={styles.errorMessage}>
