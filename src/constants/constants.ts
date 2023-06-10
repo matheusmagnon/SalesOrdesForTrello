@@ -28,31 +28,21 @@ const validationScheme = {
     .string()
     .required('Precisamos saber quem você é 😊')
     .min(10, 'Por favor, escreva seu nome completo'),
-  celInOrder: yup
-    .string()
-    .required(
-      'Seu número de celular é importante para conversarmos sobre o Bentô cake 🤗',
-    ),
+  celInOrder: yup.string().required('Campo obrigatório'),
   phraseOnTheCake: yup
     .string()
-    .required('Caso não tenha frase no bentô cake, digite "sem frase" 🤣')
+    .required('Campo obrigatório')
     .max(52, 'A quantidade de caracteres excede o espaço no bolo')
     .min(8, 'Digite a frase que vai no Bolinho'),
-  cakePhraseColor: yup.string(),
-  cakeColor: yup
-    .string()
-    .required('Todo bolinho tem uma cor 🤪 digite a cor do seu Bentô cake'),
+  cakePhraseColor: yup.string().required('Campo obrigatório'),
+  cakeColor: yup.string().required('Campo obrigatório'),
   flavorInOrder: yup.string().required('Campo obrigatório').nullable(),
   isWithdrawal: yup.string().required('Campo obrigatório').nullable(),
-  deliveryAdress: yup.string(),
   candleInOrder: yup.string().required('Campo obrigatório').nullable(),
   formOfPaymentInOrder: yup.string().required('Campo obrigatório').nullable(),
   dateTimeInOrder: yup
     .date()
-    .min(
-      moment().add(10, 'm').toDate(),
-      'Prazo muito curto😅, altere a data/horário de ',
-    )
+    .min(moment().add(10, 'm').toDate(), 'Selecione um horário válido de ')
     .required('Campo obrigatório'),
 };
 

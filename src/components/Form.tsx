@@ -12,7 +12,7 @@ import { DataOrder } from '../types';
 import BodyCard from '../services/createBody';
 import getId from '../services/getId';
 
-import menuBento from '../_assets/images/menuBento.jpeg';
+import menuBento from '../_assets/images/menuBento.png';
 
 import * as constants from '../constants/constants';
 
@@ -143,7 +143,7 @@ function Form() {
             <div className={styles.fieldPhrase}>
               <label>
                 <strong>
-                  Frase no bolinho (máximo 50 caracteres com desenho):
+                  Frase no bolinho (máximo 35 caracteres com desenho):
                 </strong>
                 <input
                   type="text"
