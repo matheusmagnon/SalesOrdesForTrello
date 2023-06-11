@@ -9,6 +9,10 @@ import { WhatsappLogo } from 'phosphor-react';
 
 import Form from './Form';
 
+type OrderSentProps = {
+  resume: () => {};
+};
+
 function OrderSent() {
   const [orderIsCompleted, setOrderIsCompleted] = useState<boolean>(false);
 
@@ -24,6 +28,7 @@ function OrderSent() {
         <div className={styles.OrderSent}>
           <p>Sua solicitação foi registrada com sucesso!</p>
           <p>Iremos enviar os dados para pagamento através do WhatsApp ❤</p>
+          <p></p>
           <div className={styles.GroupBottons}>
             <input
               type="submit"
