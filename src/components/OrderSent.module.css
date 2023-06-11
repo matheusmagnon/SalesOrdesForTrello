@@ -2,8 +2,10 @@
     margin: 20px 0 50px;
     display: flex;
     flex-direction: column;
+}
 
-
+.OrderSent p {
+    color: var(--text);
 }
 
 .GroupBottons {
