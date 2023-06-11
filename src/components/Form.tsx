@@ -246,37 +246,51 @@ function Form() {
               </label>
             </div>
             <div className={styles.fieldFlavor}>
-              <strong>Escolha um Sabor:</strong>{' '}
-              <label>
+              <strong>Selecione o sabor do seu bolo:</strong> <br />
+              <div className={styles.flavorOptions}>
                 <input
                   type="radio"
-                  id="POST-saborChoc"
+                  id="chocolatudo"
                   // name="flavorInOrder"
                   value="CHOCOLATUDO"
                   {...register('flavorInOrder')}
-                />{' '}
-                CHOCOLATUDO
-              </label>
-              <label>
+                />
+                <label htmlFor="chocolatudo">
+                  <h3>CHOCOLATUDO</h3>
+                  <p>
+                    massa amanteigada de cacu, recheio de brigadeiro gourmet de
+                    chocolate meio amargo
+                  </p>
+                </label>
                 <input
                   type="radio"
-                  id="POST-saborRed"
+                  id="redVelvet"
                   // name="flavorInOrder"
                   value="RED VELVET"
                   {...register('flavorInOrder')}
-                />{' '}
-                RED VELVET
-              </label>
-              <label>
+                />
+                <label htmlFor="redVelvet">
+                  <h3>RED VELVET</h3>
+                  <p>
+                    massa fofinha e aveludada de tom vermelho, saborizada com
+                    baunilha + cacau e recheio de cream cheese frosting
+                  </p>
+                </label>
                 <input
                   type="radio"
-                  id="POST-saborRedAmor"
+                  id="leiteNinho"
                   // name="flavorInOrder"
                   value="LEITE NINHO"
                   {...register('flavorInOrder')}
-                />{' '}
-                LEITE NINHO
-              </label>
+                />
+                <label htmlFor="leiteNinho">
+                  <h3>LEITE NINHO</h3>
+                  <p>
+                    massa amanteigada de baunilha e recheio de brigadeiro
+                    cremoso de leite ninho
+                  </p>
+                </label>
+              </div>
               <p className={styles.errorMessage}>
                 {errors.flavorInOrder?.message}
               </p>

@@ -1,8 +1,9 @@
 /* Configuração padrão */
-@font-face {
+/* @font-face {
     font-family: Nephilm;
     src: url("./_assets/font/Nephilm.otf") format("opentype");
-}
+} */
+
 
 * {
     margin: 0;
@@ -19,7 +20,9 @@ root {
     --white: rgb(244, 244, 244);
 
     --gray-300: rgb(232, 231, 231);
-    
+
+    --black-text: #403937;
+
     --purple-200: #d58ce9;
     --purple-500: #4E2A58;
 
@@ -28,7 +31,7 @@ root {
 }
 
 body {
-    font-family: Nephilm;
+    font-family: 'Baloo 2', cursive;
     font-size: 1.6rem;
     line-height: 1.8rem;
     box-sizing: border-box;

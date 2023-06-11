@@ -28,6 +28,10 @@ export default function Body({
     Labels.push(Entrega);
   }
 
+  if (deliveryAdress == undefined) {
+    deliveryAdress = 'Não Preenchido';
+  }
+
   const CardBody = {
     name: `${nameInOrder} - CEL: ${celInOrder}`,
     desc: `**RESUMO DO PEDIDO**
