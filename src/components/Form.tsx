@@ -100,11 +100,11 @@ export function Form() {
       console.log(resumeOrder);
 
       window.open(
-        ` https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido: 
-        ${resumeOrder}`,
-        "_blank",
-        "noreferrer"
+        ` https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu: ${resumeOrder} teste`,
+        "_blank"
+        // "noreferrer"
       );
+
       setIsSalesOrderIsCompleted(true);
     });
   };

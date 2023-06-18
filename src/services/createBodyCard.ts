@@ -35,10 +35,6 @@ export default function Body({
   const CardBody = {
     name: `${nameInOrder} - CEL: ${celInOrder}`,
     desc: `
-    
-    # To all of my friends:
-**Live long and prosper!!!**
-    
     **RESUMO DO PEDIDO**
     -----------------------------------
     *Frase:* ${phraseOnTheCake}
