@@ -96,11 +96,9 @@ export function Form() {
     }
 
     CreateCard().then(() => {
-      let resumeOrder = createBodyCard(dataOrder).desc;
-      console.log(resumeOrder);
-
+      let resumeOrder = createBodyCard(dataOrder).descWhatsApp;
       window.open(
-        ` https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu: ${resumeOrder} teste`,
+        ` https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`,
         "_blank"
         // "noreferrer"
       );

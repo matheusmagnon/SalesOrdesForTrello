@@ -34,30 +34,41 @@ export default function Body({
 
   const CardBody = {
     name: `${nameInOrder} - CEL: ${celInOrder}`,
-    desc: `
-    **RESUMO DO PEDIDO**
-    -----------------------------------
-    *Frase:* ${phraseOnTheCake}
-    -----------------------------------
-    *Desenho:* ${drawingOnTheCake}
-    -----------------------------------
-    *Observação:* ${orderObservation}
-    -----------------------------------
-    *Endereço para entrega:* ${deliveryAdress}
-    -----------------------------------
-    *Cor da Frase:* ${cakePhraseColor}
-    -----------------------------------
-    *Cor do bolo:* ${cakeColor}
-    -----------------------------------
-    *Sabor do bolo:* ${flavorInOrder}
-    -----------------------------------
-    *Pagamento:* ${formOfPaymentInOrder}
-    -----------------------------------
-    *Data e Horário de ${isWithdrawal}: ${dueDate}*
-    -----------------------------------
-    *Aceita vela:* ${candleInOrder}
-    -----------------------------------
-    `,
+    desc: `**RESUMO DO PEDIDO**
+-----------------------------------
+*Frase:* ${phraseOnTheCake}
+-----------------------------------
+*Desenho:* ${drawingOnTheCake}
+-----------------------------------
+*Observação:* ${orderObservation}
+-----------------------------------
+*Endereço para entrega:* ${deliveryAdress}
+-----------------------------------
+*Cor da Frase:* ${cakePhraseColor}
+-----------------------------------
+*Cor do bolo:* ${cakeColor}
+-----------------------------------
+*Sabor do bolo:* ${flavorInOrder}
+-----------------------------------
+*Pagamento:* ${formOfPaymentInOrder}
+-----------------------------------
+*Data e Horário de ${isWithdrawal}: ${dueDate}*
+-----------------------------------
+*Aceita vela:* ${candleInOrder}
+-----------------------------------
+`,
+    descWhatsApp: `*RESUMO DO PEDIDO*
+    %0A*Frase:* ${phraseOnTheCake}
+    %0A*Desenho:* ${drawingOnTheCake}
+    %0A*Observação:* ${orderObservation}
+    %0A*Endereço para entrega:* ${deliveryAdress}
+    %0A*Cor da Frase:* ${cakePhraseColor}
+    %0A*Cor do bolo:* ${cakeColor}
+    %0A*Sabor do bolo:* ${flavorInOrder}
+    %0A*Pagamento:* ${formOfPaymentInOrder}
+    %0A*Data e Horário de ${isWithdrawal}: ${dueDate}*
+    %0A*Aceita vela:* ${candleInOrder}
+    %0A`,
     due: `${moment(dateTimeInOrder)}`,
     idLabels: Labels,
   };
