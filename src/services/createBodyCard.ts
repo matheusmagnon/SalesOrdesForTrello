@@ -1,7 +1,7 @@
-import moment from 'moment';
+import moment from "moment";
 
-import * as constants from '../constants/constants';
-import { DataOrder } from '../types';
+import * as constants from "../constants/constants";
+import { DataOrder } from "../types";
 
 const { Labels, Entrega, Retirada } = constants;
 
@@ -20,16 +20,16 @@ export default function Body({
   flavorInOrder,
   deliveryAdress,
 }: DataOrder) {
-  const dueDate = moment(dateTimeInOrder).format('DD/MM HH:mm');
+  const dueDate = moment(dateTimeInOrder).format("DD/MM HH:mm");
 
-  if (isWithdrawal == 'Retirada') {
+  if (isWithdrawal == "Retirada") {
     Labels.push(Retirada);
   } else {
     Labels.push(Entrega);
   }
 
   if (deliveryAdress == undefined) {
-    deliveryAdress = 'Não Preenchido';
+    deliveryAdress = "Não Preenchido";
   }
 
   const CardBody = {
@@ -57,6 +57,18 @@ export default function Body({
 *Aceita vela:* ${candleInOrder}
 -----------------------------------
 `,
+    descWhatsApp: `*RESUMO DO PEDIDO*
+    %0A*Frase:* ${phraseOnTheCake}
+    %0A*Desenho:* ${drawingOnTheCake}
+    %0A*Observação:* ${orderObservation}
+    %0A*Endereço para entrega:* ${deliveryAdress}
+    %0A*Cor da Frase:* ${cakePhraseColor}
+    %0A*Cor do bolo:* ${cakeColor}
+    %0A*Sabor do bolo:* ${flavorInOrder}
+    %0A*Pagamento:* ${formOfPaymentInOrder}
+    %0A*Data e Horário de ${isWithdrawal}: ${dueDate}*
+    %0A*Aceita vela:* ${candleInOrder}
+    %0A`,
     due: `${moment(dateTimeInOrder)}`,
     idLabels: Labels,
   };

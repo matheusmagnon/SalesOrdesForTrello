@@ -13,6 +13,8 @@ export type DataOrder = {
   filesInOrder: [];
   dateTimeInOrder: string;
   deliveryAdress: string;
+  termsAccepted: boolean;
+  awareOfWhatsApp: boolean;
 };
 
 export type PropsState = {
