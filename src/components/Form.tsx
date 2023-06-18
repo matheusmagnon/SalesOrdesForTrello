@@ -43,6 +43,7 @@ export function Form() {
   const [images, setImage] = useState<Images[]>([]);
   const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
   const [isWithdrawal, setIsWithdrawal] = useState("Retirada");
+  const [resumeOrderState, setResumeOrderState] = useState("");
   const { urlTrelloPostCard, validationScheme } = constants;
 
   const handleisWithdrawalChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -83,8 +84,6 @@ export function Form() {
 
   const submitOrder = (dataOrder: DataOrder) => {
     async function CreateCard() {
-      // setResumeOrder(desc);
-
       const response = await makeAPICall(
         urlTrelloPostCard,
         createBodyCard(dataOrder)
@@ -93,22 +92,18 @@ export function Form() {
       const idCard: number = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
+      setResumeOrderState(createBodyCard(dataOrder).descWhatsApp);
     }
-
     CreateCard().then(() => {
       let resumeOrder = createBodyCard(dataOrder).descWhatsApp;
-      window.open(
-        ` https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`,
-        "_blank"
-        // "noreferrer"
-      );
-
+      let url = `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`;
+      window.open(url, "_blank");
       setIsSalesOrderIsCompleted(true);
     });
   };
 
   if (isSalesOrderIsCompleted == true) {
-    return <OrderSent />;
+    return <OrderSent resume={resumeOrderState} />;
   }
 
   return (
@@ -126,6 +121,7 @@ export function Form() {
               onSubmit={handleSubmit(submitOrder)}
               encType="multipart/form-data"
               name="PedidosBento"
+              data-netlify="true"
             >
               <div className={styles.fieldFullName}>
                 <label>
