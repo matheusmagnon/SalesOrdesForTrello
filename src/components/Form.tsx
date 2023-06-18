@@ -1,29 +1,29 @@
-import { useForm } from 'react-hook-form';
-import { ChangeEvent, createContext, useContext, useState } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { v4 as uuidv4 } from 'uuid';
+import { useForm } from "react-hook-form";
+import { ChangeEvent, createContext, useContext, useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { v4 as uuidv4 } from "uuid";
 
-import getDateNow from '../services/getDateNow';
-import makeAPICall from '../services/makeAPICall';
-import SendAttachment from '../services/SendAttachment';
-import postCustomFields from '../services/postCustomFields';
-import { DataOrder } from '../types';
-import createBodyCard from '../services/createBodyCard';
-import getId from '../services/getId';
+import getDateNow from "../services/getDateNow";
+import makeAPICall from "../services/makeAPICall";
+import SendAttachment from "../services/SendAttachment";
+import postCustomFields from "../services/postCustomFields";
+import { DataOrder } from "../types";
+import createBodyCard from "../services/createBodyCard";
+import getId from "../services/getId";
 
-import menuBento from '../_assets/images/menuBento.png';
+import menuBento from "../_assets/images/menuBento.png";
 
-import * as constants from '../constants/constants';
+import * as constants from "../constants/constants";
 
-import OrderSent from './OrderSent';
+import OrderSent from "./OrderSent";
 
-import PreviewImageUpload from './PreviewImageUpload';
+import PreviewImageUpload from "./PreviewImageUpload";
 
-import styles from './Form.module.css';
+import styles from "./Form.module.css";
 
-import { ContainerForm } from './styled';
-import { Main } from './styled';
+import { ContainerForm } from "./styled";
+import { Main } from "./styled";
 
 type Images = {
   name: string;
@@ -42,7 +42,7 @@ export function Form() {
 
   const [images, setImage] = useState<Images[]>([]);
   const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
-  const [isWithdrawal, setIsWithdrawal] = useState('Retirada');
+  const [isWithdrawal, setIsWithdrawal] = useState("Retirada");
   const { urlTrelloPostCard, validationScheme } = constants;
 
   const handleisWithdrawalChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +59,7 @@ export function Form() {
       size: number;
     }
 
-    const images = imagesPreview.map(file => {
+    const images = imagesPreview.map((file) => {
       const { name, size }: File = file;
       return { name, size, URLpreview: URL.createObjectURL(file) };
     });
@@ -81,24 +81,33 @@ export function Form() {
     resolver: yupResolver(validateOrder),
   });
 
-  let resumeOrder: any;
-
   const submitOrder = (dataOrder: DataOrder) => {
     async function CreateCard() {
+      // setResumeOrder(desc);
+
       const response = await makeAPICall(
         urlTrelloPostCard,
-        createBodyCard(dataOrder),
+        createBodyCard(dataOrder)
       );
+
       const idCard: number = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
     }
+
     CreateCard().then(() => {
+      let resumeOrder = createBodyCard(dataOrder).desc;
+      console.log(resumeOrder);
+
+      window.open(
+        ` https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido: 
+        ${resumeOrder}`,
+        "_blank",
+        "noreferrer"
+      );
       setIsSalesOrderIsCompleted(true);
     });
   };
-
-  console.log(resumeOrder);
 
   if (isSalesOrderIsCompleted == true) {
     return <OrderSent />;
@@ -127,7 +136,7 @@ export function Form() {
                     type="text"
                     id="POST-name"
                     // name="nameInOrder"
-                    {...register('nameInOrder')}
+                    {...register("nameInOrder")}
                     placeholder="Informe seu nome completo"
                     autoFocus
                     className={styles.inputFieldText}
@@ -145,7 +154,7 @@ export function Form() {
                   type="tel"
                   id="POST-celular"
                   // name="celInOrder"
-                  {...register('celInOrder')}
+                  {...register("celInOrder")}
                   placeholder="Informe seu WhatsApp"
                   className={styles.inputFieldText}
                 />
@@ -162,7 +171,7 @@ export function Form() {
                     type="text"
                     id="POST-celular"
                     // name="phraseOnTheCake"
-                    {...register('phraseOnTheCake')}
+                    {...register("phraseOnTheCake")}
                     placeholder="Informe a frase que vai no bolinho"
                     className={styles.inputFieldText}
                   />
@@ -177,7 +186,7 @@ export function Form() {
                   <input
                     type="text"
                     // name="cakePhraseColor"
-                    {...register('cakePhraseColor')}
+                    {...register("cakePhraseColor")}
                     placeholder="Informe a cor da frase"
                     className={styles.inputFieldText}
                   />
@@ -194,7 +203,7 @@ export function Form() {
                     type="text"
                     id="POST-celular"
                     // name="drawingOnTheCake"
-                    {...register('drawingOnTheCake')}
+                    {...register("drawingOnTheCake")}
                     placeholder="Desenho em cima do bolinho"
                     className={styles.inputFieldText}
                   />
@@ -209,8 +218,8 @@ export function Form() {
                       multiple
                       accept="image/*"
                       // name="filesInOrder"
-                      {...register('filesInOrder', {
-                        onChange: e => {
+                      {...register("filesInOrder", {
+                        onChange: (e) => {
                           getImagesToUpload(e);
                         },
                       })}
@@ -218,7 +227,7 @@ export function Form() {
                   </label>
                 </div>
                 <div className={styles.previewImages}>
-                  {images.map(image => {
+                  {images.map((image) => {
                     return (
                       <PreviewImageUpload
                         key={uuidv4()}
@@ -236,7 +245,7 @@ export function Form() {
                     type="text"
                     id="POST-celular"
                     // name="orderObservation"
-                    {...register('orderObservation')}
+                    {...register("orderObservation")}
                     placeholder="Informação adicional"
                     className={styles.inputFieldText}
                   />
@@ -249,7 +258,7 @@ export function Form() {
                     type="text"
                     id="POST-corBase"
                     // name="cakeColor"
-                    {...register('cakeColor')}
+                    {...register("cakeColor")}
                     placeholder="Cor do seu bolinho"
                     className={styles.inputFieldText}
                   />
@@ -266,12 +275,12 @@ export function Form() {
                     id="chocolatudo"
                     // name="flavorInOrder"
                     value="CHOCOLATUDO"
-                    {...register('flavorInOrder')}
+                    {...register("flavorInOrder")}
                   />
                   <label htmlFor="chocolatudo">
                     <h3>CHOCOLATUDO</h3>
                     <p>
-                      massa amanteigada de cacu, recheio de brigadeiro gourmet
+                      massa amanteigada de cacau, recheio de brigadeiro gourmet
                       de chocolate meio amargo
                     </p>
                   </label>
@@ -280,7 +289,7 @@ export function Form() {
                     id="redVelvet"
                     // name="flavorInOrder"
                     value="RED VELVET"
-                    {...register('flavorInOrder')}
+                    {...register("flavorInOrder")}
                   />
                   <label htmlFor="redVelvet">
                     <h3>RED VELVET</h3>
@@ -294,7 +303,7 @@ export function Form() {
                     id="leiteNinho"
                     // name="flavorInOrder"
                     value="LEITE NINHO"
-                    {...register('flavorInOrder')}
+                    {...register("flavorInOrder")}
                   />
                   <label htmlFor="leiteNinho">
                     <h3>LEITE NINHO</h3>
@@ -318,12 +327,12 @@ export function Form() {
                     // name="isWithdrawal"
                     value="Retirada"
                     // checked={isWithdrawal == 'Retirada'}
-                    {...register('isWithdrawal', {
-                      onChange: e => {
+                    {...register("isWithdrawal", {
+                      onChange: (e) => {
                         handleisWithdrawalChange(e);
                       },
                     })}
-                  />{' '}
+                  />{" "}
                   Retirada
                 </label>
                 <label>
@@ -331,26 +340,26 @@ export function Form() {
                     type="radio"
                     // name="isWithdrawal"
                     value="Entrega"
-                    {...register('isWithdrawal', {
-                      onChange: e => {
+                    {...register("isWithdrawal", {
+                      onChange: (e) => {
                         handleisWithdrawalChange(e);
                       },
                     })}
-                  />{' '}
+                  />{" "}
                   Entrega (Consulte a taxa)
                 </label>
                 <p className={styles.errorMessage}>
                   {errors.isWithdrawal?.message}
                 </p>
               </div>
-              {isWithdrawal == 'Entrega' && (
+              {isWithdrawal == "Entrega" && (
                 <div className={styles.fieldColorPhrase}>
                   <label>
                     <strong>Endereço de Entrega:</strong>
                     <input
                       type="text"
                       // name="cakePhraseColor"
-                      {...register('deliveryAdress')}
+                      {...register("deliveryAdress")}
                       placeholder="Digite o endereço de entrega do Bentô Cake"
                       className={styles.inputFieldText}
                     />
@@ -364,7 +373,7 @@ export function Form() {
                 <input
                   type="datetime-local"
                   // name="dateTimeInOrder"
-                  {...register('dateTimeInOrder', {
+                  {...register("dateTimeInOrder", {
                     value: getDateNow(),
                   })}
                 />
@@ -382,8 +391,8 @@ export function Form() {
                     id="POST-velaSim"
                     // name="candleInOrder"
                     value="Sim"
-                    {...register('candleInOrder')}
-                  />{' '}
+                    {...register("candleInOrder")}
+                  />{" "}
                   Sim
                 </label>
                 <label>
@@ -392,8 +401,8 @@ export function Form() {
                     id="POST-velaNao"
                     // name="candleInOrder"
                     value="Não"
-                    {...register('candleInOrder')}
-                  />{' '}
+                    {...register("candleInOrder")}
+                  />{" "}
                   Não
                 </label>
                 <p className={styles.errorMessage}>
@@ -403,7 +412,7 @@ export function Form() {
               <div className={styles.fieldPayment}>
                 <strong>Forma de Pagamento:</strong>
                 <span>
-                  Confirmamos seu pedido mediante pagamento antecipado{' '}
+                  Confirmamos seu pedido mediante pagamento antecipado{" "}
                 </span>
 
                 <label>
@@ -412,8 +421,8 @@ export function Form() {
                     id="PIX"
                     // name="formOfPaymentInOrder"
                     value="PIX"
-                    {...register('formOfPaymentInOrder')}
-                  />{' '}
+                    {...register("formOfPaymentInOrder")}
+                  />{" "}
                   PIX
                 </label>
                 <label>
@@ -422,8 +431,8 @@ export function Form() {
                     id="CardCredit"
                     // name="formOfPaymentInOrder"
                     value="Cartão de Crédito"
-                    {...register('formOfPaymentInOrder')}
-                  />{' '}
+                    {...register("formOfPaymentInOrder")}
+                  />{" "}
                   Cartão de Crédito (+ taxa de 5%)
                 </label>
                 <label>
@@ -432,18 +441,52 @@ export function Form() {
                     id="TransfBancaria"
                     // name="formOfPaymentInOrder"
                     value="TRANSFERÊNCIA"
-                    {...register('formOfPaymentInOrder')}
-                  />{' '}
+                    {...register("formOfPaymentInOrder")}
+                  />{" "}
                   TRANSFERÊNCIA BANCÁRIA (BB e CAIXA )
                 </label>
                 <p className={styles.errorMessage}>
                   {errors.formOfPaymentInOrder?.message}
                 </p>
               </div>
+
+              <div className={styles.fieldAcceptance}>
+                <label>
+                  <input
+                    type="checkbox"
+                    id="awareOfWhatsApp"
+                    // value={true}
+                    {...register("awareOfWhatsApp")}
+                    // onChange={handleOnChange}
+                  />
+                  <span>
+                    Estou ciente que o pedido será concluido via WhatsApp
+                  </span>
+                </label>
+                <p className={styles.errorMessage}>
+                  {errors.awareOfWhatsApp?.message}
+                </p>
+
+                <label>
+                  <input
+                    type="checkbox"
+                    id="accept"
+                    // value={true}
+                    {...register("termsAccepted")}
+                    // onChange={handleOnChange}
+                  />
+                  <span>Confirmo que revisei todas as informações</span>
+                </label>
+
+                <p className={styles.errorMessage}>
+                  {errors.termsAccepted?.message}
+                </p>
+              </div>
+
               <input
                 className={styles.buttomSendOrder}
                 type="submit"
-                value="Enviar Pedido"
+                value="Enviar Pedido pelo WhatsApp"
               />
             </form>
           </div>
