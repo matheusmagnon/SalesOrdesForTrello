@@ -34,28 +34,34 @@ export default function Body({
 
   const CardBody = {
     name: `${nameInOrder} - CEL: ${celInOrder}`,
-    desc: "exto que eu vou enviar \n com quebras de \n texto.",
-    //   "\n**RESUMO DO PEDIDO**-----------------------------------\n*Frase:*" +
-    //   phraseOnTheCake +
-    //   "-----------------------------------\n*Desenho:*" +
-    //   { drawingOnTheCake } +
-    //   "-----------------------------------\n*Observação:*" +
-    //   { orderObservation },
-    // // "-----------------------------------"+
-    // "*Endereço para entrega:*" +{deliveryAdress}
-    // "-----------------------------------"+
-    // "*Cor da Frase:*" +{cakePhraseColor}
-    // "-----------------------------------"+
-    // "*Cor do bolo:*" +{cakeColor}
-    // "-----------------------------------"+
-    // "*Sabor do bolo:*" +{flavorInOrder}
-    // "-----------------------------------"+
-    // "*Pagamento:*"+{formOfPaymentInOrder}
-    // "-----------------------------------"+
-    // "*Data e Horário de " +{isWithdrawal}+":" +{dueDate}+"*"
-    // "-----------------------------------"+
-    // "*Aceita vela:*" +{candleInOrder}
-    // "-----------------------------------",
+    desc: `
+    
+    # To all of my friends:
+**Live long and prosper!!!**
+    
+    **RESUMO DO PEDIDO**
+    -----------------------------------
+    *Frase:* ${phraseOnTheCake}
+    -----------------------------------
+    *Desenho:* ${drawingOnTheCake}
+    -----------------------------------
+    *Observação:* ${orderObservation}
+    -----------------------------------
+    *Endereço para entrega:* ${deliveryAdress}
+    -----------------------------------
+    *Cor da Frase:* ${cakePhraseColor}
+    -----------------------------------
+    *Cor do bolo:* ${cakeColor}
+    -----------------------------------
+    *Sabor do bolo:* ${flavorInOrder}
+    -----------------------------------
+    *Pagamento:* ${formOfPaymentInOrder}
+    -----------------------------------
+    *Data e Horário de ${isWithdrawal}: ${dueDate}*
+    -----------------------------------
+    *Aceita vela:* ${candleInOrder}
+    -----------------------------------
+    `,
     due: `${moment(dateTimeInOrder)}`,
     idLabels: Labels,
   };
