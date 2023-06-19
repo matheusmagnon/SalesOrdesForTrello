@@ -4,26 +4,26 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 
-import getDateNow from "../services/getDateNow";
-import makeAPICall from "../services/makeAPICall";
-import SendAttachment from "../services/SendAttachment";
-import postCustomFields from "../services/postCustomFields";
-import { DataOrder } from "../types";
-import createBodyCard from "../services/createBodyCard";
-import getId from "../services/getId";
+import getDateNow from "../../services/getDateNow";
+import makeAPICall from "../../services/makeAPICall";
+import SendAttachment from "../../services/SendAttachment";
+import postCustomFields from "../../services/postCustomFields";
+import { DataOrder } from "../../types";
+import createBodyCard from "../../services/createBodyCard";
+import getId from "../../services/getId";
 
-import menuBento from "../_assets/images/menuBento.png";
+import menuBento from "../../_assets/images/menuBento.png";
 
-import * as constants from "../constants/constants";
+import * as constants from "../../constants/constants";
 
-import OrderSent from "./OrderSent";
+import OrderSent from "../OrderSent/OrderSent";
 
-import PreviewImageUpload from "./PreviewImageUpload";
+import PreviewImageUpload from "../PreviewImageUpload/PreviewImageUpload";
 
 import styles from "./Form.module.css";
 
-import { ContainerForm } from "./styled";
-import { Main } from "./styled";
+import { ContainerForm } from ".././styled";
+import { Main } from ".././styled";
 
 type Images = {
   name: string;
@@ -110,7 +110,8 @@ export function Form() {
     <OrderContext.Provider value={{ order }}>
       <Main>
         <ContainerForm>
-          <h1>
+          {/* <h1 className="text-9xl font-bold underline">Hello world!</h1> */}
+          <h1 className="2xl:text-7xl font-bold xl:text-5xl lg:text-4xl md:text-4xl sm:text-4xl">
             Pedido de BENTÔ CAKE <br /> (bolinho de 350g)
           </h1>
           <div className={styles.formBody}>

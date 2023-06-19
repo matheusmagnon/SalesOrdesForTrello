@@ -5,16 +5,16 @@
 } */
 
 
-* {
+/* * {
     margin: 0;
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-}
+} */
 
-root {
+/* root {
     font-size: 62.5%;
-}
+} */
 
 :root {
     --white: rgb(244, 244, 244);
@@ -30,7 +30,7 @@ root {
     --green-500: rgb(40, 255, 112);
 }
 
-body {
+/* body {
     font-family: 'Baloo 2', cursive;
     font-size: 1.6rem;
     line-height: 1.8rem;
@@ -56,4 +56,4 @@ body {
         font-size: 0.8rem;
         line-height: 1rem;
     }
-}
+} */
