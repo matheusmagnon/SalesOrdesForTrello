@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import styles from "./OrderSent.module.css";
 
-import { ContainerForm } from "../styled";
+import { ContainerForm } from "../Form/ContainerForm";
 import { Main } from "../styled";
 
 import { Target, WhatsappLogo } from "phosphor-react";

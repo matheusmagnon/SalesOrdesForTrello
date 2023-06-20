@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -5,11 +6,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-    // screens: {
-    //   'xs': '475px',
-    //   'xxs': '540px', // min-width
-    // },
+    extend: {
+      boxShadow: {
+        "custom": 'inset 0 0 1rem black, 0 0 1rem black)'
+      }
+    },
   },
   plugins: [],
 }

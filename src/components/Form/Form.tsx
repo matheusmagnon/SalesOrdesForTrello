@@ -1,28 +1,31 @@
 import { useForm } from "react-hook-form";
 import { ChangeEvent, createContext, useContext, useState } from "react";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
+
+import { DataOrder } from "../../types";
+
+import * as constants from "../../constants/constants";
+
+import { ContainerForm } from "./ContainerForm";
+import { ButtonSendOrder } from "./ButtomSendOrder/ButtonSendOrder";
+import OrderSent from "../OrderSent/OrderSent";
+import PreviewImageUpload from "../PreviewImageUpload/PreviewImageUpload";
 
 import getDateNow from "../../services/getDateNow";
 import makeAPICall from "../../services/makeAPICall";
 import SendAttachment from "../../services/SendAttachment";
 import postCustomFields from "../../services/postCustomFields";
-import { DataOrder } from "../../types";
 import createBodyCard from "../../services/createBodyCard";
 import getId from "../../services/getId";
 
 import menuBento from "../../_assets/images/menuBento.png";
 
-import * as constants from "../../constants/constants";
-
-import OrderSent from "../OrderSent/OrderSent";
-
-import PreviewImageUpload from "../PreviewImageUpload/PreviewImageUpload";
-
 import styles from "./Form.module.css";
 
-import { ContainerForm } from ".././styled";
+// import { ContainerForm } from ".././styled";
 import { Main } from ".././styled";
 
 type Images = {
@@ -110,8 +113,10 @@ export function Form() {
     <OrderContext.Provider value={{ order }}>
       <Main>
         <ContainerForm>
-          {/* <h1 className="text-9xl font-bold underline">Hello world!</h1> */}
-          <h1 className="2xl:text-7xl font-bold xl:text-5xl lg:text-4xl md:text-4xl sm:text-4xl">
+          <h1
+            className="text-2xl font-bold text-center text-fuchsia-950
+          sm:text-4xl lg:text-5xl"
+          >
             Pedido de BENTÔ CAKE <br /> (bolinho de 350g)
           </h1>
           <div className={styles.formBody}>
@@ -477,12 +482,7 @@ export function Form() {
                   {errors.termsAccepted?.message}
                 </p>
               </div>
-
-              <input
-                className={styles.buttomSendOrder}
-                type="submit"
-                value="Enviar Pedido pelo WhatsApp"
-              />
+              <ButtonSendOrder />
             </form>
           </div>
         </ContainerForm>
