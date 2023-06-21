@@ -5,12 +5,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 
-import { DataOrder } from "../../types";
+import { DataOrder, PropsState } from "../../types";
 
 import * as constants from "../../constants/constants";
 
+import { Wrapper } from "../Wrapper";
 import { ContainerForm } from "./ContainerForm";
-import { ButtonSendOrder } from "./ButtomSendOrder/ButtonSendOrder";
+import { ButtonSendOrder } from "./ButtonSendOrder";
 import OrderSent from "../OrderSent/OrderSent";
 import PreviewImageUpload from "../PreviewImageUpload/PreviewImageUpload";
 
@@ -25,8 +26,8 @@ import menuBento from "../../_assets/images/menuBento.png";
 
 import styles from "./Form.module.css";
 
-// import { ContainerForm } from ".././styled";
-import { Main } from ".././styled";
+import background from "../../_assets/images/Pattern.png";
+import { Title } from "./Title";
 
 type Images = {
   name: string;
@@ -111,16 +112,15 @@ export function Form() {
 
   return (
     <OrderContext.Provider value={{ order }}>
-      <Main>
+      <Wrapper>
         <ContainerForm>
-          <h1
-            className="text-2xl font-bold text-center text-fuchsia-950
-          sm:text-4xl lg:text-5xl"
-          >
+          <Title>
             Pedido de BENTÔ CAKE <br /> (bolinho de 350g)
-          </h1>
-          <div className={styles.formBody}>
-            <div className={styles.menuBento}>
+          </Title>
+          <div>
+            <div
+            // className={styles.menuBento}
+            >
               <img src={menuBento} alt="Cardápio - Bentô Cake"></img>
             </div>
             <form
@@ -486,7 +486,7 @@ export function Form() {
             </form>
           </div>
         </ContainerForm>
-      </Main>
+      </Wrapper>
     </OrderContext.Provider>
   );
 }

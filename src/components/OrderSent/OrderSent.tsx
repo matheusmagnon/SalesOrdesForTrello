@@ -3,9 +3,9 @@ import { useState } from "react";
 import styles from "./OrderSent.module.css";
 
 import { ContainerForm } from "../Form/ContainerForm";
-import { Main } from "../styled";
+import { Wrapper } from "../Wrapper";
 
-import { Target, WhatsappLogo } from "phosphor-react";
+import { WhatsappLogo } from "phosphor-react";
 
 import Form from "../Form/Form";
 
@@ -19,7 +19,7 @@ function OrderSent({ resume }: any) {
   }
 
   return (
-    <Main state={true}>
+    <Wrapper state={true}>
       <ContainerForm>
         <div className={styles.OrderSent}>
           <p>Sua solicitação foi registrada com sucesso!</p>
@@ -51,7 +51,7 @@ function OrderSent({ resume }: any) {
           </div>
         </div>
       </ContainerForm>
-    </Main>
+    </Wrapper>
   );
 }
 

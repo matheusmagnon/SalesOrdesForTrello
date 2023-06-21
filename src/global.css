@@ -4,7 +4,6 @@
     src: url("./_assets/font/Nephilm.otf") format("opentype");
 } */
 
-
 /* * {
     margin: 0;
     padding: 0;
@@ -17,17 +16,19 @@
 } */
 
 :root {
-    --white: rgb(244, 244, 244);
+  --white: rgb(244, 244, 244);
 
-    --gray-300: rgb(232, 231, 231);
+  --gray-300: rgb(232, 231, 231);
 
-    --text: #403937;
+  --text: #403937;
 
-    --purple-200: #d58ce9;
-    --purple-500: #4E2A58;
+  --purple-200: #d58ce9;
+  --purple-500: #4e2a58;
 
-    --green-200: rgb(0, 177, 59);
-    --green-500: rgb(40, 255, 112);
+  --green-200: rgb(0, 177, 59);
+  --green-500: rgb(40, 255, 112);
+
+  /* --imagemB: "../../_assets/images/Pattern.png"; */
 }
 
 /* body {

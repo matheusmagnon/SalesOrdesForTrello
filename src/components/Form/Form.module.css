@@ -1,17 +1,17 @@
-.formBody {
+/* .formBody {
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
-.formBody form {
+/* .formBody form {
   display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: center;
   align-self: center;
-}
+} */
 
 /* h1 {
   font-size: 4rem;
@@ -20,13 +20,13 @@
   text-align: center;
 } */
 
-.menuBento img {
+/* .menuBento img {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   align-items: center;
-}
+} */
 
 .inputFieldText {
   width: 100%;
@@ -255,9 +255,9 @@ p {
 }
 
 @media (max-width: 1050px) {
-  .formBody {
+  /* .formBody {
     padding-top: 0;
-  }
+  } */
 
   .fieldDateWithdrawal input {
     width: 60%;
@@ -292,9 +292,9 @@ p {
     width: 60%;
   }
 
-  .formBody {
+  /* .formBody {
     padding-top: 1rem;
-  }
+  } */
 
   /* h1 {
     height: 5rem;
@@ -311,9 +311,9 @@ p {
     font-size: 1rem;
   }
 
-  .menuBento img {
+  /* .menuBento img {
     padding: 0;
-  }
+  } */
 }
 
 @media (max-width: 640px) {
@@ -352,9 +352,9 @@ p {
 
 /* xs */
 @media (max-width: 580px) {
-  .formBody {
+  /* .formBody {
     padding-top: 0;
-  }
+  } */
 
   /* h1 {
     font-size: 2rem;
