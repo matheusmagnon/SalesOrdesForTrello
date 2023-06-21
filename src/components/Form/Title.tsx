@@ -8,7 +8,7 @@ export function Title(props: TitleProps) {
   return (
     <h1
       className="text-2xl font-bold text-center text-fuchsia-950
-          sm:text-4xl lg:text-5xl"
+          sm:text-4xl py-4 lg:text-5xl"
     >
       {props.children}
     </h1>

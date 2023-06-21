@@ -118,11 +118,13 @@ export function Form() {
             Pedido de BENTÔ CAKE <br /> (bolinho de 350g)
           </Title>
           <div>
-            <div
-            // className={styles.menuBento}
-            >
-              <img src={menuBento} alt="Cardápio - Bentô Cake"></img>
-            </div>
+            {/* <div> */}
+            <img
+              className="rounded-lg"
+              src={menuBento}
+              alt="Cardápio - Bentô Cake"
+            ></img>
+            {/* </div> */}
             <form
               onSubmit={handleSubmit(submitOrder)}
               encType="multipart/form-data"
