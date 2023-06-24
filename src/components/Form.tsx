@@ -363,7 +363,7 @@ export function Form() {
               <div className={styles.fieldDateWithdrawal}>
                 <strong>Selecione a data e horário da {isWithdrawal}:</strong>
                 <span>Segunda à Sexta das 12:00 às 18:30</span>
-                <span>SÁBADO 12:00 às 16:00</span>
+                <span>SÁBADO 10:00 às 12:00</span>
                 <input
                   type="datetime-local"
                   // name="dateTimeInOrder"
