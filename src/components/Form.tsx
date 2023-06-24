@@ -247,7 +247,7 @@ export function Form() {
               </div>
               <div className={styles.fieldCakeColor}>
                 <label>
-                  <strong>Cor do bolo (base):</strong>
+                  <strong>Cordo bolo (base):</strong>
                   <input
                     type="text"
                     id="POST-corBase"
