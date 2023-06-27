@@ -1,8 +1,40 @@
+import background from "./src/_assets/images/Pattern.png";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    // screens: {
+    //   'xsm': '640px',
+    //   // => @media (min-width: 640px) { ... }
+
+    //   'laptop': '1024px',
+    //   // => @media (min-width: 1024px) { ... }
+
+    //   'desktop': '1280px',
+    //   // => @media (min-width: 1280px) { ... }
+    // },
+    extend: {
+      // boxShadow: {
+      //   container: "inset 0 0 0.8rem black, 0 0 2rem black",
+      //   smContainer: "inset 0 0 0.5rem black, 0 0 0.5rem black",
+      // },
+      // borderRadius: {
+      //   large: "85px",
+      //   md: "35px",
+      // },
+      // colors: {
+      //   baseInput: "#EDEDED",
+      //   baseButton: "#E6E5E5",
+      //   baseLabel: "8D8686",
+      //   baseInputsBackground: "#F3F2F2",
+      //   baseCard: "#F3F2F2",
+      //   grupButtonsBorder: "#D7D5D5",
+      // },
+      // backgroundImage: {
+      //   backgroundPage: "url('./src/_assets/images/Pattern.png')",
+      // },
+    },
   },
   plugins: [],
 };
