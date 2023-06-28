@@ -1,5 +1,3 @@
-import background from "./src/_assets/images/Pattern.png";
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
