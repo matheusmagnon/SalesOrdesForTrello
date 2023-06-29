@@ -4,7 +4,7 @@
     src: url("./_assets/font/Nephilm.otf") format("opentype");
 } */
 
-
+/* 
 * {
     margin: 0;
     padding: 0;
@@ -27,7 +27,7 @@ root {
     --purple-500: #4E2A58;
 
     --green-200: rgb(0, 177, 59);
-    --green-500: rgb(40, 255, 112);
+    --green-500: rgb(5, 11, 7);
 }
 
 body {
@@ -56,4 +56,4 @@ body {
         font-size: 0.8rem;
         line-height: 1rem;
     }
-}
+} */

@@ -20,3 +20,7 @@ export type DataOrder = {
 export type PropsState = {
   state?: boolean;
 };
+
+export type PropsType = {
+  children: React.ReactNode;
+};

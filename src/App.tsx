@@ -1,6 +1,6 @@
 import { SalesOrder } from "./components/SalesOrder";
 // import './global.css';
-import "./index.css";
+import "./styles/index.css";
 
 function App() {
   return (
