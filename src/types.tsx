@@ -21,6 +21,6 @@ export type PropsState = {
   state?: boolean;
 };
 
-export type PropsType = {
-  children: React.ReactNode;
-};
+export interface PropsType {
+  children?: React.ReactNode;
+}

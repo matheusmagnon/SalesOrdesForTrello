@@ -26,6 +26,13 @@ import { ContainerForm } from "./styled";
 import { Main } from "./styled";
 import { FormContainer } from "./Form/FormContainer";
 import { FormBackground } from "./Form/FormBackground";
+import { TextField } from "./Form/Fields/Text";
+import { CelField } from "./Form/Fields/Cel";
+import { GroupInputs } from "./Form/GroupInputs";
+import { UploadImages } from "./Form/Fields/UploadImages";
+import { Options } from "./Form/Fields/Options";
+import { DateField } from "./Form/Fields/Date";
+import { SimpleOption } from "./Form/Fields/SimpleOption";
 
 type Images = {
   name: string;
@@ -122,145 +129,92 @@ export function Form() {
             name="PedidosBento"
             data-netlify="true"
           >
-            <div className={styles.fieldFullName}>
-              <label>
-                <strong>Nome Completo:</strong>
-                <input
-                  type="text"
-                  id="POST-name"
-                  // name="nameInOrder"
-                  {...register("nameInOrder")}
-                  placeholder="Informe seu nome completo"
-                  autoFocus
-                  className={styles.inputFieldText}
-                />
-              </label>
-              <p className={styles.errorMessage}>
-                {errors.nameInOrder?.message}
-              </p>
-            </div>
-            <div className={styles.fieldCel}>
-              <label>
-                <strong>Número de celular(WhatsApp):</strong>
-              </label>
-              <input
-                type="tel"
-                id="POST-celular"
-                // name="celInOrder"
-                {...register("celInOrder")}
-                placeholder="Informe seu WhatsApp"
-                className={styles.inputFieldText}
+            <GroupInputs>
+              <span className="font-bold">Selecione o sabor do seu bolo:</span>
+              <br />
+
+              <Options
+                option="CHOCOLATUDO"
+                optionDescribe=" massa amanteigada de cacau, recheio de brigadeiro gourmet de chocolate meio amargo"
               />
-              <p className={styles.errorMessage}>
-                {errors.celInOrder?.message}
-              </p>
-            </div>
-            <div className={styles.fieldPhrase}>
-              <label>
-                <strong>
-                  Frase no bolinho (máximo 35 caracteres com desenho):
-                </strong>
-                <input
-                  type="text"
-                  id="POST-celular"
-                  // name="phraseOnTheCake"
-                  {...register("phraseOnTheCake")}
-                  placeholder="Informe a frase que vai no bolinho"
-                  className={styles.inputFieldText}
-                />
-              </label>
+              <Options
+                option="RED VELVET"
+                optionDescribe="  massa fofinha e aveludada de tom vermelho, saborizada com baunilha + cacau e recheio de cream cheese frosting"
+              />
+              <Options
+                option="LEITE NINHO"
+                optionDescribe="  massa amanteigada de baunilha e recheio de brigadeiro cremoso de leite ninho"
+              />
+            </GroupInputs>
+
+            <GroupInputs>
+              <TextField
+                placeholder="Digite a cor base do seu bolo"
+                {...register("cakeColor")}
+              />
+
+              {/* <p className={styles.errorMessage}>
+                  {errors.cakeColor?.message}
+                </p> */}
+
+              <TextField
+                placeholder="Digite a frase do bolinho (máximo 35 caracteres)"
+                {...register("phraseOnTheCake")}
+              />
+              {/*              
               <p className={styles.errorMessage}>
                 {errors.phraseOnTheCake?.message}
-              </p>
-            </div>
-            <div className={styles.fieldColorPhrase}>
-              <label>
-                <strong>Cor da Frase:</strong>
-                <input
-                  type="text"
-                  // name="cakePhraseColor"
-                  {...register("cakePhraseColor")}
-                  placeholder="Informe a cor da frase"
-                  className={styles.inputFieldText}
-                />
-              </label>
+              </p>  */}
 
-              <p className={styles.errorMessage}>
+              <TextField
+                placeholder="Digite a cor da frase"
+                {...register("cakePhraseColor")}
+              />
+
+              {/* <p className={styles.errorMessage}>
                 {errors.cakePhraseColor?.message}
-              </p>
-            </div>
-            <div className={styles.fieldDrawingDescription}>
-              <label>
-                <strong>Se houver desenho descreva abaixo:</strong>
-                <input
-                  type="text"
-                  id="POST-celular"
-                  // name="drawingOnTheCake"
-                  {...register("drawingOnTheCake")}
-                  placeholder="Desenho em cima do bolinho"
-                  className={styles.inputFieldText}
-                />
-              </label>
-            </div>
-            <div className={styles.fieldUpload}>
-              <div>
-                <label className={styles.ButtomUploadFile}>
-                  Caso haja alguma imagem de inspiração anexe aqui:
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    // name="filesInOrder"
-                    {...register("filesInOrder", {
-                      onChange: (e) => {
-                        getImagesToUpload(e);
-                      },
-                    })}
-                  />
-                </label>
+              </p>  */}
+
+              <TextField
+                placeholder="Se houver desenho descreva"
+                {...register("drawingOnTheCake")}
+              />
+
+              <UploadImages />
+
+              <div className={styles.fieldUpload}>
+                <div className={styles.previewImages}>
+                  {images.map((image) => {
+                    return (
+                      <PreviewImageUpload
+                        key={uuidv4()}
+                        name={image.name}
+                        URLpreview={image.URLpreview}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-              <div className={styles.previewImages}>
-                {images.map((image) => {
-                  return (
-                    <PreviewImageUpload
-                      key={uuidv4()}
-                      name={image.name}
-                      URLpreview={image.URLpreview}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <div className={styles.fieldObservation}>
-              <label>
-                <strong>Caso haja alguma observação escreva abaixo:</strong>
-                <input
-                  type="text"
-                  id="POST-celular"
-                  // name="orderObservation"
-                  {...register("orderObservation")}
-                  placeholder="Informação adicional"
-                  className={styles.inputFieldText}
-                />
-              </label>
-            </div>
-            <div className={styles.fieldCakeColor}>
-              <label>
-                <strong>Cor do bolo (base):</strong>
-                <input
-                  type="text"
-                  id="POST-corBase"
-                  // name="cakeColor"
-                  {...register("cakeColor")}
-                  placeholder="Cor do seu bolinho"
-                  className={styles.inputFieldText}
-                />
-                <p className={styles.errorMessage}>
-                  {errors.cakeColor?.message}
-                </p>
-              </label>
-            </div>
-            <div className={styles.fieldFlavor}>
+              <TextField
+                placeholder="Caso haja alguma observação descreva"
+                {...register("orderObservation")}
+              />
+              <DateField />
+            </GroupInputs>
+            <GroupInputs>
+              <h2 className="font-bold mb-2">
+                Aceita Vela? (custo adicional R$ 2):
+              </h2>
+              <SimpleOption option="Sim" {...register("candleInOrder")} />
+              <SimpleOption option="Não" {...register("candleInOrder")} />
+            </GroupInputs>
+
+            <GroupInputs>
+              <TextField placeholder="Digite seu nome completo" />
+              <CelField placeholder="Número de celular(WhatsApp)" />
+            </GroupInputs>
+
+            {/* <div className={styles.fieldFlavor}>
               <strong>Selecione o sabor do seu bolo:</strong> <br />
               <div className={styles.flavorOptions}>
                 <input
@@ -309,7 +263,7 @@ export function Form() {
               <p className={styles.errorMessage}>
                 {errors.flavorInOrder?.message}
               </p>
-            </div>
+            </div> */}
             <div className={styles.fieldIsWithdrawal}>
               <label className={styles.isWithdrawal}>
                 <strong>Retirada ou Entrega:</strong>
@@ -359,22 +313,8 @@ export function Form() {
                 </label>
               </div>
             )}
-            <div className={styles.fieldDateWithdrawal}>
-              <strong>Selecione a data e horário da {isWithdrawal}:</strong>
-              <span>Segunda à Sexta das 12:00 às 18:30</span>
-              <span>SÁBADO 10:00 às 12:00</span>
-              <input
-                type="datetime-local"
-                // name="dateTimeInOrder"
-                {...register("dateTimeInOrder", {
-                  value: getDateNow(),
-                })}
-              />
-              <p className={styles.errorMessage}>
-                {erroIsWithdrawalOrDelivery()}
-              </p>
-            </div>
-            <div className={styles.fieldCandle}>
+
+            {/* <div className={styles.fieldCandle}>
               <label className="vela">
                 <strong>Aceita vela? (custo adicional de 2 reais):</strong>
               </label>
@@ -401,7 +341,7 @@ export function Form() {
               <p className={styles.errorMessage}>
                 {errors.candleInOrder?.message}
               </p>
-            </div>
+            </div> */}
             <div className={styles.fieldPayment}>
               <strong>Forma de Pagamento:</strong>
               <span>Confirmamos seu pedido mediante pagamento antecipado </span>
