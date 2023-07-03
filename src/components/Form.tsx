@@ -28,11 +28,12 @@ import { FormContainer } from "./Form/FormContainer";
 import { FormBackground } from "./Form/FormBackground";
 import { TextField } from "./Form/Fields/Text";
 import { CelField } from "./Form/Fields/Cel";
-import { GroupInputs } from "./Form/GroupInputs";
+import { GroupLabels } from "./Form/GroupLabels";
 import { UploadImages } from "./Form/Fields/UploadImages";
 import { Options } from "./Form/Fields/Options";
 import { DateField } from "./Form/Fields/Date";
 import { SimpleOption } from "./Form/Fields/SimpleOption";
+import { GroupOptions } from "./Form/GroupOptions";
 
 type Images = {
   name: string;
@@ -129,25 +130,26 @@ export function Form() {
             name="PedidosBento"
             data-netlify="true"
           >
-            <GroupInputs>
+            <GroupLabels>
               <span className="font-bold">Selecione o sabor do seu bolo:</span>
               <br />
+              <GroupOptions>
+                <Options
+                  option="CHOCOLATUDO"
+                  optionDescribe=" massa amanteigada de cacau, recheio de brigadeiro gourmet de chocolate meio amargo"
+                />
+                <Options
+                  option="RED VELVET"
+                  optionDescribe="  massa fofinha e aveludada de tom vermelho, saborizada com baunilha + cacau e recheio de cream cheese frosting"
+                />
+                <Options
+                  option="LEITE NINHO"
+                  optionDescribe="  massa amanteigada de baunilha e recheio de brigadeiro cremoso de leite ninho"
+                />
+              </GroupOptions>
+            </GroupLabels>
 
-              <Options
-                option="CHOCOLATUDO"
-                optionDescribe=" massa amanteigada de cacau, recheio de brigadeiro gourmet de chocolate meio amargo"
-              />
-              <Options
-                option="RED VELVET"
-                optionDescribe="  massa fofinha e aveludada de tom vermelho, saborizada com baunilha + cacau e recheio de cream cheese frosting"
-              />
-              <Options
-                option="LEITE NINHO"
-                optionDescribe="  massa amanteigada de baunilha e recheio de brigadeiro cremoso de leite ninho"
-              />
-            </GroupInputs>
-
-            <GroupInputs>
+            <GroupLabels>
               <TextField
                 placeholder="Digite a cor base do seu bolo"
                 {...register("cakeColor")}
@@ -199,20 +201,32 @@ export function Form() {
                 placeholder="Caso haja alguma observação descreva"
                 {...register("orderObservation")}
               />
+              <GroupLabels type="simple">
+                <h2 className="font-bold ">Retirada Ou Entrega?</h2>
+                <span className="text-sm">Consulte a taxa para entrega* </span>
+
+                <GroupOptions type="simple">
+                  <SimpleOption option="Entrega" />
+                  <SimpleOption option="Retirada" />
+                </GroupOptions>
+              </GroupLabels>
+
               <DateField />
-            </GroupInputs>
-            <GroupInputs>
+            </GroupLabels>
+            <GroupLabels>
               <h2 className="font-bold mb-2">
                 Aceita Vela? (custo adicional R$ 2):
               </h2>
-              <SimpleOption option="Sim" {...register("candleInOrder")} />
-              <SimpleOption option="Não" {...register("candleInOrder")} />
-            </GroupInputs>
+              <GroupOptions type="simple">
+                <SimpleOption option="Sim" {...register("candleInOrder")} />
+                <SimpleOption option="Não" {...register("candleInOrder")} />
+              </GroupOptions>
+            </GroupLabels>
 
-            <GroupInputs>
+            <GroupLabels>
               <TextField placeholder="Digite seu nome completo" />
               <CelField placeholder="Número de celular(WhatsApp)" />
-            </GroupInputs>
+            </GroupLabels>
 
             {/* <div className={styles.fieldFlavor}>
               <strong>Selecione o sabor do seu bolo:</strong> <br />
@@ -264,6 +278,7 @@ export function Form() {
                 {errors.flavorInOrder?.message}
               </p>
             </div> */}
+
             <div className={styles.fieldIsWithdrawal}>
               <label className={styles.isWithdrawal}>
                 <strong>Retirada ou Entrega:</strong>

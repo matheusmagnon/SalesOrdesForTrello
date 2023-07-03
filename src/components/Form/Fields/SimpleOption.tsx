@@ -5,20 +5,30 @@ interface PropsSimpleOptions extends PropsType {
 }
 
 export function SimpleOption(props: PropsSimpleOptions) {
+  //   props.option == "candleInOrder";
   return (
-    <label
-      className=" pt-1 px-2 mr-4 bg-fuchsia-950 cursor-pointer rounded-xl drop-shadow-lg 
-    hover:bg-fuchsia-900 shadow-2xl text-white"
-      htmlFor={props.option}
-    >
+    <li>
       <input
-        className="hidden"
         type="radio"
-        id="POST-velaSim"
-        // name="candleInOrder"
+        name="candleInOrder"
         value={props.option}
-      />{" "}
-      {props.option}
-    </label>
+        className="hidden peer"
+        id={props.option}
+        // name="candleInOrder"
+        // defaultValue={props.option}
+        // onChange={(e) => {
+        //   console.log(event?.target);
+        // }}
+      />
+
+      <label
+        className="inline-flex items-center justify-between p-2 text-white bg-fuchsia-950 border-gray-200 rounded-xl cursor-pointer
+        peer-checked:bg-fuchsia-900 hover:bg-fuchsia-800"
+        htmlFor={props.option}
+      >
+        {" "}
+        {props.option}
+      </label>
+    </li>
   );
 }

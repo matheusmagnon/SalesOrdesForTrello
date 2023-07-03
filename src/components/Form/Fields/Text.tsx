@@ -11,6 +11,7 @@ export function TextField(props: PropsTextField) {
       <input
         type="text"
         id="POST-name"
+        defaultValue=""
         // name="nameInOrder"
         //   {...register("nameInOrder")}
         placeholder={`${props.placeholder}`}
