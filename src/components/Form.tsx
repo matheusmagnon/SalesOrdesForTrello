@@ -22,8 +22,6 @@ import PreviewImageUpload from "./PreviewImageUpload";
 
 import styles from "./Form.module.css";
 
-import { ContainerForm } from "./styled";
-import { Main } from "./styled";
 import { FormContainer } from "./Form/FormContainer";
 import { FormBackground } from "./Form/FormBackground";
 import { TextField } from "./Form/Fields/Text";
@@ -34,6 +32,10 @@ import { Options } from "./Form/Fields/Options";
 import { DateField } from "./Form/Fields/Date";
 import { SimpleOption } from "./Form/Fields/SimpleOption";
 import { GroupOptions } from "./Form/GroupOptions";
+import { Checkbox } from "./Form/Fields/Checkbox";
+import { Buttom } from "./Form/Buttom";
+
+import SalesOrderContext from "../context/SalesOrderContext";
 
 type Images = {
   name: string;
@@ -116,11 +118,14 @@ export function Form() {
     return <OrderSent resume={resumeOrderState} />;
   }
 
+  const { obj } = useContext(SalesOrderContext);
+
   return (
     <OrderContext.Provider value={{ order }}>
       <FormBackground>
         <FormContainer>
           <FormTitle> Pedido de BENTÔ CAKE (bolinho de 350g)</FormTitle>
+          {/* {obj} */}
           <div className="">
             <img src={menuBento} alt="Cardápio - Bentô Cake"></img>
           </div>
@@ -130,19 +135,34 @@ export function Form() {
             name="PedidosBento"
             data-netlify="true"
           >
+            <h1 className="font-bold text-baseText text-xl">
+              A partir de R$ 50,00
+            </h1>
+            <ul>
+              <li> • acompanha garfo e embalagem biodegradáveis</li>
+              <li> • 1 camada de recheio</li>
+              <li> • 7 cm de altura</li>
+              <li> • 2 camadas de massa</li>
+              <li> • serve 2 fatias</li>
+            </ul>
             <GroupLabels>
-              <span className="font-bold">Selecione o sabor do seu bolo:</span>
+              <span className="font-bold text-baseText text-xl">
+                Selecione o sabor do seu bolo:
+              </span>
               <br />
               <GroupOptions>
                 <Options
+                  nameField="flavorInOrder"
                   option="CHOCOLATUDO"
                   optionDescribe=" massa amanteigada de cacau, recheio de brigadeiro gourmet de chocolate meio amargo"
                 />
                 <Options
+                  nameField="flavorInOrder"
                   option="RED VELVET"
                   optionDescribe="  massa fofinha e aveludada de tom vermelho, saborizada com baunilha + cacau e recheio de cream cheese frosting"
                 />
                 <Options
+                  nameField="flavorInOrder"
                   option="LEITE NINHO"
                   optionDescribe="  massa amanteigada de baunilha e recheio de brigadeiro cremoso de leite ninho"
                 />
@@ -151,6 +171,7 @@ export function Form() {
 
             <GroupLabels>
               <TextField
+                nameField="cakeColor"
                 placeholder="Digite a cor base do seu bolo"
                 {...register("cakeColor")}
               />
@@ -160,6 +181,7 @@ export function Form() {
                 </p> */}
 
               <TextField
+                nameField="phraseOnTheCake"
                 placeholder="Digite a frase do bolinho (máximo 35 caracteres)"
                 {...register("phraseOnTheCake")}
               />
@@ -169,6 +191,7 @@ export function Form() {
               </p>  */}
 
               <TextField
+                nameField="cakePhraseColor"
                 placeholder="Digite a cor da frase"
                 {...register("cakePhraseColor")}
               />
@@ -178,6 +201,7 @@ export function Form() {
               </p>  */}
 
               <TextField
+                nameField="drawingOnTheCake"
                 placeholder="Se houver desenho descreva"
                 {...register("drawingOnTheCake")}
               />
@@ -198,242 +222,107 @@ export function Form() {
                 </div>
               </div>
               <TextField
+                nameField="orderObservation"
                 placeholder="Caso haja alguma observação descreva"
                 {...register("orderObservation")}
               />
               <GroupLabels type="simple">
-                <h2 className="font-bold ">Retirada Ou Entrega?</h2>
+                <h2 className="font-bold text-baseText text-xl">
+                  Aceita Vela?:
+                </h2>
+                <span className="text-sm">(custo adicional R$ 2)</span>
+                <GroupOptions type="simple">
+                  <SimpleOption
+                    option="Sim"
+                    {...register("candleInOrder")}
+                    nameField="candleInOrder"
+                  />
+                  <SimpleOption
+                    option="Não"
+                    {...register("candleInOrder")}
+                    nameField="candleInOrder"
+                  />
+                </GroupOptions>
+              </GroupLabels>
+              <GroupLabels type="simple">
+                <h2 className="font-bold text-xl">Retirada ou Entrega?</h2>
                 <span className="text-sm">Consulte a taxa para entrega* </span>
 
                 <GroupOptions type="simple">
-                  <SimpleOption option="Entrega" />
-                  <SimpleOption option="Retirada" />
+                  <SimpleOption option="Entrega" nameField="isWithdrawal" />
+                  <SimpleOption option="Retirada" nameField="isWithdrawal" />
                 </GroupOptions>
               </GroupLabels>
 
               <DateField />
             </GroupLabels>
+
             <GroupLabels>
-              <h2 className="font-bold mb-2">
-                Aceita Vela? (custo adicional R$ 2):
-              </h2>
-              <GroupOptions type="simple">
-                <SimpleOption option="Sim" {...register("candleInOrder")} />
-                <SimpleOption option="Não" {...register("candleInOrder")} />
+              <strong className="text-baseText text-lg">Seus dados:</strong>
+              <TextField
+                placeholder="Digite seu nome completo"
+                nameField="NameInOrder"
+                isOptinal
+              />
+              <CelField placeholder="Digte seu número de celular(WhatsApp)" />
+
+              {isWithdrawal == "Entrega" && (
+                <GroupLabels type="simple">
+                  <strong className="text-baseText text-lg">
+                    Dados p/ entrega:
+                  </strong>
+                  <TextField
+                    placeholder="Digite o endereço para entrega"
+                    nameField="deliveryAdress"
+                  />
+                  <TextField
+                    placeholder="Digite o nome da pessoa que irá receber o bolinho"
+                    nameField="NameDelivery"
+                  />
+                  <CelField placeholder="Digite o número de quem irá receber o bolinho" />
+                </GroupLabels>
+              )}
+            </GroupLabels>
+            <GroupLabels>
+              <strong className=" text-baseText text-lg">
+                Selecione o método de pagamento:
+              </strong>
+              <br />
+              <span className="text-xs">
+                Confirmamos seu pedido mediante pagamento antecipado 😊
+              </span>
+              <GroupOptions>
+                <Options
+                  nameField="formOfPaymentInOrder"
+                  option="PIX"
+                  // icon="iconPix"
+                />
+                <Options
+                  nameField="formOfPaymentInOrder"
+                  option="Cartão de Crédito"
+                  optionDescribe="(+ taxa de 5%)"
+                  // icon="iconCredt"
+                />
+                <Options
+                  nameField="formOfPaymentInOrder"
+                  option="TRANSFERÊNCIA BANCÁRIA"
+                  optionDescribe="(BB e Caixa)"
+                  // icon="iconTranf"
+                />
               </GroupOptions>
             </GroupLabels>
-
             <GroupLabels>
-              <TextField placeholder="Digite seu nome completo" />
-              <CelField placeholder="Número de celular(WhatsApp)" />
+              <Checkbox
+                content="Estou ciente que o pedido será concluido via WhatsApp"
+                nameField="awareOfWhatsApp"
+              />
+              <Checkbox
+                content="Confirmo que revisei todas as informações"
+                nameField="termsAccepted"
+              />
             </GroupLabels>
 
-            {/* <div className={styles.fieldFlavor}>
-              <strong>Selecione o sabor do seu bolo:</strong> <br />
-              <div className={styles.flavorOptions}>
-                <input
-                  type="radio"
-                  id="chocolatudo"
-                  // name="flavorInOrder"
-                  value="CHOCOLATUDO"
-                  {...register("flavorInOrder")}
-                />
-                <label htmlFor="chocolatudo">
-                  <h3>CHOCOLATUDO</h3>
-                  <p>
-                    massa amanteigada de cacau, recheio de brigadeiro gourmet de
-                    chocolate meio amargo
-                  </p>
-                </label>
-                <input
-                  type="radio"
-                  id="redVelvet"
-                  // name="flavorInOrder"
-                  value="RED VELVET"
-                  {...register("flavorInOrder")}
-                />
-                <label htmlFor="redVelvet">
-                  <h3>RED VELVET</h3>
-                  <p>
-                    massa fofinha e aveludada de tom vermelho, saborizada com
-                    baunilha + cacau e recheio de cream cheese frosting
-                  </p>
-                </label>
-                <input
-                  type="radio"
-                  id="leiteNinho"
-                  // name="flavorInOrder"
-                  value="LEITE NINHO"
-                  {...register("flavorInOrder")}
-                />
-                <label htmlFor="leiteNinho">
-                  <h3>LEITE NINHO</h3>
-                  <p>
-                    massa amanteigada de baunilha e recheio de brigadeiro
-                    cremoso de leite ninho
-                  </p>
-                </label>
-              </div>
-              <p className={styles.errorMessage}>
-                {errors.flavorInOrder?.message}
-              </p>
-            </div> */}
-
-            <div className={styles.fieldIsWithdrawal}>
-              <label className={styles.isWithdrawal}>
-                <strong>Retirada ou Entrega:</strong>
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  // name="isWithdrawal"
-                  value="Retirada"
-                  // checked={isWithdrawal == 'Retirada'}
-                  {...register("isWithdrawal", {
-                    onChange: (e) => {
-                      handleisWithdrawalChange(e);
-                    },
-                  })}
-                />{" "}
-                Retirada
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  // name="isWithdrawal"
-                  value="Entrega"
-                  {...register("isWithdrawal", {
-                    onChange: (e) => {
-                      handleisWithdrawalChange(e);
-                    },
-                  })}
-                />{" "}
-                Entrega (Consulte a taxa)
-              </label>
-              <p className={styles.errorMessage}>
-                {errors.isWithdrawal?.message}
-              </p>
-            </div>
-            {isWithdrawal == "Entrega" && (
-              <div className={styles.fieldColorPhrase}>
-                <label>
-                  <strong>Endereço de Entrega:</strong>
-                  <input
-                    type="text"
-                    // name="cakePhraseColor"
-                    {...register("deliveryAdress")}
-                    placeholder="Digite o endereço de entrega do Bentô Cake"
-                    className={styles.inputFieldText}
-                  />
-                </label>
-              </div>
-            )}
-
-            {/* <div className={styles.fieldCandle}>
-              <label className="vela">
-                <strong>Aceita vela? (custo adicional de 2 reais):</strong>
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  id="POST-velaSim"
-                  // name="candleInOrder"
-                  value="Sim"
-                  {...register("candleInOrder")}
-                />{" "}
-                Sim
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  id="POST-velaNao"
-                  // name="candleInOrder"
-                  value="Não"
-                  {...register("candleInOrder")}
-                />{" "}
-                Não
-              </label>
-              <p className={styles.errorMessage}>
-                {errors.candleInOrder?.message}
-              </p>
-            </div> */}
-            <div className={styles.fieldPayment}>
-              <strong>Forma de Pagamento:</strong>
-              <span>Confirmamos seu pedido mediante pagamento antecipado </span>
-
-              <label>
-                <input
-                  type="radio"
-                  id="PIX"
-                  // name="formOfPaymentInOrder"
-                  value="PIX"
-                  {...register("formOfPaymentInOrder")}
-                />{" "}
-                PIX
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  id="CardCredit"
-                  // name="formOfPaymentInOrder"
-                  value="Cartão de Crédito"
-                  {...register("formOfPaymentInOrder")}
-                />{" "}
-                Cartão de Crédito (+ taxa de 5%)
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  id="TransfBancaria"
-                  // name="formOfPaymentInOrder"
-                  value="TRANSFERÊNCIA"
-                  {...register("formOfPaymentInOrder")}
-                />{" "}
-                TRANSFERÊNCIA BANCÁRIA (BB e CAIXA )
-              </label>
-              <p className={styles.errorMessage}>
-                {errors.formOfPaymentInOrder?.message}
-              </p>
-            </div>
-
-            <div className={styles.fieldAcceptance}>
-              <label>
-                <input
-                  type="checkbox"
-                  id="awareOfWhatsApp"
-                  // value={true}
-                  {...register("awareOfWhatsApp")}
-                  // onChange={handleOnChange}
-                />
-                <span>
-                  Estou ciente que o pedido será concluido via WhatsApp
-                </span>
-              </label>
-              <p className={styles.errorMessage}>
-                {errors.awareOfWhatsApp?.message}
-              </p>
-
-              <label>
-                <input
-                  type="checkbox"
-                  id="accept"
-                  // value={true}
-                  {...register("termsAccepted")}
-                  // onChange={handleOnChange}
-                />
-                <span>Confirmo que revisei todas as informações</span>
-              </label>
-
-              <p className={styles.errorMessage}>
-                {errors.termsAccepted?.message}
-              </p>
-            </div>
-
-            <input
-              className={styles.buttomSendOrder}
-              type="submit"
-              value="Enviar Pedido pelo WhatsApp"
-            />
+            <Buttom />
           </form>
           {/* </div> */}
         </FormContainer>

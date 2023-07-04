@@ -6,7 +6,7 @@ module.exports = {
       boxShadow: {
         container: "inset 0 0 0.8rem black, 0 0 2rem black",
         smContainer: "inset 0 0 0.5rem black, 0 0 0.5rem black",
-        buttom: " inset 0 0 0.1rem #403937, 0 0 0.8rem black",
+        buttom: "inset 0 0 10rem #403937, 0 0 10rem black",
       },
       borderRadius: {
         large: "85px",
@@ -26,5 +26,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [],
 };

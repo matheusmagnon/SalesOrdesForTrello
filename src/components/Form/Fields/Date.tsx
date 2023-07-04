@@ -4,7 +4,9 @@ export function DateField() {
   return (
     <div className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg p-2 flex-col">
       <div>
-        <strong>Selecione a data e horário da Retirada:</strong>
+        <strong className="text-xl">
+          Selecione a data e horário da Retirada:
+        </strong>
         {/* {isWithdrawal} */}
       </div>
       <div>
