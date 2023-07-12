@@ -3,10 +3,12 @@ import { PropsType } from "../../../types";
 interface PropsSimpleOptions extends PropsType {
   option: string;
   nameField: string;
+  handleOption?: () => void;
 }
 
 export function SimpleOption(props: PropsSimpleOptions) {
   //   props.option == "candleInOrder";
+  const { handleOption } = props;
   return (
     <li>
       <input
@@ -15,7 +17,8 @@ export function SimpleOption(props: PropsSimpleOptions) {
         value={props.option}
         className="hidden peer"
         id={props.option}
-        onChange={(e) => console.log(e.target.value)}
+        onClick={handleOption}
+        onChange={(e) => e.target.value}
         // name="candleInOrder"
         // defaultValue={props.option}
         // onChange={(e) => {

@@ -1,7 +1,16 @@
 import { PropsType } from "../../types";
 
-export function FormContainer(props: PropsType) {
-  return (
+interface PropsFormContainer extends PropsType {
+  onderSent?: boolean;
+}
+
+export function FormContainer(props: PropsFormContainer) {
+  const { onderSent } = props;
+  return onderSent == true ? (
+    <div className=" bg-white px-3 py-3 rounded-md shadow-container max-w-6xl h-60  md:px-10">
+      {props.children}
+    </div>
+  ) : (
     <div className=" bg-white px-3 py-3 rounded-md shadow-container max-w-6xl  md:px-10">
       {props.children}
     </div>

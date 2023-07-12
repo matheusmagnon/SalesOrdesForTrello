@@ -1,8 +1,17 @@
 import { PropsType } from "../../types";
 
-export function FormBackground(props: PropsType) {
-  return (
-    <div className="bg-backgroundPage p-3 md:p-5 w-full flex justify-center">
+interface PropsFormBackground extends PropsType {
+  orderSent?: boolean;
+}
+
+export function FormBackground(props: PropsFormBackground) {
+  const { orderSent } = props;
+  return orderSent == true ? (
+    <div className="bg-backgroundPage p-3 md:p-5 h-screen flex justify-center">
+      {props.children}
+    </div>
+  ) : (
+    <div className="bg-backgroundPage p-3 md:p-5 w-full h-full flex justify-center">
       {props.children}
     </div>
   );
