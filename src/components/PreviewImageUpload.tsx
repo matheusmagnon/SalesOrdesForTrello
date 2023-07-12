@@ -1,13 +1,13 @@
-import styles from './Form.module.css';
+import styles from "./Form.module.css";
 type PropPreview = {
   name: string;
-  URLpreview: string
-}
+  URLpreview: string;
+};
 export default function PreviewImageUpload({ name, URLpreview }: PropPreview) {
   return (
-    <div className={styles.fieldPreview}>
+    <div className="xl:flex xl:flexrow xl:flex-wrap xl:items-baseline xl:space-x-2 w-32">
       <div>
-        <span>{name}</span>
+        <span className="text-sm">{name}</span>
         <img src={URLpreview} key={name} />
       </div>
     </div>
