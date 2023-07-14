@@ -5,9 +5,9 @@ type PropPreview = {
 };
 export default function PreviewImageUpload({ name, URLpreview }: PropPreview) {
   return (
-    <div className="xl:flex xl:flexrow xl:flex-wrap xl:items-baseline xl:space-x-2 w-32">
+    <div className="w-20">
       <div>
-        <span className="text-sm">{name}</span>
+        <span className="text-xs">{name}</span>
         <img src={URLpreview} key={name} />
       </div>
     </div>

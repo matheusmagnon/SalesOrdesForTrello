@@ -128,7 +128,7 @@ export function Form() {
           {/* {obj} */}
           <div className="">
             <img
-              className="flex w-full"
+              className="flex w-full rounded-lg"
               src={menuBento}
               alt="Cardápio - Bentô Cake"
             ></img>
@@ -139,27 +139,32 @@ export function Form() {
             name="PedidosBento"
             data-netlify="true"
           >
-            <div className="xl:flex xl:flex-row xl:space-x-4">
-              <GroupLabels>
+            <div className="bg-baseCard border border-grupButtonsBorder p-2 mt-2 rounded-lg xl:flex xl:flex-col xl:items-center">
+              {/* <GroupLabels> */}
+              <div>
                 <h1 className="font-bold text-baseText text-xl">
-                  Descrição Bentô Cake
+                  Informações - Bentô Cake
                 </h1>
-                <ul>
-                  <li> • acompanha garfo e embalagem biodegradáveis</li>
-                  <li> • 1 camada de recheio</li>
-                  <li> • 7 cm de altura</li>
-                  <li> • 2 camadas de massa</li>
-                  <li> • serve 2 fatias</li>
+                <ul className="xl:flex xl:flex-wrap">
+                  <li className="xl:pr-4"> • cobertura de buttercream</li>
+                  <li className="xl:pr-4">
+                    • acompanha talher de madeira e embalagem biodegradáveis
+                  </li>
+                  <li className="xl:pr-4"> • 1 camada de recheio</li>
+                  <li className="xl:pr-4"> • 2 camadas de massa</li>
+                  <li className="xl:pr-4"> • 10 cm de diâmetro</li>
+                  <li className="xl:pr-4"> • serve 2 fatias</li>
                 </ul>
-              </GroupLabels>
-
+              </div>
+              {/* </GroupLabels> */}
+              {/* 
               <GroupLabels>
                 <h1 className="font-bold text-baseText text-xl">COBERTURA</h1>
                 <p>
                   pensando na qualidade e experiência gustativa, trabalhamos
                   exclusivamente com a cobertura buttercream de merengue suíco
                 </p>
-              </GroupLabels>
+              </GroupLabels> */}
             </div>
             <GroupLabels>
               <span className="font-bold text-baseText text-xl">
@@ -297,7 +302,7 @@ export function Form() {
                 placeholder="Digite a cor base do seu bolo"
                 {...register("cakeColor")}
               /> */}
-              <div className="xl:w-1/5">
+              <div className="xl:w-48">
                 {/* <label> */}
                 <input
                   type="text"
@@ -325,7 +330,7 @@ export function Form() {
                 {...register("phraseOnTheCake")}
               /> */}
 
-              <div className="xl:w-1/4">
+              <div className="xl:w-72">
                 {/* <label> */}
                 <input
                   type="text"
@@ -334,7 +339,7 @@ export function Form() {
                   // name={props.nameField}
                   // name="nameInOrder"
                   //   {...register("nameInOrder")}
-                  placeholder="Digite a frase do bolinho (máximo 35 caracteres)"
+                  placeholder="Digite a frase do bolo (máximo 35 caracteres)"
                   {...register("phraseOnTheCake")}
                   // autoFocus
                   className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
@@ -355,7 +360,7 @@ export function Form() {
                 placeholder="Digite a cor da frase"
                 {...register("cakePhraseColor")}
               /> */}
-              <div>
+              <div className="xl:w-36">
                 {/* <label> */}
                 <input
                   type="text"
@@ -386,7 +391,7 @@ export function Form() {
                 {...register("drawingOnTheCake")}
               /> */}
 
-              <div className="xl:w-1/3">
+              <div className="xl:w-64">
                 {/* <label> */}
                 <input
                   type="text"
@@ -395,7 +400,7 @@ export function Form() {
                   // name={props.nameField}
                   // name="nameInOrder"
                   //   {...register("nameInOrder")}
-                  placeholder="Se houver desenho descreva"
+                  placeholder="Se houver desenho descreva detalhadamente"
                   {...register("drawingOnTheCake")}
                   // autoFocus
                   className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
@@ -405,7 +410,7 @@ export function Form() {
               </div>
 
               {/* <UploadImages /> */}
-              <div className="xl:w-48">
+              <div className="xl:w-36">
                 <label className="bg-fuchsia-950 p-2 text-white block rounded-xl cursor-pointer text-center duration-75">
                   Caso haja alguma imagem de inspiração anexe aqui
                   <input
@@ -421,8 +426,8 @@ export function Form() {
                     })}
                   />
                 </label>
-                <div className="xl:flex xl:flex-row">
-                  <div className={styles.previewImages}>
+                <div className="xl:w-96">
+                  <div className="w-full flex flex-wrap space-x-4">
                     {images.map((image) => {
                       return (
                         <PreviewImageUpload
@@ -599,6 +604,7 @@ export function Form() {
                   {erroIsWithdrawalOrDelivery()}
                 </p>
               </div>
+
               <div className="w-full">
                 {/* <label> */}
                 <input
@@ -619,56 +625,58 @@ export function Form() {
             </GroupLabels>
 
             <GroupLabels>
-              <strong className="text-baseText text-lg">Seus dados:</strong>
               {/* <TextField
                 placeholder="Digite seu nome completo"
                 nameField="NameInOrder"
                 isOptinal
               /> */}
 
-              <div>
-                {/* <label> */}
-                <input
-                  type="text"
-                  id="POST-name"
-                  // defaultValue=""
-                  // name={props.nameField}
-                  // name="nameInOrder"
-                  //   {...register("nameInOrder")}
-                  placeholder="Digite seu nome completo"
-                  {...register("nameInOrder")}
-                  // autoFocus
-                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+              <div className="space-y-2">
+                <strong className="text-baseText text-lg">Seus dados:</strong>
+                <div className="w-72">
+                  {/* <label> */}
+                  <input
+                    type="text"
+                    id="POST-name"
+                    // defaultValue=""
+                    // name={props.nameField}
+                    // name="nameInOrder"
+                    //   {...register("nameInOrder")}
+                    placeholder="Digite seu nome completo"
+                    {...register("nameInOrder")}
+                    // autoFocus
+                    className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
-                />
-                {/* </label> */}
-                <p className="text-red-500 text-sm">
-                  {errors.nameInOrder?.message}
-                </p>
-              </div>
+                  />
+                  {/* </label> */}
+                  <p className="text-red-500 text-sm">
+                    {errors.nameInOrder?.message}
+                  </p>
+                </div>
 
-              {/* <CelField placeholder="Digte seu número de celular(WhatsApp)" /> */}
+                {/* <CelField placeholder="Digte seu número de celular(WhatsApp)" /> */}
 
-              <div>
-                {/* <label> */}
-                <input
-                  type="tel"
-                  id="POST-celular"
-                  // name="celInOrder"
-                  {...register("celInOrder")}
-                  placeholder="Digte seu número de celular(WhatsApp)"
-                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                <div>
+                  {/* <label> */}
+                  <input
+                    type="tel"
+                    id="POST-celular"
+                    // name="celInOrder"
+                    {...register("celInOrder")}
+                    placeholder="Digte seu número de celular(WhatsApp)"
+                    className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
                 focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
-                />
-                {/* </label> */}
+                  />
+                  {/* </label> */}
 
-                <p className="text-red-500 text-sm">
-                  {errors.celInOrder?.message}
-                </p>
+                  <p className="text-red-500 text-sm">
+                    {errors.celInOrder?.message}
+                  </p>
+                </div>
               </div>
 
               {isWithdrawal == "Entrega" && (
-                <GroupLabels simple>
+                <div>
                   <strong className="text-baseText text-lg">
                     Dados p/ entrega:
                   </strong>
@@ -676,64 +684,66 @@ export function Form() {
                     placeholder="Digite o endereço para entrega"
                     nameField="deliveryAdress"
                   /> */}
-                  <div>
-                    {/* <label> */}
-                    <input
-                      type="text"
-                      // id="POST-name"
-                      // defaultValue=""
-                      // name={props.nameField}
-                      // name="nameInOrder"
-                      {...register("deliveryAdress")}
-                      placeholder="Digite o endereço para entrega"
-                      // autoFocus
-                      className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                  <div className="xl:w-96 space-y-2">
+                    <div>
+                      {/* <label> */}
+                      <input
+                        type="text"
+                        // id="POST-name"
+                        // defaultValue=""
+                        // name={props.nameField}
+                        // name="nameInOrder"
+                        {...register("deliveryAdress")}
+                        placeholder="Digite o endereço para entrega"
+                        // autoFocus
+                        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
-                    />
-                    {/* </label> */}
-                    {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
-                  </div>
-                  {/* <TextField
+                      />
+                      {/* </label> */}
+                      {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
+                    </div>
+                    {/* <TextField
                     placeholder="Digite o nome da pessoa que irá receber o bolinho"
                     nameField="NameDelivery"
                   /> */}
-                  <div>
-                    {/* <label> */}
-                    <input
-                      type="text"
-                      id="POST-name"
-                      // defaultValue=""
-                      // name={props.nameField}
-                      // name="nameInOrder"
-                      {...register("deliveryName")}
-                      placeholder="Digite o nome da pessoa que irá receber o bolinho"
-                      // autoFocus
-                      className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                    <div>
+                      {/* <label> */}
+                      <input
+                        type="text"
+                        id="POST-name"
+                        // defaultValue=""
+                        // name={props.nameField}
+                        // name="nameInOrder"
+                        {...register("deliveryName")}
+                        placeholder="Digite o nome da pessoa que irá receber o bolinho"
+                        // autoFocus
+                        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
-                    />
-                    {/* </label> */}
-                    {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
-                  </div>
-                  {/* <CelField placeholder="Digite o número de quem irá receber o bolinho" /> */}
+                      />
+                      {/* </label> */}
+                      {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
+                    </div>
+                    {/* <CelField placeholder="Digite o número de quem irá receber o bolinho" /> */}
 
-                  <div>
-                    {/* <label> */}
-                    <input
-                      type="text"
-                      id="POST-name"
-                      // defaultValue=""
-                      // name={props.nameField}
-                      // name="nameInOrder"
-                      {...register("deliveryPhone")}
-                      placeholder="Digite o número de quem irá receber o bolinho"
-                      // autoFocus
-                      className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                    <div>
+                      {/* <label> */}
+                      <input
+                        type="text"
+                        id="POST-name"
+                        // defaultValue=""
+                        // name={props.nameField}
+                        // name="nameInOrder"
+                        {...register("deliveryPhone")}
+                        placeholder="Digite o número de quem irá receber o bolinho"
+                        // autoFocus
+                        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
-                    />
-                    {/* </label> */}
-                    {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
+                      />
+                      {/* </label> */}
+                      {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
+                    </div>
                   </div>
-                </GroupLabels>
+                </div>
               )}
             </GroupLabels>
             <GroupLabels>
@@ -863,7 +873,7 @@ export function Form() {
                 </li>
               </GroupOptions>
             </GroupLabels>
-            <GroupLabels>
+            <div className="bg-baseCard border border-grupButtonsBorder p-2 rounded-lg mt-2 xl:flex-col ">
               {/* <Checkbox
                 content="Estou ciente que o pedido será concluido via WhatsApp"
                 nameField="awareOfWhatsApp"
@@ -911,7 +921,7 @@ export function Form() {
                   {errors.termsAccepted?.message}
                 </p>
               </div>
-            </GroupLabels>
+            </div>
 
             {/* <Buttom /> */}
             <input
