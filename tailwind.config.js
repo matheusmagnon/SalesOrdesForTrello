@@ -20,6 +20,7 @@ module.exports = {
         baseInputsBackground: "#F3F2F2",
         baseCard: "#F3F2F2",
         grupButtonsBorder: "#D7D5D5",
+        baseBackground: "#FAFAFA",
       },
       backgroundImage: {
         backgroundPage: "url('./src/_assets/images/Pattern.png')",

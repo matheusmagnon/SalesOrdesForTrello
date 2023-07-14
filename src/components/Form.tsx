@@ -13,6 +13,7 @@ import createBodyCard from "../services/createBodyCard";
 import getId from "../services/getId";
 
 import menuBento from "../_assets/images/menuBento.png";
+import logo from "../_assets/images/logo.png";
 
 import * as constants from "../constants/constants";
 
@@ -122,17 +123,19 @@ export function Form() {
 
   return (
     <OrderContext.Provider value={{ order }}>
+      <header className="w-11 xl:w-20">
+        <img src={logo} />
+      </header>
       <FormBackground>
         <FormContainer>
           <FormTitle> Pedido de BENTÔ CAKE (bolinho de 350g)</FormTitle>
-          {/* {obj} */}
-          <div className="">
-            <img
-              className="flex w-full rounded-lg"
-              src={menuBento}
-              alt="Cardápio - Bentô Cake"
-            ></img>
-          </div>
+
+          <img
+            className="flex w-full rounded-lg"
+            src={menuBento}
+            alt="Cardápio - Bentô Cake"
+          ></img>
+
           <form
             onSubmit={handleSubmit(submitOrder)}
             encType="multipart/form-data"
@@ -140,24 +143,21 @@ export function Form() {
             data-netlify="true"
           >
             <div className="bg-baseCard border border-grupButtonsBorder p-2 mt-2 rounded-lg xl:flex xl:flex-col xl:items-center">
-              {/* <GroupLabels> */}
-              <div>
-                <h1 className="font-bold text-baseText text-xl">
-                  Informações - Bentô Cake
-                </h1>
-                <ul className="xl:flex xl:flex-wrap">
-                  <li className="xl:pr-4"> • cobertura de buttercream</li>
-                  <li className="xl:pr-4">
-                    • acompanha talher de madeira e embalagem biodegradáveis
-                  </li>
-                  <li className="xl:pr-4"> • 1 camada de recheio</li>
-                  <li className="xl:pr-4"> • 2 camadas de massa</li>
-                  <li className="xl:pr-4"> • 10 cm de diâmetro</li>
-                  <li className="xl:pr-4"> • serve 2 fatias</li>
-                </ul>
-              </div>
-              {/* </GroupLabels> */}
-              {/* 
+              <h1 className="font-bold text-baseText text-xl">
+                Informações - Bentô Cake
+              </h1>
+              <ul className="xl:flex xl:flex-wrap">
+                <li className="xl:pr-4"> • cobertura de buttercream</li>
+                <li className="xl:pr-4">
+                  • acompanha talher de madeira e embalagem biodegradáveis
+                </li>
+                <li className="xl:pr-4"> • 1 camada de recheio</li>
+                <li className="xl:pr-4"> • 2 camadas de massa</li>
+                <li className="xl:pr-4"> • 10 cm de diâmetro</li>
+                <li className="xl:pr-4"> • serve 2 fatias</li>
+              </ul>
+            </div>
+            {/* 
               <GroupLabels>
                 <h1 className="font-bold text-baseText text-xl">COBERTURA</h1>
                 <p>
@@ -165,14 +165,14 @@ export function Form() {
                   exclusivamente com a cobertura buttercream de merengue suíco
                 </p>
               </GroupLabels> */}
-            </div>
+            {/* </div> */}
             <GroupLabels>
               <span className="font-bold text-baseText text-xl">
                 Selecione o sabor do seu bolo:
               </span>
               <br />
               <GroupOptions>
-                <li>
+                <div>
                   <input
                     type="radio"
                     // name={props.nameField}
@@ -191,7 +191,6 @@ export function Form() {
                     htmlFor="CHOCOLATUDO"
                   >
                     <div>
-                      <div>{/* <Bank size={20} /> */}</div>
                       <div className="flex-col items-center justify-center">
                         <h3 className="text-xl font-bold text-baseInput text-center">
                           CHOCOLATUDO
@@ -203,7 +202,7 @@ export function Form() {
                       </div>
                     </div>
                   </label>
-                </li>
+                </div>
 
                 {/* <Options
                   nameField="flavorInOrder"
@@ -211,7 +210,7 @@ export function Form() {
                   optionDescribe="massa amanteigada de cacau, recheio de brigadeiro gourmet de chocolate meio amargo"
                 /> */}
 
-                <li>
+                <div>
                   <input
                     type="radio"
                     // name={props.nameField}
@@ -244,7 +243,7 @@ export function Form() {
                     </div>
                   </label>
                   {/* <p className={styles.errorMessage}>{errors.flavorInOrder?.message}</p> */}
-                </li>
+                </div>
 
                 {/* <Options
                   nameField="flavorInOrder"
@@ -252,7 +251,7 @@ export function Form() {
                   optionDescribe="  massa fofinha e aveludada de tom vermelho, saborizada com baunilha + cacau e recheio de cream cheese frosting"
                 /> */}
 
-                <li>
+                <div>
                   <input
                     type="radio"
                     // name={props.nameField}
@@ -284,7 +283,7 @@ export function Form() {
                     </div>
                   </label>
                   {/* <p className={styles.errorMessage}>{errors.flavorInOrder?.message}</p> */}
-                </li>
+                </div>
                 {/* <Options
                   nameField="flavorInOrder"
                   option="LEITE NINHO"
@@ -314,7 +313,7 @@ export function Form() {
                   placeholder="Digite a cor base do seu bolo"
                   {...register("cakeColor")}
                   // autoFocus
-                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                  className="bg-baseInput  border border-baseButton  text-baseText  placeholder-baseLabel text-base xl:text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
                 />
                 {/* </label> */}
@@ -339,10 +338,10 @@ export function Form() {
                   // name={props.nameField}
                   // name="nameInOrder"
                   //   {...register("nameInOrder")}
-                  placeholder="Digite a frase do bolo (máximo 35 caracteres)"
+                  placeholder="Digite a frase do bolo (máx. 35 caracteres)"
                   {...register("phraseOnTheCake")}
                   // autoFocus
-                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2 "
                 />
                 {/* </label> */}
@@ -372,7 +371,7 @@ export function Form() {
                   placeholder="Digite a cor da frase"
                   {...register("cakePhraseColor")}
                   // autoFocus
-                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
                 />
                 <p className="text-red-500 text-sm">
@@ -404,6 +403,23 @@ export function Form() {
                   {...register("drawingOnTheCake")}
                   // autoFocus
                   className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                />
+                {/* </label> */}
+              </div>
+              <div className="w-full">
+                {/* <label> */}
+                <input
+                  type="text"
+                  id="POST-name"
+                  // defaultValue=""
+                  // name={props.nameField}
+                  // name="nameInOrder"
+                  //   {...register("nameInOrder")}
+                  placeholder="Caso haja alguma observação descreva"
+                  {...register("orderObservation")}
+                  // autoFocus
+                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
                 />
                 {/* </label> */}
@@ -580,7 +596,7 @@ export function Form() {
               <div className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg p-2 flex-col">
                 <div>
                   <strong className="text-xl">
-                    Selecione a data e horário da Retirada:
+                    Selecione a data e horário da {isWithdrawal}:
                   </strong>
                   {/* {isWithdrawal} */}
                 </div>
@@ -603,24 +619,6 @@ export function Form() {
                 <p className="text-red-500 ltext-sm">
                   {erroIsWithdrawalOrDelivery()}
                 </p>
-              </div>
-
-              <div className="w-full">
-                {/* <label> */}
-                <input
-                  type="text"
-                  id="POST-name"
-                  // defaultValue=""
-                  // name={props.nameField}
-                  // name="nameInOrder"
-                  //   {...register("nameInOrder")}
-                  placeholder="Caso haja alguma observação descreva"
-                  {...register("orderObservation")}
-                  // autoFocus
-                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
-                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
-                />
-                {/* </label> */}
               </div>
             </GroupLabels>
 
@@ -645,7 +643,7 @@ export function Form() {
                     placeholder="Digite seu nome completo"
                     {...register("nameInOrder")}
                     // autoFocus
-                    className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                    className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
                   />
                   {/* </label> */}
@@ -664,7 +662,7 @@ export function Form() {
                     // name="celInOrder"
                     {...register("celInOrder")}
                     placeholder="Digte seu número de celular(WhatsApp)"
-                    className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                    className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
                 focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
                   />
                   {/* </label> */}
@@ -696,7 +694,7 @@ export function Form() {
                         {...register("deliveryAdress")}
                         placeholder="Digite o endereço para entrega"
                         // autoFocus
-                        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
                       />
                       {/* </label> */}
@@ -715,7 +713,7 @@ export function Form() {
                         // name={props.nameField}
                         // name="nameInOrder"
                         {...register("deliveryName")}
-                        placeholder="Digite o nome da pessoa que irá receber o bolinho"
+                        placeholder="Digite o nome da pessoa que irá receber o bentô"
                         // autoFocus
                         className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
                    focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
@@ -760,7 +758,7 @@ export function Form() {
                   option="PIX"
                   // icon="iconPix"
                 /> */}
-                <li>
+                <div>
                   <input
                     type="radio"
                     // name="PIX"
@@ -791,14 +789,14 @@ export function Form() {
                     </div>
                   </label>
                   {/* <p className={styles.errorMessage}>{errors.flavorInOrder?.message}</p> */}
-                </li>
+                </div>
                 {/* <Options
                   nameField="formOfPaymentInOrder"
                   option="Cartão de Crédito"
                   optionDescribe="(+ taxa de 5%)"
                   // icon="iconCredt"
                 /> */}
-                <li>
+                <div>
                   <input
                     type="radio"
                     // name="PIX"
@@ -820,16 +818,16 @@ export function Form() {
                       <div>{/* <Bank size={20} /> */}</div>
                       <div className="flex-col items-center justify-center">
                         <h3 className="text-xl font-bold text-baseInput text-center">
-                          Cartão de Crédito
+                          Cartão de Crédito (por link)
                         </h3>
                         <p className="text-baseInput text-center">
-                          (+ taxa de 5%)
+                          (+ taxa de 5% )
                         </p>
                       </div>
                     </div>
                   </label>
                   {/* <p className={styles.errorMessage}>{errors.flavorInOrder?.message}</p> */}
-                </li>
+                </div>
                 {/* <Options
                   nameField="formOfPaymentInOrder"
                   option="TRANSFERÊNCIA BANCÁRIA"
@@ -837,7 +835,7 @@ export function Form() {
                   // icon="iconTranf"
                 /> */}
 
-                <li>
+                <div>
                   <input
                     type="radio"
                     // name="PIX"
@@ -859,7 +857,7 @@ export function Form() {
                       <div>{/* <Bank size={20} /> */}</div>
                       <div className="flex-col items-center justify-center">
                         <h3 className="text-xl font-bold text-baseInput text-center">
-                          TRANSFERÊNCIA BANCÁRIA
+                          Transferência Bancária
                         </h3>
                         <p className="text-baseInput text-center">
                           (BB e Caixa)
@@ -870,7 +868,7 @@ export function Form() {
                   <p className="text-red-500 text-sm pt-1">
                     {errors.formOfPaymentInOrder?.message}
                   </p>
-                </li>
+                </div>
               </GroupOptions>
             </GroupLabels>
             <div className="bg-baseCard border border-grupButtonsBorder p-2 rounded-lg mt-2 xl:flex-col ">
@@ -928,13 +926,14 @@ export function Form() {
               // onClick={(e) => {
               //   console.log(e);
               // }}
-              className="bg-fuchsia-950 rounded-md px-2 py-1 mt-2 text-white cursor-pointer"
+              className="bg-fuchsia-950 rounded-md px-2 py-1 mt-2 text-xl text-white cursor-pointer"
               // className={styles.buttomSendOrder}
               type="submit"
               value="Enviar Pedido pelo WhatsApp"
             />
           </form>
           {/* </div> */}
+          <footer className="bg-red-300 h-8 mt-4"></footer>
         </FormContainer>
       </FormBackground>
     </OrderContext.Provider>

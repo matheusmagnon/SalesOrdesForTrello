@@ -10,9 +10,9 @@ export function GroupOptions(props: PropsGruopOptions) {
       {props.children}
     </ul>
   ) : (
-    <ul className="flex-col self-center space-y-2 xl:flex xl:flex-row xl:space-x-10 items-baseline ">
+    <div className="flex-col self-center space-y-2 xl:flex xl:flex-row xl:space-x-8 items-baseline ">
       {props.children}
-    </ul>
+    </div>
   );
 }
 

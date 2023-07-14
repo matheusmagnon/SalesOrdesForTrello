@@ -11,7 +11,8 @@ export function FormBackground(props: PropsFormBackground) {
       {props.children}
     </div>
   ) : (
-    <div className="bg-backgroundPage p-3 md:p-5 w-full h-full flex justify-center">
+    <div className="bg-baseBackground  w-full h-full flex justify-center">
+      {/* bg-backgroundPage */}
       {props.children}
     </div>
   );
