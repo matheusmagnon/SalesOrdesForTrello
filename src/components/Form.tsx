@@ -128,7 +128,10 @@ export function Form() {
       </header>
       <FormBackground>
         <FormContainer>
-          <FormTitle> Pedido de BENTÔ CAKE (bolinho de 350g)</FormTitle>
+          <FormTitle>
+            {" "}
+            Faça seu orçamento de BENTÔ CAKE (bolinho de 350g)
+          </FormTitle>
 
           <img
             className="flex w-full rounded-lg"
@@ -933,9 +936,130 @@ export function Form() {
             />
           </form>
           {/* </div> */}
-          <footer className="bg-red-300 h-8 mt-4"></footer>
         </FormContainer>
       </FormBackground>
+      <footer className="">
+        <div className="w-full flex-col xl:px-56">
+          <div className="flex flex-row justify-between">
+            <div>
+              <h3 className="font-dmSans text-2xl text-footerTitle font-bold">
+                Produtos
+              </h3>
+              <ul>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Bolos Grandes
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Petit
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Bentô Cake
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Brigadeiros
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-dmSans text-2xl text-footerTitle font-bold">
+                Sobre nós
+              </h3>
+              <ul>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    História da Confeitaria
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Quem é Yanna Góis
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Cases de sucesso
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-dmSans text-2xl text-footerTitle font-bold">
+                Consultoria empresarial
+              </h3>
+              <ul>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Gerenciamento de atendimento
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Petit
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Desenho e automação de processos
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <a
+                    href="#"
+                    className="font-dmSans text-base text-footerOptions"
+                  >
+                    Food Marketing
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-dmSans text-2xl text-footerTitle font-bold">
+                Redes socias
+              </h3>
+              <div></div>
+            </div>
+          </div>
+          <div className="bg-yellow-400 h-20"></div>
+        </div>
+      </footer>
     </OrderContext.Provider>
   );
 }

@@ -3,6 +3,11 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+        dmSans: ["DM Sans", "sans-serif"],
+        // 'roboto': ['Roboto', 'sans-serif'],
+      },
       boxShadow: {
         container: "inset 0 0 0.8rem black, 0 0 2rem black",
         smContainer: "inset 0 0 0.5rem black, 0 0 0.5rem black",
@@ -21,6 +26,8 @@ module.exports = {
         baseCard: "#F3F2F2",
         grupButtonsBorder: "#D7D5D5",
         baseBackground: "#FAFAFA",
+        footerTitle: "#4B2995",
+        footerOptions: "#574F4D",
       },
       backgroundImage: {
         backgroundPage: "url('./src/_assets/images/Pattern.png')",
