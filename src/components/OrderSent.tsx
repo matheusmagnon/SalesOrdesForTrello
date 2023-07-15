@@ -5,7 +5,7 @@ import styles from "./OrderSent.module.css";
 import { ContainerForm } from "./styled";
 import { Main } from "./styled";
 
-import { Target, WhatsappLogo } from "phosphor-react";
+// import { Target, WhatsappLogo } from "phosphor-react";
 
 import Form from "./Form";
 import { FormBackground } from "./Form/FormBackground";
@@ -37,19 +37,19 @@ function OrderSent({ resume }: any) {
               }}
             />
 
-            <button
-              className=" flex items-center gap-5  bg-green-700 rounded-md w-full px-4 py-1 mt-2 text-white cursor-pointer"
-              onClick={() => {
-                window.open(
-                  `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, passando para avisar que fiz um pedido:%0A${resume}`,
-                  "_blank"
-                );
-              }}
-              type="button"
-            >
-              <WhatsappLogo size={30} className="" />
-              Sinalizar envio do pedido
-            </button>
+            {/* <button */}
+            {/* // className=" flex items-center gap-5  bg-green-700 rounded-md w-full px-4 py-1 mt-2 text-white cursor-pointer" */}
+            {/* // onClick={() => { */}
+            {/* // window.open( */}
+            {/* // `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, passando para avisar que fiz um pedido:%0A${resume}`, */}
+            {/* // "_blank" */}
+            {/* // ); */}
+            {/* // }} */}
+            {/* // type="button" */}
+            {/* // > */}
+            {/* <WhatsappLogo size={30} className="" /> */}
+            {/* Sinalizar envio do pedido */}
+            {/* </button> */}
           </div>
         </div>
       </FormContainer>

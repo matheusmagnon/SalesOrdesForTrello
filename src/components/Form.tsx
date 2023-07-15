@@ -37,6 +37,7 @@ import { Checkbox } from "./Form/Fields/Checkbox";
 import { Buttom } from "./Form/Buttom";
 
 import SalesOrderContext from "../context/SalesOrderContext";
+import { Footer } from "./Footer";
 
 type Images = {
   name: string;
@@ -109,8 +110,12 @@ export function Form() {
     }
     CreateCard().then(() => {
       let resumeOrder = createBodyCard(dataOrder).descWhatsApp;
+
       let url = `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`;
-      window.open(url, "_blank");
+      // window.open(url, "_blank");
+
+      window.location.assign(url);
+
       setIsSalesOrderIsCompleted(true);
     });
   };
@@ -854,7 +859,7 @@ export function Form() {
                   <label
                     className="inline-flex w-full flex-col p-2 bg-fuchsia-950 cursor-pointer rounded-xl drop-shadow-lg
         peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-900"
-                    htmlFor="Cartão de Crédito"
+                    htmlFor="TRANSFERÊNCIA BANCÁRIA"
                   >
                     <div>
                       <div>{/* <Bank size={20} /> */}</div>
@@ -929,137 +934,16 @@ export function Form() {
               // onClick={(e) => {
               //   console.log(e);
               // }}
-              className="bg-fuchsia-950 rounded-md px-2 py-1 mt-2 text-xl text-white cursor-pointer"
+              className="bg-fuchsia-950 rounded-md px-4 py-1 mt-3 text-xl text-white cursor-pointer"
               // className={styles.buttomSendOrder}
               type="submit"
-              value="Enviar Pedido pelo WhatsApp"
+              value="Enviar informações pelo WhatsApp"
             />
           </form>
           {/* </div> */}
         </FormContainer>
       </FormBackground>
-      <footer className="">
-        <div className="w-full flex-col xl:px-56">
-          <div className="flex flex-row justify-between">
-            <div>
-              <h3 className="font-dmSans text-2xl text-footerTitle font-bold">
-                Produtos
-              </h3>
-              <ul>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Bolos Grandes
-                  </a>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Petit
-                  </a>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Bentô Cake
-                  </a>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Brigadeiros
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-dmSans text-2xl text-footerTitle font-bold">
-                Sobre nós
-              </h3>
-              <ul>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    História da Confeitaria
-                  </a>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Quem é Yanna Góis
-                  </a>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Cases de sucesso
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-dmSans text-2xl text-footerTitle font-bold">
-                Consultoria empresarial
-              </h3>
-              <ul>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Gerenciamento de atendimento
-                  </a>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Petit
-                  </a>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Desenho e automação de processos
-                  </a>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="#"
-                    className="font-dmSans text-base text-footerOptions"
-                  >
-                    Food Marketing
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-dmSans text-2xl text-footerTitle font-bold">
-                Redes socias
-              </h3>
-              <div></div>
-            </div>
-          </div>
-          <div className="bg-yellow-400 h-20"></div>
-        </div>
-      </footer>
+      <Footer />
     </OrderContext.Provider>
   );
 }
