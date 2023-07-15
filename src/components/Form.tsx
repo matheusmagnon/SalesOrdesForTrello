@@ -37,7 +37,7 @@ import { Checkbox } from "./Form/Fields/Checkbox";
 import { Buttom } from "./Form/Buttom";
 
 import SalesOrderContext from "../context/SalesOrderContext";
-import { Footer } from "./Footer";
+import { Footer } from "./Footer/Footer";
 
 type Images = {
   name: string;
@@ -133,10 +133,7 @@ export function Form() {
       </header>
       <FormBackground>
         <FormContainer>
-          <FormTitle>
-            {" "}
-            Faça seu orçamento de BENTÔ CAKE (bolinho de 350g)
-          </FormTitle>
+          <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
 
           <img
             className="flex w-full rounded-lg"
@@ -930,15 +927,8 @@ export function Form() {
             </div>
 
             {/* <Buttom /> */}
-            <input
-              // onClick={(e) => {
-              //   console.log(e);
-              // }}
-              className="bg-fuchsia-950 rounded-md px-4 py-1 mt-3 text-xl text-white cursor-pointer"
-              // className={styles.buttomSendOrder}
-              type="submit"
-              value="Enviar informações pelo WhatsApp"
-            />
+
+            <Buttom content="Enviar informações pelo WhatsApp" />
           </form>
           {/* </div> */}
         </FormContainer>
