@@ -38,6 +38,7 @@ import { Buttom } from "./Form/Buttom";
 
 import SalesOrderContext from "../context/SalesOrderContext";
 import { Footer } from "./Footer/Footer";
+import { About } from "./Form/Fields/About/About";
 
 type Images = {
   name: string;
@@ -134,7 +135,6 @@ export function Form() {
       <FormBackground>
         <FormContainer>
           <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
-
           <img
             className="flex w-full rounded-lg"
             src={menuBento}
@@ -147,21 +147,7 @@ export function Form() {
             name="PedidosBento"
             data-netlify="true"
           >
-            <div className="bg-baseCard border border-grupButtonsBorder p-2 mt-2 rounded-lg xl:flex xl:flex-col xl:items-center">
-              <h1 className="font-bold text-baseText text-xl">
-                Informações - Bentô Cake
-              </h1>
-              <ul className="xl:flex xl:flex-wrap">
-                <li className="xl:pr-4"> • cobertura de buttercream</li>
-                <li className="xl:pr-4">
-                  • acompanha talher de madeira e embalagem biodegradáveis
-                </li>
-                <li className="xl:pr-4"> • 1 camada de recheio</li>
-                <li className="xl:pr-4"> • 2 camadas de massa</li>
-                <li className="xl:pr-4"> • 10 cm de diâmetro</li>
-                <li className="xl:pr-4"> • serve 2 fatias</li>
-              </ul>
-            </div>
+            <About title="Informações - Bentô Cake" />
             {/* 
               <GroupLabels>
                 <h1 className="font-bold text-baseText text-xl">COBERTURA</h1>
