@@ -2,7 +2,7 @@
 
 ## Capa
 
-<img src="./Capa.JPG" /> <br/> <br/>
+<img src="./Cover.JPG" /> <br/> <br/>
 
 ## Design da aplicação
 
