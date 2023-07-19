@@ -19,6 +19,8 @@ export default function Body({
   candleInOrder,
   flavorInOrder,
   deliveryAdress,
+  deliveryName,
+  deliveryPhone,
 }: DataOrder) {
   const dueDate = moment(dateTimeInOrder).format("DD/MM HH:mm");
 
@@ -42,8 +44,6 @@ export default function Body({
 -----------------------------------
 *Observação:* ${orderObservation}
 -----------------------------------
-*Endereço para entrega:* ${deliveryAdress}
------------------------------------
 *Cor da Frase:* ${cakePhraseColor}
 -----------------------------------
 *Cor do bolo:* ${cakeColor}
@@ -55,6 +55,12 @@ export default function Body({
 *Data e Horário de ${isWithdrawal}: ${dueDate}*
 -----------------------------------
 *Aceita vela:* ${candleInOrder}
+-----------------------------------
+*Endereço para entrega:* ${deliveryAdress}
+-----------------------------------
+*Nome de quem irá receber:* ${deliveryName}
+-----------------------------------
+*Telefone de quem irá receber:* ${deliveryPhone}
 -----------------------------------
 `,
     descWhatsApp: `*RESUMO DO PEDIDO*

@@ -13,6 +13,8 @@ export type DataOrder = {
   filesInOrder: [];
   dateTimeInOrder: string;
   deliveryAdress: string;
+  deliveryName: string;
+  deliveryPhone: string;
   termsAccepted: boolean;
   awareOfWhatsApp: boolean;
 };
@@ -20,3 +22,7 @@ export type DataOrder = {
 export type PropsState = {
   state?: boolean;
 };
+
+export interface PropsType {
+  children?: React.ReactNode;
+}

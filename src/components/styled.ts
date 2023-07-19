@@ -26,7 +26,7 @@ export const Main = styled.div`
   }
 `;
 
-export const ContainerForm = styled.div`
+export const ContainerForm = styled.main`
   display: flex;
   flex-direction: column;
   border-radius: 45px;

@@ -13,17 +13,33 @@ import createBodyCard from "../services/createBodyCard";
 import getId from "../services/getId";
 
 import menuBento from "../_assets/images/menuBento.png";
+import logo from "../_assets/images/logo.png";
 
 import * as constants from "../constants/constants";
 
+import { FormTitle } from "./Form/FormTitle";
 import OrderSent from "./OrderSent";
-
 import PreviewImageUpload from "./PreviewImageUpload";
 
 import styles from "./Form.module.css";
 
-import { ContainerForm } from "./styled";
-import { Main } from "./styled";
+import { FormContainer } from "./Form/FormContainer";
+import { FormBackground } from "./Form/FormBackground";
+// import { TextField } from "./Form/Fields/Text";
+import { CelField } from "./Form/Fields/Cel";
+import { GroupLabels } from "./Form/GroupLabels";
+import { UploadImages } from "./Form/Fields/UploadImages";
+import { Options } from "./Form/Fields/Options";
+import { DateField } from "./Form/Fields/Date";
+import { SimpleOption } from "./Form/Fields/SimpleOption";
+import { GroupOptions } from "./Form/GroupOptions";
+import { Checkbox } from "./Form/Fields/Checkbox";
+import { Buttom } from "./Form/Buttom";
+
+import SalesOrderContext from "../context/SalesOrderContext";
+import { Footer } from "./Footer/Footer";
+import { About } from "./Form/Fields/About/About";
+import { Modal } from "./Modal";
 
 type Images = {
   name: string;
@@ -96,8 +112,12 @@ export function Form() {
     }
     CreateCard().then(() => {
       let resumeOrder = createBodyCard(dataOrder).descWhatsApp;
+
       let url = `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`;
-      window.open(url, "_blank");
+      // window.open(url, "_blank");
+
+      window.location.assign(url);
+
       setIsSalesOrderIsCompleted(true);
     });
   };
@@ -106,386 +126,802 @@ export function Form() {
     return <OrderSent resume={resumeOrderState} />;
   }
 
+  const { obj } = useContext(SalesOrderContext);
+
   return (
     <OrderContext.Provider value={{ order }}>
-      <Main>
-        <ContainerForm>
-          <h1>
-            Pedido de BENTÔ CAKE <br /> (bolinho de 350g)
-          </h1>
-          <div className={styles.formBody}>
-            <div className={styles.menuBento}>
-              <img src={menuBento} alt="Cardápio - Bentô Cake"></img>
-            </div>
-            <form
-              onSubmit={handleSubmit(submitOrder)}
-              encType="multipart/form-data"
-              name="PedidosBento"
-              data-netlify="true"
-            >
-              <div className={styles.fieldFullName}>
-                <label>
-                  <strong>Nome Completo:</strong>
-                  <input
-                    type="text"
-                    id="POST-name"
-                    // name="nameInOrder"
-                    {...register("nameInOrder")}
-                    placeholder="Informe seu nome completo"
-                    autoFocus
-                    className={styles.inputFieldText}
-                  />
-                </label>
-                <p className={styles.errorMessage}>
-                  {errors.nameInOrder?.message}
+      <header className="w-11 xl:w-20">
+        <img src={logo} />
+      </header>
+      <FormBackground>
+        <FormContainer>
+          <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
+          <Modal />
+          <img
+            className="flex w-full rounded-lg"
+            src={menuBento}
+            alt="Cardápio - Bentô Cake"
+          ></img>
+
+          <form
+            onSubmit={handleSubmit(submitOrder)}
+            encType="multipart/form-data"
+            name="PedidosBento"
+            data-netlify="true"
+          >
+            <About title="Informações - Bentô Cake" />
+            {/* 
+              <GroupLabels>
+                <h1 className="font-bold text-baseText text-xl">COBERTURA</h1>
+                <p>
+                  pensando na qualidade e experiência gustativa, trabalhamos
+                  exclusivamente com a cobertura buttercream de merengue suíco
                 </p>
-              </div>
-              <div className={styles.fieldCel}>
-                <label>
-                  <strong>Número de celular(WhatsApp):</strong>
-                </label>
+              </GroupLabels> */}
+            {/* </div> */}
+            <GroupLabels>
+              <span className="font-bold text-baseText text-xl">
+                Selecione o sabor do seu bolo:
+              </span>
+              <br />
+              <GroupOptions>
+                <div>
+                  <input
+                    type="radio"
+                    // name={props.nameField}
+                    defaultValue="CHOCOLATUDO"
+                    className="hidden peer"
+                    id="CHOCOLATUDO"
+                    // className="hidden"
+                    // id={props.option}
+                    // value={props.option}
+                    // type="radio"
+                    {...register("flavorInOrder")}
+                  />
+                  <label
+                    className="inline-flex w-full flex-col p-1 bg-fuchsia-950 cursor-pointer rounded-xl drop-shadow-lg
+        peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-900"
+                    htmlFor="CHOCOLATUDO"
+                  >
+                    <div>
+                      <div className="flex-col items-center justify-center">
+                        <h3 className="text-xl font-bold text-baseInput text-center">
+                          CHOCOLATUDO
+                        </h3>
+                        <p className="text-baseInput text-center">
+                          massa amanteigada de cacau, recheio de brigadeiro
+                          gourmet de chocolate meio amargo
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                {/* <Options
+                  nameField="flavorInOrder"
+                  option="CHOCOLATUDO"
+                  optionDescribe="massa amanteigada de cacau, recheio de brigadeiro gourmet de chocolate meio amargo"
+                /> */}
+
+                <div>
+                  <input
+                    type="radio"
+                    // name={props.nameField}
+                    defaultValue="RED VELVET"
+                    className="hidden peer"
+                    id="RED VELVET"
+                    // className="hidden"
+                    // id={props.option}
+                    // value={props.option}
+                    // type="radio"
+                    {...register("flavorInOrder")}
+                  />
+                  <label
+                    className="inline-flex w-full flex-col p-1 bg-fuchsia-950 cursor-pointer rounded-xl drop-shadow-lg
+        peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-900"
+                    htmlFor="RED VELVET"
+                  >
+                    <div>
+                      <div>{/* <Bank size={20} /> */}</div>
+                      <div className="flex-col items-center justify-center">
+                        <h3 className="text-xl font-bold text-baseInput text-center">
+                          RED VELVET
+                        </h3>
+                        <p className="text-baseInput text-center">
+                          massa fofinha e aveludada de tom vermelho, saborizada
+                          com baunilha + cacau e recheio de cream cheese
+                          frosting
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                  {/* <p className={styles.errorMessage}>{errors.flavorInOrder?.message}</p> */}
+                </div>
+
+                {/* <Options
+                  nameField="flavorInOrder"
+                  option="RED VELVET"
+                  optionDescribe="  massa fofinha e aveludada de tom vermelho, saborizada com baunilha + cacau e recheio de cream cheese frosting"
+                /> */}
+
+                <div>
+                  <input
+                    type="radio"
+                    // name={props.nameField}
+                    defaultValue="LEITE NINHO"
+                    className="hidden peer"
+                    id="LEITE NINHO"
+                    // className="hidden"
+                    // id={props.option}
+                    // value={props.option}
+                    // type="radio"
+                    {...register("flavorInOrder")}
+                  />
+                  <label
+                    className="inline-flex w-full flex-col p-1 bg-fuchsia-950 cursor-pointer rounded-xl drop-shadow-lg
+        peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-900"
+                    htmlFor="LEITE NINHO"
+                  >
+                    <div>
+                      <div>{/* <Bank size={20} /> */}</div>
+                      <div className="flex-col items-center justify-center">
+                        <h3 className="text-xl font-bold text-baseInput text-center">
+                          LEITE NINHO
+                        </h3>
+                        <p className="text-baseInput text-center">
+                          massa amanteigada de baunilha e recheio de brigadeiro
+                          cremoso de leite ninho
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                  {/* <p className={styles.errorMessage}>{errors.flavorInOrder?.message}</p> */}
+                </div>
+                {/* <Options
+                  nameField="flavorInOrder"
+                  option="LEITE NINHO"
+                  optionDescribe="massa amanteigada de baunilha e recheio de brigadeiro cremoso de leite ninho"
+                /> */}
+              </GroupOptions>
+              <p className="text-red-500 text-sm">
+                {errors.flavorInOrder?.message}
+              </p>
+            </GroupLabels>
+
+            <GroupLabels>
+              {/* <TextField
+                nameField="cakeColor"
+                placeholder="Digite a cor base do seu bolo"
+                {...register("cakeColor")}
+              /> */}
+              <div className="xl:w-48">
+                {/* <label> */}
                 <input
-                  type="tel"
-                  id="POST-celular"
-                  // name="celInOrder"
-                  {...register("celInOrder")}
-                  placeholder="Informe seu WhatsApp"
-                  className={styles.inputFieldText}
+                  type="text"
+                  id="POST-name"
+                  // defaultValue=""
+                  // name={props.nameField}
+                  // name="nameInOrder"
+                  //   {...register("nameInOrder")}
+                  placeholder="Digite a cor base do seu bolo"
+                  {...register("cakeColor")}
+                  // autoFocus
+                  className="bg-baseInput  border border-baseButton  text-baseText  placeholder-baseLabel text-base xl:text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
                 />
-                <p className={styles.errorMessage}>
-                  {errors.celInOrder?.message}
+                {/* </label> */}
+                <p className="text-red-500 text-sm">
+                  {errors.cakeColor?.message}
                 </p>
+                {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
               </div>
-              <div className={styles.fieldPhrase}>
-                <label>
-                  <strong>
-                    Frase no bolinho (máximo 35 caracteres com desenho):
-                  </strong>
-                  <input
-                    type="text"
-                    id="POST-celular"
-                    // name="phraseOnTheCake"
-                    {...register("phraseOnTheCake")}
-                    placeholder="Informe a frase que vai no bolinho"
-                    className={styles.inputFieldText}
-                  />
-                </label>
-                <p className={styles.errorMessage}>
+
+              {/* <TextField
+                nameField="phraseOnTheCake"
+                placeholder="Digite a frase do bolinho (máximo 35 caracteres)"
+                {...register("phraseOnTheCake")}
+              /> */}
+
+              <div className="xl:w-72">
+                {/* <label> */}
+                <input
+                  type="text"
+                  id="POST-name"
+                  // defaultValue=""
+                  // name={props.nameField}
+                  // name="nameInOrder"
+                  //   {...register("nameInOrder")}
+                  placeholder="Digite a frase do bolo (máx. 35 caracteres)"
+                  {...register("phraseOnTheCake")}
+                  // autoFocus
+                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2 "
+                />
+                {/* </label> */}
+                <p className="text-red-500 text-sm">
                   {errors.phraseOnTheCake?.message}
                 </p>
               </div>
-              <div className={styles.fieldColorPhrase}>
-                <label>
-                  <strong>Cor da Frase:</strong>
-                  <input
-                    type="text"
-                    // name="cakePhraseColor"
-                    {...register("cakePhraseColor")}
-                    placeholder="Informe a cor da frase"
-                    className={styles.inputFieldText}
-                  />
-                </label>
+              {/*              
+              <p className={styles.errorMessage}>
+                {errors.phraseOnTheCake?.message}
+              </p>  */}
 
-                <p className={styles.errorMessage}>
+              {/* <TextField
+                nameField="cakePhraseColor"
+                placeholder="Digite a cor da frase"
+                {...register("cakePhraseColor")}
+              /> */}
+              <div className="xl:w-36">
+                {/* <label> */}
+                <input
+                  type="text"
+                  id="POST-name"
+                  // defaultValue=""
+                  // name={props.nameField}
+                  // name="nameInOrder"
+                  //   {...register("nameInOrder")}
+                  placeholder="Digite a cor da frase"
+                  {...register("cakePhraseColor")}
+                  // autoFocus
+                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                />
+                <p className="text-red-500 text-sm">
                   {errors.cakePhraseColor?.message}
                 </p>
+                {/* </label> */}
               </div>
-              <div className={styles.fieldDrawingDescription}>
-                <label>
-                  <strong>Se houver desenho descreva abaixo:</strong>
+
+              {/* <p className={styles.errorMessage}>
+                {errors.cakePhraseColor?.message}
+              </p>  */}
+
+              {/* <TextField
+                nameField="drawingOnTheCake"
+                placeholder="Se houver desenho descreva"
+                {...register("drawingOnTheCake")}
+              /> */}
+
+              <div className="xl:w-64">
+                {/* <label> */}
+                <input
+                  type="text"
+                  id="POST-name"
+                  // defaultValue=""
+                  // name={props.nameField}
+                  // name="nameInOrder"
+                  //   {...register("nameInOrder")}
+                  placeholder="Se houver desenho descreva detalhadamente"
+                  {...register("drawingOnTheCake")}
+                  // autoFocus
+                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                />
+                {/* </label> */}
+              </div>
+              <div className="w-full">
+                {/* <label> */}
+                <input
+                  type="text"
+                  id="POST-name"
+                  // defaultValue=""
+                  // name={props.nameField}
+                  // name="nameInOrder"
+                  //   {...register("nameInOrder")}
+                  placeholder="Caso haja alguma observação descreva"
+                  {...register("orderObservation")}
+                  // autoFocus
+                  className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                />
+                {/* </label> */}
+              </div>
+
+              {/* <UploadImages /> */}
+              <div className="xl:w-36">
+                <label className="bg-fuchsia-950 p-2 text-white block rounded-xl cursor-pointer text-center duration-75">
+                  Caso haja alguma imagem de inspiração anexe aqui
                   <input
-                    type="text"
-                    id="POST-celular"
-                    // name="drawingOnTheCake"
-                    {...register("drawingOnTheCake")}
-                    placeholder="Desenho em cima do bolinho"
-                    className={styles.inputFieldText}
+                    className="hidden"
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    // name="filesInOrder"
+                    {...register("filesInOrder", {
+                      onChange: (e) => {
+                        getImagesToUpload(e);
+                      },
+                    })}
                   />
                 </label>
+                <div className="xl:w-96">
+                  <div className="w-full flex flex-wrap space-x-4">
+                    {images.map((image) => {
+                      return (
+                        <PreviewImageUpload
+                          key={uuidv4()}
+                          name={image.name}
+                          URLpreview={image.URLpreview}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
-              <div className={styles.fieldUpload}>
-                <div>
-                  <label className={styles.ButtomUploadFile}>
-                    Caso haja alguma imagem de inspiração anexe aqui:
+
+              {/* <TextField
+                nameField="orderObservation"
+                placeholder="Caso haja alguma observação descreva"
+                {...register("orderObservation")}
+              /> */}
+
+              <GroupLabels simple>
+                <h2 className="font-bold text-baseText text-xl">
+                  Precisa de Vela?
+                </h2>
+                <span className="text-sm">(sem custo adicional)</span>
+                <GroupOptions simple>
+                  {/* <SimpleOption
+                    option="Sim"
+                    {...register("candleInOrder")}
+                    nameField="candleInOrder"
+                  /> */}
+                  <li>
                     <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      // name="filesInOrder"
-                      {...register("filesInOrder", {
+                      type="radio"
+                      // name={props.nameField}
+                      defaultValue="Sim"
+                      className="hidden peer"
+                      id="Sim"
+                      {...register("candleInOrder")}
+                    />
+
+                    <label
+                      className="inline-flex items-center justify-between p-2 text-white bg-fuchsia-950 border-gray-200 rounded-xl 
+                      cursor-pointer peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-800"
+                      htmlFor="Sim"
+                    >
+                      {" "}
+                      Sim
+                    </label>
+                  </li>
+
+                  {/* <SimpleOption
+                    option="Não"
+                    {...register("candleInOrder")}
+                    nameField="candleInOrder"
+                  /> */}
+
+                  <li>
+                    <input
+                      type="radio"
+                      // name={props.nameField}
+                      defaultValue="Não"
+                      className="hidden peer"
+                      id="Não"
+                      {...register("candleInOrder")}
+                    />
+
+                    <label
+                      className="inline-flex items-center justify-between p-2 text-white bg-fuchsia-950 border-gray-200 rounded-xl 
+                      cursor-pointer peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-800"
+                      htmlFor="Não"
+                    >
+                      Não
+                    </label>
+                  </li>
+                </GroupOptions>
+                <p className="text-red-500 text-sm">
+                  {errors.candleInOrder?.message}
+                </p>
+              </GroupLabels>
+              <GroupLabels simple>
+                <h2 className="font-bold text-xl">Retirada ou Entrega?</h2>
+                <span className="text-sm">Consulte a taxa para entrega* </span>
+
+                <GroupOptions simple>
+                  <li>
+                    <input
+                      type="radio"
+                      // name={props.nameField}
+                      defaultValue="Entrega"
+                      className="hidden peer"
+                      id="Entrega"
+                      // onClick={handleOption}
+                      {...register("isWithdrawal", {
                         onChange: (e) => {
-                          getImagesToUpload(e);
+                          handleisWithdrawalChange(e);
                         },
                       })}
+                      // name="candleInOrder"
+                      // defaultValue={props.option}
+                      // onChange={(e) => {
+                      //   console.log(event?.target);
+                      // }}
                     />
-                  </label>
-                </div>
-                <div className={styles.previewImages}>
-                  {images.map((image) => {
-                    return (
-                      <PreviewImageUpload
-                        key={uuidv4()}
-                        name={image.name}
-                        URLpreview={image.URLpreview}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-              <div className={styles.fieldObservation}>
-                <label>
-                  <strong>Caso haja alguma observação escreva abaixo:</strong>
-                  <input
-                    type="text"
-                    id="POST-celular"
-                    // name="orderObservation"
-                    {...register("orderObservation")}
-                    placeholder="Informação adicional"
-                    className={styles.inputFieldText}
-                  />
-                </label>
-              </div>
-              <div className={styles.fieldCakeColor}>
-                <label>
-                  <strong>Cor do bolo (base):</strong>
-                  <input
-                    type="text"
-                    id="POST-corBase"
-                    // name="cakeColor"
-                    {...register("cakeColor")}
-                    placeholder="Cor do seu bolinho"
-                    className={styles.inputFieldText}
-                  />
-                  <p className={styles.errorMessage}>
-                    {errors.cakeColor?.message}
-                  </p>
-                </label>
-              </div>
-              <div className={styles.fieldFlavor}>
-                <strong>Selecione o sabor do seu bolo:</strong> <br />
-                <div className={styles.flavorOptions}>
-                  <input
-                    type="radio"
-                    id="chocolatudo"
-                    // name="flavorInOrder"
-                    value="CHOCOLATUDO"
-                    {...register("flavorInOrder")}
-                  />
-                  <label htmlFor="chocolatudo">
-                    <h3>CHOCOLATUDO</h3>
-                    <p>
-                      massa amanteigada de cacau, recheio de brigadeiro gourmet
-                      de chocolate meio amargo
-                    </p>
-                  </label>
-                  <input
-                    type="radio"
-                    id="redVelvet"
-                    // name="flavorInOrder"
-                    value="RED VELVET"
-                    {...register("flavorInOrder")}
-                  />
-                  <label htmlFor="redVelvet">
-                    <h3>RED VELVET</h3>
-                    <p>
-                      massa fofinha e aveludada de tom vermelho, saborizada com
-                      baunilha + cacau e recheio de cream cheese frosting
-                    </p>
-                  </label>
-                  <input
-                    type="radio"
-                    id="leiteNinho"
-                    // name="flavorInOrder"
-                    value="LEITE NINHO"
-                    {...register("flavorInOrder")}
-                  />
-                  <label htmlFor="leiteNinho">
-                    <h3>LEITE NINHO</h3>
-                    <p>
-                      massa amanteigada de baunilha e recheio de brigadeiro
-                      cremoso de leite ninho
-                    </p>
-                  </label>
-                </div>
-                <p className={styles.errorMessage}>
-                  {errors.flavorInOrder?.message}
-                </p>
-              </div>
-              <div className={styles.fieldIsWithdrawal}>
-                <label className={styles.isWithdrawal}>
-                  <strong>Retirada ou Entrega:</strong>
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    // name="isWithdrawal"
-                    value="Retirada"
-                    // checked={isWithdrawal == 'Retirada'}
-                    {...register("isWithdrawal", {
-                      onChange: (e) => {
-                        handleisWithdrawalChange(e);
-                      },
-                    })}
-                  />{" "}
-                  Retirada
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    // name="isWithdrawal"
-                    value="Entrega"
-                    {...register("isWithdrawal", {
-                      onChange: (e) => {
-                        handleisWithdrawalChange(e);
-                      },
-                    })}
-                  />{" "}
-                  Entrega (Consulte a taxa)
-                </label>
-                <p className={styles.errorMessage}>
+
+                    <label
+                      className="inline-flex items-center justify-between p-2 text-white bg-fuchsia-950 border-gray-200 rounded-xl 
+                      cursor-pointer peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-800"
+                      htmlFor="Entrega"
+                    >
+                      Entrega
+                    </label>
+                  </li>
+                  <li>
+                    <input
+                      type="radio"
+                      // name={props.nameField}
+                      defaultValue="Retirada"
+                      className="hidden peer"
+                      id="Retirada"
+                      // onClick={handleOption}
+                      {...register("isWithdrawal", {
+                        onChange: (e) => {
+                          handleisWithdrawalChange(e);
+                        },
+                      })}
+                      // name="candleInOrder"
+                      // defaultValue={props.option}
+                      // onChange={(e) => {
+                      //   console.log(event?.target);
+                      // }}
+                    />
+
+                    <label
+                      className="inline-flex items-center justify-between p-2 text-white bg-fuchsia-950 border-gray-200 rounded-xl 
+                      cursor-pointer peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-800"
+                      htmlFor="Retirada"
+                    >
+                      Retirada
+                    </label>
+                  </li>
+                  {/* <SimpleOption option="Entrega" nameField="isWithdrawal" /> */}
+                  {/* <SimpleOption option="Retirada" nameField="isWithdrawal" /> */}
+                </GroupOptions>
+                <p className="text-red-500 text-sm">
                   {errors.isWithdrawal?.message}
                 </p>
-              </div>
-              {isWithdrawal == "Entrega" && (
-                <div className={styles.fieldColorPhrase}>
-                  <label>
-                    <strong>Endereço de Entrega:</strong>
-                    <input
-                      type="text"
-                      // name="cakePhraseColor"
-                      {...register("deliveryAdress")}
-                      placeholder="Digite o endereço de entrega do Bentô Cake"
-                      className={styles.inputFieldText}
-                    />
-                  </label>
+              </GroupLabels>
+
+              {/* <DateField /> */}
+              <div className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg p-2 flex-col">
+                <div>
+                  <strong className="text-xl">
+                    Selecione a data e horário da {isWithdrawal}:
+                  </strong>
+                  {/* {isWithdrawal} */}
                 </div>
-              )}
-              <div className={styles.fieldDateWithdrawal}>
-                <strong>Selecione a data e horário da {isWithdrawal}:</strong>
-                <span>Segunda à Sexta das 12:00 às 18:30</span>
-                <span>SÁBADO 10:00 às 12:00</span>
+                <div>
+                  <span>Segunda à Sexta das 12:00 às 18:30</span>
+                </div>
+                <div>
+                  <span>SÁBADO 10:00 às 12:00</span>
+                </div>
+
                 <input
+                  className="bg-fuchsia-950 p-2  rounded-xl text-white"
                   type="datetime-local"
+                  defaultValue={getDateNow()}
                   // name="dateTimeInOrder"
                   {...register("dateTimeInOrder", {
                     value: getDateNow(),
                   })}
                 />
-                <p className={styles.errorMessage}>
+                <p className="text-red-500 ltext-sm">
                   {erroIsWithdrawalOrDelivery()}
                 </p>
               </div>
-              <div className={styles.fieldCandle}>
-                <label className="vela">
-                  <strong>Aceita vela? (custo adicional de 2 reais):</strong>
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    id="POST-velaSim"
-                    // name="candleInOrder"
-                    value="Sim"
-                    {...register("candleInOrder")}
-                  />{" "}
-                  Sim
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    id="POST-velaNao"
-                    // name="candleInOrder"
-                    value="Não"
-                    {...register("candleInOrder")}
-                  />{" "}
-                  Não
-                </label>
-                <p className={styles.errorMessage}>
-                  {errors.candleInOrder?.message}
-                </p>
-              </div>
-              <div className={styles.fieldPayment}>
-                <strong>Forma de Pagamento:</strong>
-                <span>
-                  Confirmamos seu pedido mediante pagamento antecipado{" "}
-                </span>
+            </GroupLabels>
 
-                <label>
+            <GroupLabels>
+              {/* <TextField
+                placeholder="Digite seu nome completo"
+                nameField="NameInOrder"
+                isOptinal
+              /> */}
+
+              <div className="space-y-2">
+                <strong className="text-baseText text-lg">Seus dados:</strong>
+                <div className="w-72">
+                  {/* <label> */}
+                  <input
+                    type="text"
+                    id="POST-name"
+                    // defaultValue=""
+                    // name={props.nameField}
+                    // name="nameInOrder"
+                    //   {...register("nameInOrder")}
+                    placeholder="Digite seu nome completo"
+                    {...register("nameInOrder")}
+                    // autoFocus
+                    className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                  />
+                  {/* </label> */}
+                  <p className="text-red-500 text-sm">
+                    {errors.nameInOrder?.message}
+                  </p>
+                </div>
+
+                {/* <CelField placeholder="Digte seu número de celular(WhatsApp)" /> */}
+
+                <div>
+                  {/* <label> */}
+                  <input
+                    type="tel"
+                    id="POST-celular"
+                    // name="celInOrder"
+                    {...register("celInOrder")}
+                    placeholder="Digte seu número de celular(WhatsApp)"
+                    className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
+                focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                  />
+                  {/* </label> */}
+
+                  <p className="text-red-500 text-sm">
+                    {errors.celInOrder?.message}
+                  </p>
+                </div>
+              </div>
+
+              {isWithdrawal == "Entrega" && (
+                <div>
+                  <strong className="text-baseText text-lg">
+                    Dados p/ entrega:
+                  </strong>
+                  {/* <TextField
+                    placeholder="Digite o endereço para entrega"
+                    nameField="deliveryAdress"
+                  /> */}
+                  <div className="xl:w-96 space-y-2">
+                    <div>
+                      {/* <label> */}
+                      <input
+                        type="text"
+                        // id="POST-name"
+                        // defaultValue=""
+                        // name={props.nameField}
+                        // name="nameInOrder"
+                        {...register("deliveryAdress")}
+                        placeholder="Digite o endereço para entrega"
+                        // autoFocus
+                        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-base xl:text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                      />
+                      {/* </label> */}
+                      {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
+                    </div>
+                    {/* <TextField
+                    placeholder="Digite o nome da pessoa que irá receber o bolinho"
+                    nameField="NameDelivery"
+                  /> */}
+                    <div>
+                      {/* <label> */}
+                      <input
+                        type="text"
+                        id="POST-name"
+                        // defaultValue=""
+                        // name={props.nameField}
+                        // name="nameInOrder"
+                        {...register("deliveryName")}
+                        placeholder="Digite o nome da pessoa que irá receber o bentô"
+                        // autoFocus
+                        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                      />
+                      {/* </label> */}
+                      {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
+                    </div>
+                    {/* <CelField placeholder="Digite o número de quem irá receber o bolinho" /> */}
+
+                    <div>
+                      {/* <label> */}
+                      <input
+                        type="text"
+                        id="POST-name"
+                        // defaultValue=""
+                        // name={props.nameField}
+                        // name="nameInOrder"
+                        {...register("deliveryPhone")}
+                        placeholder="Digite o número de quem irá receber o bolinho"
+                        // autoFocus
+                        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
+                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+                      />
+                      {/* </label> */}
+                      {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </GroupLabels>
+            <GroupLabels>
+              <strong className=" text-baseText text-lg">
+                Selecione o método de pagamento:
+              </strong>
+              <br />
+              <span className="text-xs">
+                Confirmamos seu pedido mediante pagamento antecipado 😊
+              </span>
+              <GroupOptions>
+                {/* <Options
+                  nameField="formOfPaymentInOrder"
+                  option="PIX"
+                  // icon="iconPix"
+                /> */}
+                <div>
                   <input
                     type="radio"
+                    // name="PIX"
+                    defaultValue="PIX"
+                    className="hidden peer"
                     id="PIX"
-                    // name="formOfPaymentInOrder"
-                    value="PIX"
+                    // className="hidden"
+                    // id={props.option}
+                    // value={props.option}
+                    // type="radio"
                     {...register("formOfPaymentInOrder")}
-                  />{" "}
-                  PIX
-                </label>
-                <label>
+                  />
+                  <label
+                    className="inline-flex w-full flex-col p-2 bg-fuchsia-950 cursor-pointer rounded-xl drop-shadow-lg
+        peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-900"
+                    htmlFor="PIX"
+                  >
+                    <div>
+                      <div>{/* <Bank size={20} /> */}</div>
+                      <div className="flex-col items-center justify-center">
+                        <h3 className="text-xl font-bold text-baseInput text-center">
+                          PIX
+                        </h3>
+                        <p className="text-baseInput text-center">
+                          (Iremos passar a chave pelo WhatsApp)
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                  {/* <p className={styles.errorMessage}>{errors.flavorInOrder?.message}</p> */}
+                </div>
+                {/* <Options
+                  nameField="formOfPaymentInOrder"
+                  option="Cartão de Crédito"
+                  optionDescribe="(+ taxa de 5%)"
+                  // icon="iconCredt"
+                /> */}
+                <div>
                   <input
                     type="radio"
-                    id="CardCredit"
-                    // name="formOfPaymentInOrder"
-                    value="Cartão de Crédito"
+                    // name="PIX"
+                    defaultValue="Cartão de Crédito"
+                    className="hidden peer"
+                    id="Cartão de Crédito"
+                    // className="hidden"
+                    // id={props.option}
+                    // value={props.option}
+                    // type="radio"
                     {...register("formOfPaymentInOrder")}
-                  />{" "}
-                  Cartão de Crédito (+ taxa de 5%)
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    id="TransfBancaria"
-                    // name="formOfPaymentInOrder"
-                    value="TRANSFERÊNCIA"
-                    {...register("formOfPaymentInOrder")}
-                  />{" "}
-                  TRANSFERÊNCIA BANCÁRIA (BB e CAIXA )
-                </label>
-                <p className={styles.errorMessage}>
-                  {errors.formOfPaymentInOrder?.message}
-                </p>
-              </div>
+                  />
+                  <label
+                    className="inline-flex w-full flex-col p-2 bg-fuchsia-950 cursor-pointer rounded-xl drop-shadow-lg
+        peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-900"
+                    htmlFor="Cartão de Crédito"
+                  >
+                    <div>
+                      <div>{/* <Bank size={20} /> */}</div>
+                      <div className="flex-col items-center justify-center">
+                        <h3 className="text-xl font-bold text-baseInput text-center">
+                          Cartão de Crédito (por link)
+                        </h3>
+                        <p className="text-baseInput text-center">
+                          (+ taxa de 5% )
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                  {/* <p className={styles.errorMessage}>{errors.flavorInOrder?.message}</p> */}
+                </div>
+                {/* <Options
+                  nameField="formOfPaymentInOrder"
+                  option="TRANSFERÊNCIA BANCÁRIA"
+                  optionDescribe="(BB e Caixa)"
+                  // icon="iconTranf"
+                /> */}
 
-              <div className={styles.fieldAcceptance}>
+                <div>
+                  <input
+                    type="radio"
+                    // name="PIX"
+                    defaultValue="TRANSFERÊNCIA BANCÁRIA"
+                    className="hidden peer"
+                    id="TRANSFERÊNCIA BANCÁRIA"
+                    // className="hidden"
+                    // id={props.option}
+                    // value={props.option}
+                    // type="radio"
+                    {...register("formOfPaymentInOrder")}
+                  />
+                  <label
+                    className="inline-flex w-full flex-col p-2 bg-fuchsia-950 cursor-pointer rounded-xl drop-shadow-lg
+        peer-checked:bg-fuchsia-900 shadow-sm peer-checked:shadow-fuchsia-950  hover:bg-fuchsia-900"
+                    htmlFor="TRANSFERÊNCIA BANCÁRIA"
+                  >
+                    <div>
+                      <div>{/* <Bank size={20} /> */}</div>
+                      <div className="flex-col items-center justify-center">
+                        <h3 className="text-xl font-bold text-baseInput text-center">
+                          Transferência Bancária
+                        </h3>
+                        <p className="text-baseInput text-center">
+                          (BB e Caixa)
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                  <p className="text-red-500 text-sm pt-1">
+                    {errors.formOfPaymentInOrder?.message}
+                  </p>
+                </div>
+              </GroupOptions>
+            </GroupLabels>
+            <div className="bg-baseCard border border-grupButtonsBorder p-2 rounded-lg mt-2 xl:flex-col ">
+              {/* <Checkbox
+                content="Estou ciente que o pedido será concluido via WhatsApp"
+                nameField="awareOfWhatsApp"
+              /> */}
+              <div>
                 <label>
                   <input
+                    className="accent-fuchsia-900 focus:accent-fuchsia-900"
                     type="checkbox"
-                    id="awareOfWhatsApp"
-                    // value={true}
+                    id="accept"
+                    //   value={true}
                     {...register("awareOfWhatsApp")}
                     // onChange={handleOnChange}
                   />
-                  <span>
+                  <span className="pl-1 text-end">
                     Estou ciente que o pedido será concluido via WhatsApp
                   </span>
+                  {/* Estou ciente que o pedido será concluido via WhatsApp */}
                 </label>
-                <p className={styles.errorMessage}>
+                <p className="text-red-500 text-sm pt-1">
                   {errors.awareOfWhatsApp?.message}
-                </p>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    id="accept"
-                    // value={true}
-                    {...register("termsAccepted")}
-                    // onChange={handleOnChange}
-                  />
-                  <span>Confirmo que revisei todas as informações</span>
-                </label>
-
-                <p className={styles.errorMessage}>
-                  {errors.termsAccepted?.message}
                 </p>
               </div>
 
-              <input
-                className={styles.buttomSendOrder}
-                type="submit"
-                value="Enviar Pedido pelo WhatsApp"
-              />
-            </form>
-          </div>
-        </ContainerForm>
-      </Main>
+              {/* <Checkbox
+                content="Confirmo que revisei todas as informações"
+                nameField="termsAccepted"
+              /> */}
+              <div>
+                <label>
+                  <input
+                    className="accent-fuchsia-900 focus:accent-fuchsia-900"
+                    type="checkbox"
+                    id="termsAccepted"
+                    //   value={true}
+                    {...register("termsAccepted")}
+                    // onChange={handleOnChange}
+                  />
+                  <span className="pl-1 text-end">
+                    Confirmo que revisei todas as informações
+                  </span>
+                  {/* Estou ciente que o pedido será concluido via WhatsApp */}
+                </label>
+                <p className="text-red-500 text-sm pt-1">
+                  {errors.termsAccepted?.message}
+                </p>
+              </div>
+            </div>
+
+            {/* <Buttom /> */}
+
+            <Buttom content="Enviar informações pelo WhatsApp" />
+          </form>
+          {/* </div> */}
+        </FormContainer>
+      </FormBackground>
+      <Footer />
     </OrderContext.Provider>
   );
 }
