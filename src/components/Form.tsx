@@ -921,7 +921,7 @@ export function Form() {
           {/* </div> */}
         </FormContainer>
       </FormBackground>
-      <Footer />
+      {/* <Footer /> */}
     </OrderContext.Provider>
   );
 }
