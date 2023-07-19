@@ -1,6 +1,6 @@
 import { PropsType } from "../../../types";
 
-import { Bank } from "phosphor-react";
+// import { Bank } from "phosphor-react";
 
 interface PropsOptions extends PropsType {
   option: string;
