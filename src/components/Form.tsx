@@ -39,6 +39,7 @@ import { Buttom } from "./Form/Buttom";
 import SalesOrderContext from "../context/SalesOrderContext";
 import { Footer } from "./Footer/Footer";
 import { About } from "./Form/Fields/About/About";
+import { Modal } from "./Modal";
 
 type Images = {
   name: string;
@@ -135,6 +136,7 @@ export function Form() {
       <FormBackground>
         <FormContainer>
           <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
+          <Modal />
           <img
             className="flex w-full rounded-lg"
             src={menuBento}
