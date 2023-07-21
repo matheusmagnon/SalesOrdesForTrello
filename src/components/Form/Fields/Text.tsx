@@ -1,32 +1,37 @@
+import { useFormContext } from "react-hook-form";
 import { PropsType } from "../../../types";
 
-interface PropsTextField extends PropsType {
+import { twMerge } from "tailwind-merge";
+import { FC, HTMLAttributes } from "react";
+
+interface PropsTextField extends React.HTMLAttributes<HTMLElement> {
   placeholder: string;
-  isOptinal?: boolean;
   nameField: string;
 }
 
-export function TextField(props: PropsTextField) {
+export function TextField({ placeholder, nameField, ...rest }: PropsTextField) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   // props.isOptinal == true
   //   ? (props.placeholder = "Opcional")
   //   : (props.placeholder = "ok");
+
+  const field = nameField;
   return (
-    <div>
-      {/* <label> */}
+    <div {...rest} className={twMerge("xl:w-full", rest.className)}>
       <input
         type="text"
         id="POST-name"
-        // defaultValue=""
-        name={props.nameField}
-        // name="nameInOrder"
-        //   {...register("nameInOrder")}
-        placeholder={`${props.placeholder}      `}
-        // autoFocus
-        className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg
-                   focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
+        {...register(`${nameField}`)}
+        placeholder={placeholder}
+        className="bg-baseInput  border border-baseButton  text-baseText  placeholder-baseLabel text-base xl:text-sm rounded-lg
+       focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2"
       />
-      {/* </label> */}
-      {/* <p className={styles.errorMessage}>{errors.nameInOrder?.message}</p> */}
+      <p className="text-red-500 text-sm">
+        {errors?.[nameField]?.message?.toString()}
+      </p>
     </div>
   );
 }
