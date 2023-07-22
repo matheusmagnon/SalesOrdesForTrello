@@ -1,3 +1,4 @@
+import { useFormContext } from "react-hook-form";
 import { PropsType } from "../../../types";
 
 interface PropsCheckbox extends PropsType {
@@ -5,22 +6,28 @@ interface PropsCheckbox extends PropsType {
   nameField: string;
 }
 
-export function Checkbox(props: PropsCheckbox) {
+export function Checkbox({ content, nameField }: PropsCheckbox) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   return (
     <div>
       <label>
         <input
           className="accent-fuchsia-900 focus:accent-fuchsia-900"
           type="checkbox"
-          id={props.nameField}
+          id="accept"
           //   value={true}
-          //   {...register("awareOfWhatsApp")}
+          {...register(`${nameField}`)}
           // onChange={handleOnChange}
         />
-        <span className="pl-1 text-end">{props.content}</span>
+        <span className="pl-1 text-end">{content}</span>
         {/* Estou ciente que o pedido será concluido via WhatsApp */}
       </label>
-      {/* <p className={styles.errorMessage}>{errors.awareOfWhatsApp?.message}</p> */}
+      <p className="text-red-500 text-sm pt-1">
+        {errors?.[nameField]?.message?.toString()}
+      </p>
     </div>
   );
 }

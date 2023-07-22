@@ -1,8 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { PropsType } from "../../../types";
-
 import { twMerge } from "tailwind-merge";
-import { FC, HTMLAttributes } from "react";
 
 interface PropsTextField extends React.HTMLAttributes<HTMLElement> {
   placeholder: string;
@@ -14,11 +11,7 @@ export function TextField({ placeholder, nameField, ...rest }: PropsTextField) {
     register,
     formState: { errors },
   } = useFormContext();
-  // props.isOptinal == true
-  //   ? (props.placeholder = "Opcional")
-  //   : (props.placeholder = "ok");
 
-  const field = nameField;
   return (
     <div {...rest} className={twMerge("xl:w-full", rest.className)}>
       <input

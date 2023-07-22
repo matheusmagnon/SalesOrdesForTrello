@@ -1,11 +1,26 @@
+import { useContext } from "react";
 import getDateNow from "../../../services/getDateNow";
+import { useFormContext } from "react-hook-form";
+import { OrderContext } from "..";
 
 export function DateField() {
+  const { isWithdrawal } = useContext(OrderContext);
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
+  function erroIsWithdrawalOrDelivery() {
+    if (errors.dateTimeInOrder?.message) {
+      return errors.dateTimeInOrder?.message + `${isWithdrawal}`;
+    }
+  }
+
   return (
     <div className="bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel text-sm rounded-lg p-2 flex-col">
       <div>
         <strong className="text-xl">
-          Selecione a data e horário da Retirada:
+          Selecione a data e horário da {isWithdrawal}:
         </strong>
         {/* {isWithdrawal} */}
       </div>
@@ -19,13 +34,13 @@ export function DateField() {
       <input
         className="bg-fuchsia-950 p-2  rounded-xl text-white"
         type="datetime-local"
-        value={getDateNow()}
+        defaultValue={getDateNow()}
         // name="dateTimeInOrder"
-        // {...register("dateTimeInOrder", {
-        //   value: getDateNow(),
-        // })}
+        {...register("dateTimeInOrder", {
+          value: getDateNow(),
+        })}
       />
-      {/* <p className={styles.errorMessage}>{erroIsWithdrawalOrDelivery()}</p> */}
+      <p className="text-red-500 ltext-sm">{erroIsWithdrawalOrDelivery()}</p>
     </div>
   );
 }
