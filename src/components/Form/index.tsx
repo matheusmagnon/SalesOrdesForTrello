@@ -1,12 +1,5 @@
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -26,12 +19,9 @@ import * as constants from "../../constants/constants";
 import { FormTitle } from "./FormTitle";
 import OrderSent from "../OrderSent";
 
-// import styles from "./Form.module.css";
-
 import { FormContainer } from "./FormContainer";
 import { FormBackground } from "./FormBackground";
 import { TextField } from "./Fields/Text";
-import { CelField } from "./Fields/Cel";
 import { GroupLabels } from "./GroupLabels";
 import { UploadImages } from "./Fields/UploadImages";
 import { Option } from "./Fields/Option";
@@ -41,7 +31,6 @@ import { GroupOptions } from "./GroupOptions";
 import { Checkbox } from "./Fields/Checkbox";
 import { Buttom } from "./Buttom";
 
-import SalesOrderContext from "../../context/SalesOrderContext";
 import { Footer } from "../Footer/Footer";
 import { About } from "./Fields/About/About";
 import { Modal } from "../Modal";
@@ -69,7 +58,6 @@ export function Form() {
   });
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
   } = reactHookFormMethods;
