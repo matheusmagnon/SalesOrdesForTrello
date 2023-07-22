@@ -42,10 +42,7 @@ const validationScheme = {
     .string()
     .required("Clique em um sabor para seu bolinho 🤤")
     .nullable(),
-  isWithdrawal: yup
-    .string()
-    .required("Selecione se é retiarda ou entrega")
-    .nullable(),
+  isWithdrawal: yup.string().required("Selecione uma opção").nullable(),
   candleInOrder: yup.string().required("Campo obrigatório").nullable(),
   formOfPaymentInOrder: yup
     .string()
