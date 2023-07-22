@@ -297,7 +297,7 @@ export function Form() {
           </FormProvider>
         </FormContainer>
       </FormBackground>
-      {/* <Footer /> */}
+      <Footer />
     </OrderContext.Provider>
   );
 }
