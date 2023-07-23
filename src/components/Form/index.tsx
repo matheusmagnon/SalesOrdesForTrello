@@ -108,7 +108,7 @@ export function Form() {
       <FormBackground>
         <FormContainer>
           <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
-          <Modal />
+          {/* <Modal /> */}
           <img
             className="flex w-full rounded-lg"
             src={menuBento}

@@ -36,9 +36,12 @@ export function DateField() {
         type="datetime-local"
         defaultValue={getDateNow()}
         // name="dateTimeInOrder"
-        {...register("dateTimeInOrder", {
-          value: getDateNow(),
-        })}
+        {...register(
+          "dateTimeInOrder"
+          // , {
+          //   value: getDateNow(),
+          // }
+        )}
       />
       <p className="text-red-500 ltext-sm">{erroIsWithdrawalOrDelivery()}</p>
     </div>

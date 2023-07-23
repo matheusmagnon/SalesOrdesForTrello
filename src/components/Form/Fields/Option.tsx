@@ -17,6 +17,7 @@ export function Option({ option, nameField, optionDescribe }: PropsOptions) {
   return (
     <div>
       <input
+        // name={nameField}
         type="radio"
         defaultValue={option}
         className="hidden peer"
