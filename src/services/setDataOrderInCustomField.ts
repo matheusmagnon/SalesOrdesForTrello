@@ -1,10 +1,16 @@
-import { number } from "yup";
 import { DataOrder } from "../types";
 
-export function setDataOrderInCustomField(idCustomField: string,
-  { nameInOrder, celInOrder, cakeColor, candleInOrder,
-    flavorInOrder, formOfPaymentInOrder }: DataOrder) {
-
+export function setDataOrderInCustomField(
+  idCustomField: string,
+  {
+    nameInOrder,
+    celInOrder,
+    cakeColor,
+    candleInOrder,
+    flavorInOrder,
+    formOfPaymentInOrder,
+  }: DataOrder
+) {
   const customFieldData = { value: { text: `` } };
   if (idCustomField == "6266f3cf7a05075d51e5d87a") {
     customFieldData.value.text = nameInOrder;
@@ -24,6 +30,5 @@ export function setDataOrderInCustomField(idCustomField: string,
   if (idCustomField == "62845d1714150e5f18da882e") {
     customFieldData.value.text = formOfPaymentInOrder;
   }
-  return customFieldData
-};
-
+  return customFieldData;
+}

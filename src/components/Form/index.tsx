@@ -5,33 +5,31 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import getDateNow from "../../services/getDateNow";
-import makeAPICall from "../../services/makeAPICall";
+import makeAPICall from "../../utils/makeAPICall";
 import SendAttachment from "../../services/SendAttachment";
 import postCustomFields from "../../services/postCustomFields";
 import { DataOrder } from "../../types";
 import createBodyCard from "../../services/createBodyCard";
-import getId from "../../services/getId";
+import getId from "../../utils/getId";
 
 import menuBento from "../../_assets/images/menuBento.png";
 import logo from "../../_assets/images/logo.png";
 
 import * as constants from "../../constants/constants";
+// import { validationScheme } from "../../services/validationsSchema";
 
 import { FormTitle } from "./FormTitle";
 import OrderSent from "../OrderSent";
 
-// import styles from "./Form.module.css";
-
 import { FormContainer } from "./FormContainer";
 import { FormBackground } from "./FormBackground";
 import { TextField } from "./Fields/Text";
-import { CelField } from "./Fields/Cel";
 import { GroupLabels } from "./GroupLabels";
 import { UploadImages } from "./Fields/UploadImages";
 import { Option } from "./Fields/Option";
@@ -45,6 +43,7 @@ import SalesOrderContext from "../../context/SalesOrderContext";
 import { Footer } from "../Footer/Footer";
 import { About } from "./Fields/About/About";
 import { Modal } from "../Modal";
+import React from "react";
 
 interface TypeOrderContext {
   isWithdrawal: string;
@@ -69,14 +68,11 @@ export function Form() {
   });
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
   } = reactHookFormMethods;
 
   const submitOrder = (dataOrder: DataOrder) => {
-    console.log(dataOrder);
-
     async function CreateCard() {
       const response = await makeAPICall(
         urlTrelloPostCard,
@@ -97,8 +93,21 @@ export function Form() {
   };
 
   if (isSalesOrderIsCompleted == true) {
-    return <OrderSent resume={resumeOrderState} />;
+    return <OrderSent />;
   }
+
+  // useEffect(() => {
+  //   const firstError = (
+  //     Object.keys(errors) as Array<keyof typeof errors>
+  //   ).reduce<keyof typeof errors | null>((field, a) => {
+  //     const fieldKey = field as keyof typeof errors;
+  //     return !!errors[fieldKey] ? fieldKey : a;
+  //   }, null);
+
+  //   if (firstError) {
+  //     setFocus(firstError);
+  //   }
+  // }, [errors, setFocus]);
 
   return (
     <OrderContext.Provider value={{ isWithdrawal, setIsWithdrawal }}>
@@ -148,9 +157,11 @@ export function Form() {
                     brigadeiro cremoso de leite ninho"
                   />
                 </GroupOptions>
-                <p className="text-red-500 text-sm">
-                  {errors.flavorInOrder?.message}
-                </p>
+                {errors.flavorInOrder?.message && (
+                  <p className="text-red-500 text-sm">
+                    {errors.flavorInOrder?.message}
+                  </p>
+                )}
               </GroupLabels>
 
               <GroupLabels>

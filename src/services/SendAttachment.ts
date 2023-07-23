@@ -1,12 +1,11 @@
-import { string } from "yup";
 import * as constants from "../constants/constants";
 const { apikeyTrello, tokenTrello } = constants;
 
-type File = string | Blob
+type File = string | Blob;
 export default function SendAttachment(files: [], idCard: number) {
   try {
     const getFile = (files: []) => {
-      Object.values(files).map(file => {
+      Object.values(files).map((file) => {
         CreateAndSendForm(file);
       });
     };
@@ -36,9 +35,7 @@ export default function SendAttachment(files: [], idCard: number) {
     };
 
     getFile(files);
+  } catch (error) {
+    console.log(error);
   }
-  catch (error) {
-    console.log(error)
-  }
-
 }

@@ -11,7 +11,7 @@ import Form from "./Form";
 import { FormBackground } from "./Form/FormBackground";
 import { FormContainer } from "./Form/FormContainer";
 
-function OrderSent({ resume }: any) {
+function OrderSent() {
   const [orderIsCompleted, setOrderIsCompleted] = useState<boolean>(false);
 
   window.scrollTo(0, 0);
