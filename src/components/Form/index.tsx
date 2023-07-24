@@ -91,7 +91,7 @@ export function Form() {
       </header>
       <FormBackground>
         <FormContainer>
-          <FormTitle>Solicite s seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
+          <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
           {/* <Modal
             titleDialog="Aviso!"
             contentDialog={
