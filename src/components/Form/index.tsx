@@ -1,23 +1,23 @@
 import { useForm, FormProvider } from "react-hook-form";
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import { Fragment, useContext, useEffect, useRef } from "react";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import getDateNow from "../../services/getDateNow";
-import makeAPICall from "../../services/makeAPICall";
+import makeAPICall from "../../utils/makeAPICall";
 import SendAttachment from "../../services/SendAttachment";
 import postCustomFields from "../../services/postCustomFields";
 import { DataOrder } from "../../types";
 import createBodyCard from "../../services/createBodyCard";
-import getId from "../../services/getId";
+import getId from "../../utils/getId";
 
 import menuBento from "../../_assets/images/menuBento.png";
 import logo from "../../_assets/images/logo.png";
 
 import * as constants from "../../constants/constants";
+import { validationScheme } from "../../services/validationsSchema";
 
 import { FormTitle } from "./FormTitle";
-import OrderSent from "../OrderSent";
 
 import { FormContainer } from "./FormContainer";
 import { FormBackground } from "./FormBackground";
@@ -33,25 +33,17 @@ import { Buttom } from "./Buttom";
 
 import { Footer } from "../Footer/Footer";
 import { About } from "./Fields/About/About";
-import { Modal } from "../Modal";
-
-interface TypeOrderContext {
-  isWithdrawal: string;
-  setIsWithdrawal: Dispatch<SetStateAction<string>>;
-}
-
-export const OrderContext = createContext<TypeOrderContext>({
-  isWithdrawal: "Retirada",
-  setIsWithdrawal: () => {},
-});
+import { Modal } from "../Modal/Modal";
+import { OrderContext } from "../../context/SalesOrderContext";
 
 export function Form() {
-  const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
-  const [isWithdrawal, setIsWithdrawal] = useState<string>("Retirada");
-  const [resumeOrderState, setResumeOrderState] = useState("");
-  const { urlTrelloPostCard, validationScheme } = constants;
+  const flavorsRef = useRef<null | HTMLDivElement>(null);
 
+  const { urlTrelloPostCard } = constants;
   const validateOrder = yup.object().shape(validationScheme);
+
+  const { isWithdrawal, isSalesOrderIsCompleted, setIsSalesOrderIsCompleted } =
+    useContext(OrderContext);
 
   const reactHookFormMethods = useForm<DataOrder>({
     resolver: yupResolver(validateOrder),
@@ -59,12 +51,12 @@ export function Form() {
 
   const {
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = reactHookFormMethods;
 
   const submitOrder = (dataOrder: DataOrder) => {
-    console.log(dataOrder);
-
+    setFocus("flavorInOrder");
     async function CreateCard() {
       const response = await makeAPICall(
         urlTrelloPostCard,
@@ -74,29 +66,52 @@ export function Form() {
       const idCard: number = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
-      setResumeOrderState(createBodyCard(dataOrder).descWhatsApp);
     }
     CreateCard().then(() => {
-      let resumeOrder = createBodyCard(dataOrder).descWhatsApp;
-      let url = `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`;
-      window.location.assign(url);
       setIsSalesOrderIsCompleted(true);
+      setTimeout(() => {
+        let resumeOrder = createBodyCard(dataOrder).descWhatsApp;
+        let url = `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`;
+        window.location.assign(url);
+      }, 5000);
     });
   };
 
-  if (isSalesOrderIsCompleted == true) {
-    return <OrderSent resume={resumeOrderState} />;
-  }
+  //If erro in flavor scroll to field
+  useEffect(() => {
+    if (errors.flavorInOrder?.message) {
+      flavorsRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [errors]);
 
   return (
-    <OrderContext.Provider value={{ isWithdrawal, setIsWithdrawal }}>
+    <>
       <header className="w-11 xl:w-20">
         <img src={logo} />
       </header>
       <FormBackground>
         <FormContainer>
-          <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
-          <Modal />
+          <FormTitle>Solicite s seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
+          {/* <Modal
+            titleDialog="Aviso!"
+            contentDialog={
+              <Fragment>
+                Estamos de recesso!
+                <br />
+                Temos disponibilidade de agenda somente a partir do dia
+                <strong> 26/07/2023.</strong>
+              </Fragment>
+            }
+            closeButton
+            okButton
+          /> */}
+          {isSalesOrderIsCompleted && (
+            <Modal
+              titleDialog="Você está sendo redirecionado..."
+              contentDialog="Seu WhatApp irá abrir com resumo da sua solicitação 🤞"
+              isLoading
+            />
+          )}
           <img
             className="flex w-full rounded-lg"
             src={menuBento}
@@ -112,7 +127,10 @@ export function Form() {
             >
               <About title="Informações - Bentô Cake" />
 
-              <GroupLabels title="Selecione o sabor do seu bolo:">
+              <GroupLabels
+                ref={flavorsRef}
+                title="Selecione o sabor do seu bolo:"
+              >
                 <GroupOptions>
                   <Option
                     nameField="flavorInOrder"
@@ -136,9 +154,11 @@ export function Form() {
                     brigadeiro cremoso de leite ninho"
                   />
                 </GroupOptions>
-                <p className="text-red-500 text-sm">
-                  {errors.flavorInOrder?.message}
-                </p>
+                {errors.flavorInOrder?.message && (
+                  <p className="text-red-500 text-sm">
+                    {errors.flavorInOrder?.message}
+                  </p>
+                )}
               </GroupLabels>
 
               <GroupLabels>
@@ -280,13 +300,14 @@ export function Form() {
                   nameField="termsAccepted"
                 />
               </div>
+
               <Buttom content="Enviar informações pelo WhatsApp" />
             </form>
           </FormProvider>
         </FormContainer>
       </FormBackground>
       {/* <Footer /> */}
-    </OrderContext.Provider>
+    </>
   );
 }
 export default Form;

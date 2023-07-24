@@ -17,6 +17,9 @@ module.exports = {
         large: "85px",
         md: "35px",
       },
+      borderWidth: {
+        6: "6px",
+      },
       colors: {
         baseText: "#403937",
         baseInput: "#EDEDED",

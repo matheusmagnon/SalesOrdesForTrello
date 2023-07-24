@@ -15,7 +15,3 @@ export function GroupOptions(props: PropsGruopOptions) {
     </div>
   );
 }
-
-{
-  /*  */
-}

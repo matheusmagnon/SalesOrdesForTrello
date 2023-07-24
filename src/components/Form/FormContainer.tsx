@@ -12,7 +12,6 @@ export function FormContainer(props: PropsFormContainer) {
     </div>
   ) : (
     <div className=" bg-baseBackground px-2 pb-2 max-w-5xl  md:px-10">
-      {/* rounded-md shadow-container  */}
       {props.children}
     </div>
   );

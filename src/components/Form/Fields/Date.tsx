@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import getDateNow from "../../../services/getDateNow";
+import getDateNow from "../../../utils/getDateNow";
 import { useFormContext } from "react-hook-form";
-import { OrderContext } from "..";
+import { OrderContext } from "../../../context/SalesOrderContext";
 
 export function DateField() {
   const { isWithdrawal } = useContext(OrderContext);
@@ -22,7 +22,6 @@ export function DateField() {
         <strong className="text-xl">
           Selecione a data e horário da {isWithdrawal}:
         </strong>
-        {/* {isWithdrawal} */}
       </div>
       <div>
         <span>Segunda à Sexta das 12:00 às 18:30</span>
@@ -35,10 +34,7 @@ export function DateField() {
         className="bg-fuchsia-950 p-2  rounded-xl text-white"
         type="datetime-local"
         defaultValue={getDateNow()}
-        // name="dateTimeInOrder"
-        {...register("dateTimeInOrder", {
-          value: getDateNow(),
-        })}
+        {...register("dateTimeInOrder")}
       />
       <p className="text-red-500 ltext-sm">{erroIsWithdrawalOrDelivery()}</p>
     </div>

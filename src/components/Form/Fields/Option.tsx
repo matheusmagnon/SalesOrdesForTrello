@@ -10,8 +10,6 @@ interface PropsOptions extends PropsType {
 }
 
 export function Option({ option, nameField, optionDescribe }: PropsOptions) {
-  // const { option, optionDescribe, nameField } = props;
-
   const { register } = useFormContext();
 
   return (
