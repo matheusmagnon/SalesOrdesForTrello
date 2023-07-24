@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, forwardRef } from "react";
 import { PropsType } from "../../types";
 
 interface PropsGroupLaber extends PropsType {
@@ -6,19 +6,27 @@ interface PropsGroupLaber extends PropsType {
   describe?: string;
   simple?: boolean;
   children: ReactNode;
+  innerRef?: any;
 }
 
-export function GroupLabels(props: PropsGroupLaber) {
-  const { simple, title, describe, children } = props;
+const GroupLabels = forwardRef((props: PropsGroupLaber, ref: any) => {
+  const { simple, title, describe, children, innerRef } = props;
+
   return simple == true ? (
-    <div className=" bg-baseInput  border border-baseButton p-2 space-y-2 text-baseText placeholder-baseLabel rounded-lg leading-none ">
+    <div
+      className=" bg-baseInput  border border-baseButton p-2 space-y-2 text-baseText placeholder-baseLabel rounded-lg leading-none "
+      ref={ref}
+    >
       {/* // bg-baseCard border border-grupButtonsBorder */}
       <h2 className="font-bold text-baseText text-xl">{title}</h2>
       <span className="text-sm">{describe}</span>
       {children}
     </div>
   ) : (
-    <div className="bg-baseCard border border-grupButtonsBorder p-2 rounded-lg mt-2 space-y-2 xl:flex xl:flex-wrap xl:items-baseline xl:space-x-3 ">
+    <div
+      ref={ref}
+      className="bg-baseCard border border-grupButtonsBorder p-2 rounded-lg mt-2 space-y-2 xl:flex xl:flex-wrap xl:items-baseline xl:space-x-3 "
+    >
       {/* bg-baseInput  border border-baseButton  text-baseText placeholder-baseLabel */}
       <div>
         <h2 className="font-bold text-baseText text-xl">{title}</h2>
@@ -27,4 +35,6 @@ export function GroupLabels(props: PropsGroupLaber) {
       {children}
     </div>
   );
-}
+});
+
+export { GroupLabels };

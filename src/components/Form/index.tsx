@@ -6,8 +6,10 @@ import {
   Fragment,
   SetStateAction,
   createContext,
+  forwardRef,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -61,11 +63,10 @@ export const OrderContext = createContext<TypeOrderContext>({
 export function Form() {
   const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
   const [isWithdrawal, setIsWithdrawal] = useState<string>("Retirada");
-  const [resumeOrderState, setResumeOrderState] = useState("");
+  const flavorsRef = useRef<null | HTMLDivElement>(null);
+
   const { urlTrelloPostCard, validationScheme } = constants;
-
   const validateOrder = yup.object().shape(validationScheme);
-
   const reactHookFormMethods = useForm<DataOrder>({
     resolver: yupResolver(validateOrder),
   });
@@ -87,7 +88,6 @@ export function Form() {
       const idCard: number = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
-      // setResumeOrderState(createBodyCard(dataOrder).descWhatsApp);
     }
     CreateCard().then(() => {
       setIsSalesOrderIsCompleted(true);
@@ -99,6 +99,13 @@ export function Form() {
     });
   };
 
+  //If erro in flavor scroll to field
+  useEffect(() => {
+    if (errors.flavorInOrder?.message) {
+      flavorsRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [errors]);
+
   return (
     <OrderContext.Provider value={{ isWithdrawal, setIsWithdrawal }}>
       <header className="w-11 xl:w-20">
@@ -107,7 +114,7 @@ export function Form() {
       <FormBackground>
         <FormContainer>
           <FormTitle>Solicite s seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
-          <Modal
+          {/* <Modal
             titleDialog="Aviso!"
             contentDialog={
               <Fragment>
@@ -119,7 +126,7 @@ export function Form() {
             }
             closeButton
             okButton
-          />
+          /> */}
           {isSalesOrderIsCompleted && (
             <Modal
               titleDialog="Você está sendo redirecionado..."
@@ -142,7 +149,10 @@ export function Form() {
             >
               <About title="Informações - Bentô Cake" />
 
-              <GroupLabels title="Selecione o sabor do seu bolo:">
+              <GroupLabels
+                ref={flavorsRef}
+                title="Selecione o sabor do seu bolo:"
+              >
                 <GroupOptions>
                   <Option
                     nameField="flavorInOrder"
@@ -312,6 +322,7 @@ export function Form() {
                   nameField="termsAccepted"
                 />
               </div>
+
               <Buttom content="Enviar informações pelo WhatsApp" />
             </form>
           </FormProvider>

@@ -5,7 +5,7 @@ const image = "image1.png";
 
 describe("Teste Sales Order with Erro", () => {
   beforeEach(() => {
-    cy.viewport(350, 800);
+    cy.viewport("iphone-x");
     // cy.viewport(1920, 1080);
 
     cy.visit("/");
