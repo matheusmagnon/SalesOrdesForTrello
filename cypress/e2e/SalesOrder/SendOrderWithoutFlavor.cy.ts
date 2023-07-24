@@ -18,7 +18,7 @@ describe("Teste Sales Order with Erro", () => {
     cy.get("input[type=file]").attachFile(image);
     // cy.get('input[type=file]').selectFile('cypress/fixtures/file.json')
     cy.contains("Sim").click({ force: true });
-    cy.get("li").contains("Retirada").click();
+    cy.get("li").contains("Entrega").click();
     cy.get('input[type="datetime-local"]').type(getDateNow(2));
     cy.get('input[name="nameInOrder"]').type("Meu nome Teste da Silva");
     cy.get('input[name="celInOrder"]').type("63984365196");

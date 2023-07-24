@@ -1,11 +1,11 @@
 // import * as dotenv from 'dotenv/config';
-import { useState } from "react";
+// import { useState } from "react";
 
-import Form from "./Form";
-import OrderSent from "./OrderSent";
+// import Form from "./Form";
+// // import OrderSent from "./OrderSent";
 
-export function SalesOrder() {
-  const [formIsCompleted, setFormIsCompleted] = useState<boolean>(false);
+// export function SalesOrder() {
+//   const [formIsCompleted, setFormIsCompleted] = useState<boolean>(false);
 
-  return formIsCompleted == false ? <Form /> : <OrderSent />;
-}
+//   return formIsCompleted == false ? <Form /> : <OrderSent />;
+// }

@@ -1,22 +1,8 @@
-
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
-import {
-  ChangeEvent,
-  Children,
-  Dispatch,
-  Fragment,
-  SetStateAction,
-  createContext,
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { Fragment, useContext, useEffect, useRef } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { v4 as uuidv4 } from "uuid";
 
 import makeAPICall from "../../utils/makeAPICall";
 import SendAttachment from "../../services/SendAttachment";
@@ -29,10 +15,9 @@ import menuBento from "../../_assets/images/menuBento.png";
 import logo from "../../_assets/images/logo.png";
 
 import * as constants from "../../constants/constants";
-// import { validationScheme } from "../../services/validationsSchema";
+import { validationScheme } from "../../services/validationsSchema";
 
 import { FormTitle } from "./FormTitle";
-import OrderSent from "../OrderSent";
 
 import { FormContainer } from "./FormContainer";
 import { FormBackground } from "./FormBackground";
@@ -49,25 +34,17 @@ import { Buttom } from "./Buttom";
 import { Footer } from "../Footer/Footer";
 import { About } from "./Fields/About/About";
 import { Modal } from "../Modal/Modal";
-import React from "react";
-
-interface TypeOrderContext {
-  isWithdrawal: string;
-  setIsWithdrawal: Dispatch<SetStateAction<string>>;
-}
-
-export const OrderContext = createContext<TypeOrderContext>({
-  isWithdrawal: "Retirada",
-  setIsWithdrawal: () => {},
-});
+import { OrderContext } from "../../context/SalesOrderContext";
 
 export function Form() {
-  const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
-  const [isWithdrawal, setIsWithdrawal] = useState<string>("Retirada");
   const flavorsRef = useRef<null | HTMLDivElement>(null);
 
-  const { urlTrelloPostCard, validationScheme } = constants;
+  const { urlTrelloPostCard } = constants;
   const validateOrder = yup.object().shape(validationScheme);
+
+  const { isWithdrawal, isSalesOrderIsCompleted, setIsSalesOrderIsCompleted } =
+    useContext(OrderContext);
+
   const reactHookFormMethods = useForm<DataOrder>({
     resolver: yupResolver(validateOrder),
   });
@@ -108,7 +85,7 @@ export function Form() {
   }, [errors]);
 
   return (
-    <OrderContext.Provider value={{ isWithdrawal, setIsWithdrawal }}>
+    <>
       <header className="w-11 xl:w-20">
         <img src={logo} />
       </header>
@@ -330,7 +307,7 @@ export function Form() {
         </FormContainer>
       </FormBackground>
       {/* <Footer /> */}
-    </OrderContext.Provider>
+    </>
   );
 }
 export default Form;

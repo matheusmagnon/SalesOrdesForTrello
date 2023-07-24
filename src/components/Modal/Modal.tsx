@@ -4,7 +4,6 @@ import { Buttom } from "../Form/Buttom";
 import StyleLoading from "./StyleLoading";
 import { PropsType } from "../../types";
 import React, { ReactNode } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 interface PropsModal extends PropsType {
   titleDialog: string;

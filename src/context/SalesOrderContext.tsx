@@ -1,6 +1,15 @@
-import { createContext } from "react";
-import { string } from "yup";
+import { Dispatch, SetStateAction, createContext } from "react";
 
-const SalesOrderContext = createContext({ obj: string });
+interface TypeOrderContext {
+  isWithdrawal: string;
+  setIsWithdrawal: Dispatch<SetStateAction<string>>;
+  isSalesOrderIsCompleted: boolean;
+  setIsSalesOrderIsCompleted: Dispatch<SetStateAction<boolean>>;
+}
 
-export default SalesOrderContext;
+export const OrderContext = createContext<TypeOrderContext>({
+  isWithdrawal: "Retirada",
+  setIsWithdrawal: () => {},
+  isSalesOrderIsCompleted: false,
+  setIsSalesOrderIsCompleted: () => {},
+});

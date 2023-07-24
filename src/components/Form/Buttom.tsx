@@ -1,13 +1,8 @@
-import { useForm } from "react-hook-form";
-
 interface PropsButtom {
   content: string;
   color?: string;
 }
 export function Buttom(props: PropsButtom) {
-  const {
-    formState: { errors },
-  } = useForm();
   let { color, content } = props;
 
   return color == "verde" ? (

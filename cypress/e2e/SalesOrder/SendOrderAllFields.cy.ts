@@ -3,7 +3,7 @@ import { getDateNow } from "../../../src/utils/getDateNow";
 
 describe("SalesOder", () => {
   beforeEach(() => {
-    cy.viewport(350, 800);
+    cy.viewport("iphone-x");
     cy.visit("/");
   });
   it("select flavor RED", () => {

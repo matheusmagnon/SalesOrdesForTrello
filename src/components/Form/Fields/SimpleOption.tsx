@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { PropsType } from "../../../types";
 import { ChangeEvent, useContext } from "react";
-import { OrderContext } from "..";
+import { OrderContext } from "../../../context/SalesOrderContext";
 
 interface PropsSimpleOptions extends PropsType {
   option: string;
