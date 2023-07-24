@@ -1,18 +1,17 @@
 /// <reference types="cypress" />
 import { getDateNow } from "../../../src/utils/getDateNow";
 
-// import { t } from "../../fixtures/image1.png";
 const image = "image1.png";
 
-describe("SalesOder", () => {
+describe("Teste Sales Order with Erro", () => {
   beforeEach(() => {
-    // cy.viewport(350, 800);
-    cy.viewport(1920, 1080);
+    cy.viewport(350, 800);
+    // cy.viewport(1920, 1080);
 
     cy.visit("/");
   });
   it("select flavor RED", () => {
-    cy.contains("RED VELVET").click();
+    // cy.contains("RED VELVET").click();
     cy.get('input[name="cakeColor"]').type("Cor de teste");
     cy.get('input[name="phraseOnTheCake"]').type("Frase de teste");
     cy.get('input[name="cakePhraseColor"]').type("Azul");

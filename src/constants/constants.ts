@@ -24,30 +24,17 @@ const cardFields = {
 };
 
 const validationScheme = {
-  nameInOrder: yup
-    .string()
-    .required("Precisamos saber quem você é 😊")
-    .min(10, "Por favor, escreva seu nome completo"),
-  celInOrder: yup
-    .string()
-    .required("Vamos precisar conversar com você sobre o bolinho😄"),
-  phraseOnTheCake: yup
-    .string()
-    .required('Caso não tenha frase no seu bolinho digite "sem frase" 🤣')
-    .max(35, "A quantidade de caracteres excede o espaço no bolo"),
-  // .min(8, "Digite a frase que vai no Bolinho"),
-  cakePhraseColor: yup.string(),
-  cakeColor: yup.string().required("Todo bolo tem cor 🤪 escreva a cor do seu"),
   flavorInOrder: yup
     .string()
     .required("Clique em um sabor para seu bolinho 🤤")
     .nullable(),
-  isWithdrawal: yup.string().required("Selecione uma opção").nullable(),
-  candleInOrder: yup.string().required("Campo obrigatório").nullable(),
-  formOfPaymentInOrder: yup
+  cakeColor: yup.string().required("Todo bolo tem cor 🤪 escreva a cor do seu"),
+  phraseOnTheCake: yup
     .string()
-    .required("Com será a forma de pagamento 😅")
-    .nullable(),
+    .required('Caso não tenha frase no seu bolinho digite "sem frase" 🤣')
+    .max(35, "A quantidade de caracteres excede o espaço no bolo"),
+  candleInOrder: yup.string().required("Campo obrigatório").nullable(),
+  isWithdrawal: yup.string().required("Selecione uma opção").nullable(),
   dateTimeInOrder: yup
     .date()
     .min(
@@ -55,6 +42,18 @@ const validationScheme = {
       "Prazo muito curto, altere o horário de "
     )
     .required("Campo obrigatório"),
+  nameInOrder: yup
+    .string()
+    .required("Precisamos saber quem você é 😊")
+    .min(10, "Por favor, escreva seu nome completo"),
+  celInOrder: yup
+    .string()
+    .required("Vamos precisar conversar com você sobre o bolinho😄"),
+  cakePhraseColor: yup.string(),
+  formOfPaymentInOrder: yup
+    .string()
+    .required("Com será a forma de pagamento 😅")
+    .nullable(),
   awareOfWhatsApp: yup.bool().oneOf([true], "Campo obrigatório"),
   termsAccepted: yup
     .bool()

@@ -1,7 +1,9 @@
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import {
   ChangeEvent,
+  Children,
   Dispatch,
+  Fragment,
   SetStateAction,
   createContext,
   useContext,
@@ -10,6 +12,7 @@ import {
 } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { v4 as uuidv4 } from "uuid";
 
 import makeAPICall from "../../utils/makeAPICall";
 import SendAttachment from "../../services/SendAttachment";
@@ -42,7 +45,7 @@ import { Buttom } from "./Buttom";
 import SalesOrderContext from "../../context/SalesOrderContext";
 import { Footer } from "../Footer/Footer";
 import { About } from "./Fields/About/About";
-import { Modal } from "../Modal";
+import { Modal } from "../Modal/Modal";
 import React from "react";
 
 interface TypeOrderContext {
@@ -69,10 +72,12 @@ export function Form() {
 
   const {
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = reactHookFormMethods;
 
   const submitOrder = (dataOrder: DataOrder) => {
+    setFocus("flavorInOrder");
     async function CreateCard() {
       const response = await makeAPICall(
         urlTrelloPostCard,
@@ -82,32 +87,17 @@ export function Form() {
       const idCard: number = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
-      setResumeOrderState(createBodyCard(dataOrder).descWhatsApp);
+      // setResumeOrderState(createBodyCard(dataOrder).descWhatsApp);
     }
     CreateCard().then(() => {
-      let resumeOrder = createBodyCard(dataOrder).descWhatsApp;
-      let url = `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`;
-      window.location.assign(url);
       setIsSalesOrderIsCompleted(true);
+      setTimeout(() => {
+        let resumeOrder = createBodyCard(dataOrder).descWhatsApp;
+        let url = `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, segue meu pedido:%0A${resumeOrder}`;
+        window.location.assign(url);
+      }, 5000);
     });
   };
-
-  if (isSalesOrderIsCompleted == true) {
-    return <OrderSent />;
-  }
-
-  // useEffect(() => {
-  //   const firstError = (
-  //     Object.keys(errors) as Array<keyof typeof errors>
-  //   ).reduce<keyof typeof errors | null>((field, a) => {
-  //     const fieldKey = field as keyof typeof errors;
-  //     return !!errors[fieldKey] ? fieldKey : a;
-  //   }, null);
-
-  //   if (firstError) {
-  //     setFocus(firstError);
-  //   }
-  // }, [errors, setFocus]);
 
   return (
     <OrderContext.Provider value={{ isWithdrawal, setIsWithdrawal }}>
@@ -116,8 +106,27 @@ export function Form() {
       </header>
       <FormBackground>
         <FormContainer>
-          <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
-          {/* <Modal /> */}
+          <FormTitle>Solicite s seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
+          <Modal
+            titleDialog="Aviso!"
+            contentDialog={
+              <Fragment>
+                Estamos de recesso!
+                <br />
+                Temos disponibilidade de agenda somente a partir do dia
+                <strong> 26/07/2023.</strong>
+              </Fragment>
+            }
+            closeButton
+            okButton
+          />
+          {isSalesOrderIsCompleted && (
+            <Modal
+              titleDialog="Você está sendo redirecionado..."
+              contentDialog="Seu WhatApp irá abrir com resumo da sua solicitação 🤞"
+              isLoading
+            />
+          )}
           <img
             className="flex w-full rounded-lg"
             src={menuBento}
