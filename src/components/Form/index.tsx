@@ -92,7 +92,7 @@ export function Form() {
       <FormBackground>
         <FormContainer>
           <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
-          {/* <Modal
+          <Modal
             titleDialog="Aviso!"
             contentDialog={
               <Fragment>
@@ -104,7 +104,7 @@ export function Form() {
             }
             closeButton
             okButton
-          /> */}
+          />
           {isSalesOrderIsCompleted && (
             <Modal
               titleDialog="Você está sendo redirecionado..."
