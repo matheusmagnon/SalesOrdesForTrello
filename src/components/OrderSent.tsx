@@ -36,20 +36,6 @@ function OrderSent() {
                 setOrderIsCompleted(true);
               }}
             />
-
-            {/* <button */}
-            {/* // className=" flex items-center gap-5  bg-green-700 rounded-md w-full px-4 py-1 mt-2 text-white cursor-pointer" */}
-            {/* // onClick={() => { */}
-            {/* // window.open( */}
-            {/* // `https://api.whatsapp.com/send?phone=5563991069649&text=Oie, passando para avisar que fiz um pedido:%0A${resume}`, */}
-            {/* // "_blank" */}
-            {/* // ); */}
-            {/* // }} */}
-            {/* // type="button" */}
-            {/* // > */}
-            {/* <WhatsappLogo size={30} className="" /> */}
-            {/* Sinalizar envio do pedido */}
-            {/* </button> */}
           </div>
         </div>
       </FormContainer>
