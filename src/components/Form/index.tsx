@@ -92,19 +92,7 @@ export function Form() {
       <FormBackground>
         <FormContainer>
           <FormTitle>Solicite seu BENTÔ CAKE (bolinho de 350g)</FormTitle>
-          <Modal
-            titleDialog="Aviso!"
-            contentDialog={
-              <Fragment>
-                Estamos de recesso!
-                <br />
-                Temos disponibilidade de agenda somente a partir do dia
-                <strong> 26/07/2023.</strong>
-              </Fragment>
-            }
-            closeButton
-            okButton
-          />
+
           {isSalesOrderIsCompleted && (
             <Modal
               titleDialog="Você está sendo redirecionado..."
