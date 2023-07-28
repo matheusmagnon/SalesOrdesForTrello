@@ -24,7 +24,7 @@ export function DateField() {
         </strong>
       </div>
       <div>
-        <span>Segunda à Sexta das 12:00 às 18:30</span>
+        <span>Segunda à Sexta das 12:00 às 18:00</span>
       </div>
       <div>
         <span>SÁBADO 10:00 às 12:00</span>
