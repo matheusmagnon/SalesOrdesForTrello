@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import PreviewImageUpload from "../../PreviewImageUpload";
 import { v4 as uuidv4 } from "uuid";
 
-type Images = {
-  name: string;
-  size: number;
-  URLpreview: string;
-};
+import { OrderContext } from "../../../context/SalesOrderContext";
 
 export function UploadImages() {
-  const [images, setImage] = useState<Images[]>([]);
   const { register } = useFormContext();
+  const { imagesBento, setImageBento } = useContext(OrderContext);
 
-  const getImagesToUpload = (event: React.ChangeEvent) => {
+  // const [images, setImages] = useState<any>();
+
+  interface Images extends FileList {
+    name: string;
+    size: number;
+    URLpreview: string;
+  }
+
+  const getImagesToUpload = async (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
 
     const imagesPreview = Array.from(target.files as FileList);
@@ -23,11 +27,12 @@ export function UploadImages() {
       size: number;
     }
 
-    const images = imagesPreview.map((file) => {
+    const ImagesToShow = imagesPreview.map((file) => {
       const { name, size }: File = file;
       return { name, size, URLpreview: URL.createObjectURL(file) };
     });
-    setImage(images);
+    setImageBento(ImagesToShow);
+    // setImages(ImagesToShow);
   };
 
   return (
@@ -48,12 +53,12 @@ export function UploadImages() {
       </label>
       <div className="xl:w-96">
         <div className="w-full flex flex-wrap space-x-4">
-          {images.map((image) => {
+          {imagesBento.map((item) => {
             return (
               <PreviewImageUpload
                 key={uuidv4()}
-                name={image.name}
-                URLpreview={image.URLpreview}
+                name={item.name}
+                URLpreview={item.URLpreview}
               />
             );
           })}

@@ -17,7 +17,7 @@ describe("SalesOder", () => {
     cy.get('input[name="phraseOnTheCake"]').type("Frase de teste");
     cy.get('input[name="cakePhraseColor"]').type("Azul");
     cy.get("input[type=file]").attachFile(image);
-    // cy.get('input[type=file]').selectFile('cypress/fixtures/file.json')
+    // cy.get("input[type=file]").selectFile("cypress/fixtures/image1.png");
     cy.contains("Sim").click({ force: true });
     cy.get("li").contains("Retirada").click();
     cy.get('input[type="datetime-local"]').type(getDateNow(2));

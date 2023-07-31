@@ -1,5 +1,5 @@
 import { useForm, FormProvider } from "react-hook-form";
-import { Fragment, useContext, useEffect, useRef } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -36,14 +36,26 @@ import { About } from "./Fields/About/About";
 import { Modal } from "../Modal/Modal";
 import { OrderContext } from "../../context/SalesOrderContext";
 
+import { createClient } from "@supabase/supabase-js";
+import getDateNow from "../../utils/getDateNow";
+
+interface ImagesLinksType {
+  links: string[];
+}
+
 export function Form() {
   const flavorsRef = useRef<null | HTMLDivElement>(null);
+  const [imageLinks, setImageLinks] = useState<{}>();
 
   const { urlTrelloPostCard } = constants;
   const validateOrder = yup.object().shape(validationScheme);
 
-  const { isWithdrawal, isSalesOrderIsCompleted, setIsSalesOrderIsCompleted } =
-    useContext(OrderContext);
+  const {
+    isWithdrawal,
+    isSalesOrderIsCompleted,
+    setIsSalesOrderIsCompleted,
+    imagesBento,
+  } = useContext(OrderContext);
 
   const reactHookFormMethods = useForm<DataOrder>({
     resolver: yupResolver(validateOrder),
@@ -51,18 +63,92 @@ export function Form() {
 
   const {
     handleSubmit,
-    setFocus,
     formState: { errors },
   } = reactHookFormMethods;
 
+  console.log(imagesBento);
+
+  const supabase = createClient(
+    "https://wnsxretzoexjewupnzef.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Induc3hyZXR6b2V4amV3dXBuemVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTA1ODgzMDUsImV4cCI6MjAwNjE2NDMwNX0.6kZf5xZZAZxk5vFUdV0hEP91TqpYmxHKNqbx8XPjnAk"
+  );
+
+  const imagelink = imagesBento.map((file) => {
+    const sendToStorage = async () => {
+      const { data, error } = await supabase.storage
+        .from("imagesBentoCake")
+        .upload(`bentos/${file.size}${file.name}`, file, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+      return data;
+    };
+    sendToStorage();
+
+    const { data: image_url } = supabase.storage
+      .from("imagesBentoCake")
+      .getPublicUrl(`bentos/${file.size}${file.name}`);
+
+    const { publicUrl } = image_url;
+    return publicUrl;
+  });
+  useEffect(() => {
+    setImageLinks(imagelink);
+  }, [imagesBento]);
+
   const submitOrder = (dataOrder: DataOrder) => {
-    setFocus("flavorInOrder");
+    const dateInOrder = () => {
+      const DateBento = new Date(dataOrder.dateTimeInOrder);
+
+      let date = `${DateBento.getFullYear()}-${(DateBento.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}-${DateBento.getDate().toString().padStart(2, "0")}`;
+
+      let time = `${DateBento.getHours()
+        .toString()
+        .padStart(2, "0")}:${DateBento.getMinutes()
+        .toString()
+        .padStart(2, "0")}`;
+
+      return `${date}T${time}`;
+    };
+
+    const sendToSupabase = async () => {
+      const supabase = createClient(
+        "https://wnsxretzoexjewupnzef.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Induc3hyZXR6b2V4amV3dXBuemVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTA1ODgzMDUsImV4cCI6MjAwNjE2NDMwNX0.6kZf5xZZAZxk5vFUdV0hEP91TqpYmxHKNqbx8XPjnAk"
+      );
+      const { data, error } = await supabase
+        .from("Orders")
+        .insert({
+          // "id": 1,
+          created_at: getDateNow(),
+          customer_name: dataOrder.nameInOrder,
+          customer_mobile: dataOrder.celInOrder,
+          phrase_on_the_cake: dataOrder.phraseOnTheCake,
+          drawing_on_the_cake: dataOrder.drawingOnTheCake,
+          cake_phrase_color: dataOrder.cakePhraseColor,
+          cake_color: dataOrder.cakeColor,
+          is_withdrawal: dataOrder.isWithdrawal == "Retirada" ? true : false,
+          order_observation: dataOrder.orderObservation,
+          candleIn_order: dataOrder.candleInOrder == "Sim" ? true : false,
+          flavor_in_order: dataOrder.flavorInOrder,
+          form_of_paymentIn_order: dataOrder.formOfPaymentInOrder,
+          files_in_order: imageLinks,
+          date_time_in_order: dateInOrder(),
+          delivery_adress: dataOrder.deliveryAdress,
+          delivery_phone: dataOrder.deliveryPhone,
+        })
+        .select();
+    };
+    sendToSupabase().then((data) => {
+      console.log(data);
+    });
     async function CreateCard() {
       const response = await makeAPICall(
         urlTrelloPostCard,
         createBodyCard(dataOrder)
       );
-
       const idCard: number = await getId(response);
       SendAttachment(dataOrder.filesInOrder, idCard);
       postCustomFields(dataOrder, idCard);
@@ -77,7 +163,7 @@ export function Form() {
     });
   };
 
-  //If erro in flavor scroll to field
+  // If erro in flavor scroll to field
   useEffect(() => {
     if (errors.flavorInOrder?.message) {
       flavorsRef.current?.scrollIntoView({ behavior: "smooth" });

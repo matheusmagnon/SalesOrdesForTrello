@@ -4,6 +4,8 @@ const IdListPedAberto = `624a047f2f06001532cef5e5`;
 const apikeyTrello = import.meta.env.VITE_API_KEY;
 const tokenTrello = import.meta.env.VITE_TOKEN;
 
+// const SupabaseAutorization = import.meta.env.SUPABASE_AUTORIZATION;
+
 const urlTrelloGetCustomField = `https://api.trello.com/1/boards/${IdBoard}/customFields?key=${apikeyTrello}&token=${tokenTrello}`;
 const urlTrelloPostCard = `https://api.trello.com/1/cards?idList=${IdListPedAberto}&key=${apikeyTrello}&token=${tokenTrello}`;
 
@@ -31,4 +33,5 @@ export {
   Labels,
   Entrega,
   Retirada,
+  // SupabaseAutorization,
 };

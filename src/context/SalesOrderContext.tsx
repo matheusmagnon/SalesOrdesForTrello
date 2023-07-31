@@ -6,11 +6,19 @@ import {
   useState,
 } from "react";
 
+interface Images extends FileList {
+  name: string;
+  size: number;
+  URLpreview: string;
+}
+
 interface TypeOrderContext {
   isWithdrawal: string;
   setIsWithdrawal: Dispatch<SetStateAction<string>>;
   isSalesOrderIsCompleted: boolean;
   setIsSalesOrderIsCompleted: Dispatch<SetStateAction<boolean>>;
+  imagesBento: any[];
+  setImageBento: Dispatch<SetStateAction<any>>;
 }
 
 interface SalesOrderProviderProps {
@@ -22,11 +30,14 @@ export const OrderContext = createContext<TypeOrderContext>({
   setIsWithdrawal: () => {},
   isSalesOrderIsCompleted: false,
   setIsSalesOrderIsCompleted: () => {},
+  imagesBento: [],
+  setImageBento: () => {},
 });
 
 export function SalesOrderProvider({ children }: SalesOrderProviderProps) {
   const [isWithdrawal, setIsWithdrawal] = useState<string>("Retirada");
   const [isSalesOrderIsCompleted, setIsSalesOrderIsCompleted] = useState(false);
+  const [imagesBento, setImageBento] = useState<Images[]>([]);
 
   return (
     <OrderContext.Provider
@@ -35,6 +46,8 @@ export function SalesOrderProvider({ children }: SalesOrderProviderProps) {
         setIsWithdrawal,
         isSalesOrderIsCompleted,
         setIsSalesOrderIsCompleted,
+        imagesBento,
+        setImageBento,
       }}
     >
       {children}
